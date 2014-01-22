@@ -3,11 +3,12 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css' />
+    <link rel='stylesheet' href='/css/bootstrap-datepicker.css' />
     <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap-theme.css' />
     <link rel='stylesheet' href='/css/style.css' />
   </head>
   <body ng-controller="mainCtrl">
-    <div class="container  theme-showcase">
+    <div class="container theme-showcase">
 
       <div class="jumbotron">
         <h1><%= title %></h1>
@@ -18,10 +19,11 @@
       <form class="form-horizontal" role="form">
         <div class="row">
           <div class="col-sm-6">
+            <legend>Basic stuff</legend>
             <div class="form-group">
               <label for="name" class="col-sm-3 control-label">Your name</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="name" placeholder="Your name">
+                <input type="text" class="form-control" id="name" placeholder="Your name" ng-model="fullName">
               </div>
             </div>
             <div class="form-group">
@@ -29,25 +31,57 @@
               <div class="col-sm-9">
                 <div class="row">
                   <div class="col-sm-6">
-                    <select class="form-control" id="destination-country">
-                      <option>Select country</option>
-                    </select>
+                    <select class="form-control" id="destination-country" placeholder="Select destination country"
+                      ng-model="country" ng-options="el.name for el in countriesList"></select>
                   </div>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control" id="destination" placeholder="City">
+                    <input type="text" class="form-control" id="destination" placeholder="City" ng-model="destCity">
                   </div>
                 </div>
               </div>
             </div>
             <div class="form-group">
-              <label for="destination" class="col-sm-3 control-label">Delegation title</label>
+              <label for="delegation-title" class="col-sm-3 control-label">Delegation title</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="destination" placeholder="Delegation title">
+                <input type="text" class="form-control" id="delegation-title" placeholder="Delegation title" ng-model="delegationTitle">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="transport-type" class="col-sm-3 control-label">Transport type</label>
+              <div class="col-sm-9">
+                <select class="form-control" id="transport-type" placeholder="Transport type"
+                      ng-model="transportName" ng-options="el for el in transportWays"></select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="start-city" class="col-sm-3 control-label">Start city</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="start-city" placeholder="Start city" ng-model="startCity">
               </div>
             </div>
           </div>
           <div class="col-sm-6">
+            <legend>Delegation details</legend>
 
+            <div class="delegation-dates row">
+              <div class="col-sm-5">
+                <label for="">Departure time</label>
+                <div class="date-form">
+
+                </div>
+              </div>
+              <div class="col-sm-5">
+                <label for="">Arrival time</label>
+                <div class="date-form">
+
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <div><span class="label label-info">12h+</span> 6</div>
+                <div><span class="label label-info">6h-12h</span> 1</div>
+                <div><span class="label label-info">to 6h</span> 1</div>
+              </div>
+            </div>
           </div>
         </div>
       </form>
@@ -56,6 +90,7 @@
 
     <script type="text/javascript" src="/bower_components/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="/js/mainCtrl.js"></script>
   </body>
