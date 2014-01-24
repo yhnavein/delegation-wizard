@@ -3,7 +3,6 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css' />
-    <link rel='stylesheet' href='/css/bootstrap-datepicker.css' />
     <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap-theme.css' />
     <link rel='stylesheet' href='/css/style.css' />
   </head>
@@ -66,13 +65,13 @@
               <div class="col-sm-5">
                 <label for="">Departure time</label>
                 <div class="date-form">
-                  <input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="dateFrom" is-open="opened" max="'3001-06-22'"  ng-required="true" close-text="Close" placeholder="dd-mm-yyyy" />
+                  <input type="date" placeholder="dd-mm-yyyy" ng-model="dateFrom" />
                 </div>
               </div>
               <div class="col-sm-5">
                 <label for="">Arrival time</label>
                 <div class="date-form">
-                  <input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="dateTo" is-open="opened" max="'3001-06-22'"  ng-required="true" close-text="Close" placeholder="dd-mm-yyyy" />
+                  <input type="date" placeholder="dd-mm-yyyy" ng-model="dateTo" />
                 </div>
               </div>
               <div class="col-sm-2">
@@ -89,10 +88,7 @@
 
     <script type="text/javascript" src="/bower_components/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
-    <script type="text/javascript" src="/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-    <script type="text/javascript" src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script type="text/javascript" src="/js/mainCtrl.js"></script>
   </body>
 </html>
