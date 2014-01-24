@@ -62,18 +62,17 @@
           </div>
           <div class="col-sm-6">
             <legend>Delegation details</legend>
-
             <div class="delegation-dates row">
               <div class="col-sm-5">
                 <label for="">Departure time</label>
                 <div class="date-form">
-
+                  <input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="dateFrom" is-open="opened" max="'3001-06-22'"  ng-required="true" close-text="Close" placeholder="dd-mm-yyyy" />
                 </div>
               </div>
               <div class="col-sm-5">
                 <label for="">Arrival time</label>
                 <div class="date-form">
-
+                  <input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="dateTo" is-open="opened" max="'3001-06-22'"  ng-required="true" close-text="Close" placeholder="dd-mm-yyyy" />
                 </div>
               </div>
               <div class="col-sm-2">
@@ -92,6 +91,8 @@
     <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script type="text/javascript" src="/js/mainCtrl.js"></script>
   </body>
 </html>

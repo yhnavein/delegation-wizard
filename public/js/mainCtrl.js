@@ -1,5 +1,5 @@
 /*global console:false, angular:false */
-var app = angular.module('delegations', []);
+var app = angular.module('delegations', ['ui.bootstrap']);
 
 app.controller('mainCtrl', function($scope, $http) {
   var self = this;
