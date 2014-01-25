@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard Test Suite</title>
+    <!-- include your script files (notice that the jasmine source files have been added to the project) -->
+    <script type="text/javascript" src="../libs/jasmine.js"></script>
+    <script type="text/javascript" src="../libs/jasmine-html.js"></script>
+    <script type="text/javascript" src="../../public/bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="../../public/bower_components/angular-i18n/angular-locale_pl.js"></script>
+    <script type="text/javascript" src="../../public/bower_components/angular-mocks/angular-mocks.js"></script>
+    <script type="text/javascript" src="../../public/bower_components/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="mocks/ngQuickDate.js"></script>
+    <script type="text/javascript" src="../../public/js/mainCtrl.js"></script>
+    <script type="text/javascript" src="mainCtrl.tests.js"></script>
+    <link rel="stylesheet" href="../libs/jasmine.css"/>
+</head>
+<body>
+    <!-- use Jasmine to run and display test results -->
+    <script type="text/javascript">
+        var jasmineEnv = jasmine.getEnv();
+        jasmineEnv.addReporter(new jasmine.HtmlReporter());
+        jasmineEnv.execute();
+    </script>
+</body>
+</html>
