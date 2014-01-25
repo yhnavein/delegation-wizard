@@ -19,12 +19,16 @@ app.controller('mainCtrl', function($scope, $http) {
     var fullDate1 = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
     var fullDate2 = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
 
-    if(fullDate2 === fullDate1)
-      return 0;
+    if(fullDate2 === fullDate1) {
+      var hours = Math.floor( Math.abs( date2 - date1 ) / (1000 * 60 * 60) );
 
-    var days = Math.floor( Math.abs( fullDate1 - fullDate2 ) / (1000 * 60 * 60 * 24) ) + 1;
+      return (hours >= 12 ? 1 : 0);
+    }
 
-    if((24 - Math.floor( Math.abs( date1 - new Date(date1.getFullYear(), date1.getMonth(), date1.getDate()) ) / (1000 * 60 * 60) )) < 12)
+    var days = Math.floor( Math.abs( fullDate2 - fullDate1 ) / (1000 * 60 * 60 * 24) ) + 1;
+
+    var firstDayHours = (24 - Math.floor( Math.abs( date1 - new Date(date1.getFullYear(), date1.getMonth(), date1.getDate()) ) / (1000 * 60 * 60) ));
+    if(firstDayHours < 12)
       days--;
 
     var lastDayHours = Math.floor( Math.abs( date2 - new Date(date2.getFullYear(), date2.getMonth(), date2.getDate()) ) / (1000 * 60 * 60) );
@@ -39,7 +43,7 @@ app.controller('mainCtrl', function($scope, $http) {
     if(typeof $scope.dateTo === 'undefined' || typeof $scope.dateFrom === 'undefined')
       return;
 
-    var datediff = self.fullDateDiff($scope.dateTo, $scope.dateFrom);
+    var fullDays = self.fullDateDiff($scope.dateFrom, $scope.dateTo);
 
     console.log('days: ' + datediff);
   };
