@@ -14,7 +14,6 @@ app.controller('mainCtrl', function($scope, $http) {
         $scope.countriesList = angular.fromJson(data);
     });
 
-
   self.daysDiff = function(date1, date2) {
     var fHalfDays = 0, fOneThirdDays = 0;
     var fullDate1 = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
@@ -53,12 +52,17 @@ app.controller('mainCtrl', function($scope, $http) {
     };
   };
 
+  $scope.delegationCost = function() {
+    if(typeof $scope.dateTo === 'undefined' || typeof $scope.dateFrom === 'undefined' || typeof $scope.country === 'undefined')
+      return 0;
+
+    return $scope.country.diem * ($scope.days.fullDays + $scope.days.halfDays / 2 + $scope.days.oneThirdDays / 3);
+  };
 
   $scope.datesChange = function() {
     if(typeof $scope.dateTo === 'undefined' || typeof $scope.dateFrom === 'undefined')
       return;
 
     $scope.days = self.daysDiff($scope.dateFrom, $scope.dateTo);
-
   };
 });
