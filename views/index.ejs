@@ -65,21 +65,21 @@
             <legend>Delegation details</legend>
             <div class="delegation-dates row">
               <div class="col-sm-5">
-                <label for="">Departure time</label>
+                <label>Departure time</label>
                 <div class="date-form">
                   <datepicker ng-model='dateFrom' date-format="dd-MM-yyyy" time-format="HH:mm" on-change="datesChange()" />
                 </div>
               </div>
               <div class="col-sm-5">
-                <label for="">Arrival time</label>
+                <label>Arrival time</label>
                 <div class="date-form">
                   <datepicker ng-model='dateTo' date-format="dd-MM-yyyy" time-format="HH:mm" on-change="datesChange()" />
                 </div>
               </div>
               <div class="col-sm-2">
-                <div><span class="label label-info">12h+</span> 6</div>
-                <div><span class="label label-info">6h-12h</span> 1</div>
-                <div><span class="label label-info">to 6h</span> 1</div>
+                <div><span class="label label-info">12h+</span> {{days.fullDays}}</div>
+                <div><span class="label label-info">8h-12h</span> {{days.halfDays}}</div>
+                <div><span class="label label-info">to 8h</span> {{days.oneThirdDays}}</div>
               </div>
             </div>
           </div>
