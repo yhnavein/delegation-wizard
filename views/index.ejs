@@ -20,58 +20,58 @@
       <form class="form-horizontal" role="form">
         <div class="row">
           <div class="col-sm-6">
-            <legend>Basic stuff</legend>
+            <legend><%= __('Basic stuff') %></legend>
             <div class="form-group">
-              <label for="name" class="col-sm-3 control-label">Your name</label>
+              <label for="name" class="col-sm-3 control-label"><%= __('Your name') %></label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="name" placeholder="Your name" ng-model="fullName">
+                <input type="text" class="form-control" id="name" placeholder="<%= __('Your name') %>" ng-model="fullName">
               </div>
             </div>
             <div class="form-group">
-              <label for="destination-country" class="col-sm-3 control-label">Country, City</label>
+              <label for="destination-country" class="col-sm-3 control-label"><%= __('Country, City') %></label>
               <div class="col-sm-9">
                 <div class="row">
                   <div class="col-sm-6">
-                    <select class="form-control" id="destination-country" placeholder="Select destination country"
-                      ng-model="country" ng-options="el.name for el in countriesList"></select>
+                    <select class="form-control" id="destination-country" placeholder="<%= __('Select destination country') %>"
+                      ng-model="country" ng-options="el.name<%= locale.toUpperCase() %> for el in countriesList"></select>
                   </div>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control" id="destination" placeholder="City" ng-model="destCity">
+                    <input type="text" class="form-control" id="destination" placeholder="<%= __('City') %>" ng-model="destCity">
                   </div>
                 </div>
               </div>
             </div>
             <div class="form-group">
-              <label for="delegation-title" class="col-sm-3 control-label">Delegation title</label>
+              <label for="delegation-title" class="col-sm-3 control-label"><%= __('Delegation title') %></label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="delegation-title" placeholder="Delegation title" ng-model="delegationTitle">
+                <input type="text" class="form-control" id="delegation-title" placeholder="<%= __('Delegation title') %>" ng-model="delegationTitle">
               </div>
             </div>
             <div class="form-group">
-              <label for="transport-type" class="col-sm-3 control-label">Transport type</label>
+              <label for="transport-type" class="col-sm-3 control-label"><%= __('Transport type') %></label>
               <div class="col-sm-9">
-                <select class="form-control" id="transport-type" placeholder="Transport type"
+                <select class="form-control" id="transport-type" placeholder="<%= __('Transport type') %>"
                       ng-model="transportName" ng-options="el for el in transportWays"></select>
               </div>
             </div>
             <div class="form-group">
-              <label for="start-city" class="col-sm-3 control-label">Start city</label>
+              <label for="start-city" class="col-sm-3 control-label"><%= __('Start city') %></label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="start-city" placeholder="Start city" ng-model="startCity">
+                <input type="text" class="form-control" id="start-city" placeholder="<%= __('Start city') %>" ng-model="startCity">
               </div>
             </div>
           </div>
           <div class="col-sm-6">
-            <legend>Delegation details</legend>
+            <legend><%= __('Delegation details') %></legend>
             <div class="delegation-dates row">
               <div class="col-sm-5">
-                <label>Departure time</label>
+                <label><%= __('Departure time') %></label>
                 <div class="date-form">
                   <datepicker ng-model='dateFrom' date-format="dd-MM-yyyy" time-format="HH:mm" on-change="datesChange()" />
                 </div>
               </div>
               <div class="col-sm-5">
-                <label>Arrival time</label>
+                <label><%= __('Arrival time') %></label>
                 <div class="date-form">
                   <datepicker ng-model='dateTo' date-format="dd-MM-yyyy" time-format="HH:mm" on-change="datesChange()" />
                 </div>

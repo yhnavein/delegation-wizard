@@ -1,0 +1,13 @@
+{
+	"Transport type": "Transport",
+	"Basic stuff": "Podstawowe informacje",
+	"Your name": "Imię Nazwisko",
+	"Country, City": "Kraj i Miasto",
+	"Select destination country": "Wybierz docelowy kraj delegacji",
+	"City": "Miasto",
+	"Delegation title": "Tytuł delegacji",
+	"Start city": "Miasto startowe",
+	"Delegation details": "Szczegóły delegacji",
+	"Departure time": "Data wylotu",
+	"Arrival time": "Data powrotu"
+}
