@@ -8,8 +8,6 @@
 	"Delegation title": "Tytuł delegacji",
 	"Start city": "Miasto startowe",
 	"Delegation details": "Szczegóły delegacji",
-	"Departure time": "Data wylotu",
-	"Arrival time": "Data powrotu",
 	"Submit date": "Data rozliczenia",
 	"dd-mm-yyyy": "dd-mm-rrrr",
 	"Travel details": "Szczegóły podróży",
@@ -17,5 +15,8 @@
 	"Date": "Dzień",
 	"Breakfast": "Śniadanie",
 	"Dinner": "Obiad",
-	"Supper": "Kolacja"
+	"Supper": "Kolacja",
+	"Departure date and time": "Data i godzina wylotu",
+	"HH:mm": "hh:mm",
+	"Arrival date and time": "Data i godzina przylotu"
 }

@@ -8,6 +8,7 @@
         "angular-mocks": "latest",
         "angular-route": "latest",
         "jquery": "1.*",
+        "globalize" : "*",
         "font-awesome": "3.*",
         "bootstrap": "3.0.3",
         "angular-bootstrap": "0.10.0",

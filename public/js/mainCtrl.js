@@ -1,10 +1,11 @@
-/*global console:false, angular:false */
-var app = angular.module('delegations', ['ngQuickDate']);
+/*global console:false, angular:false, Globalize:false */
+var app = angular.module('delegations', []);
 
 app.controller('mainCtrl', function($scope, $http) {
   var self = this;
 
   $scope.transportWays = [ 'Train', 'Bus', 'Airplane' ];
+  $scope.submitDate = Globalize.format(new Date(), 'dd-MM-yyyy');
 
   $http({
       method: 'GET',
@@ -61,7 +62,7 @@ app.controller('mainCtrl', function($scope, $http) {
 
     for(;;) {
       days.push({
-        date: iterator.toLocaleDateString(),
+        date: Globalize.format(iterator, 'dd-MM-yyyy'),
         dayType: 1,
         provBreakfast : false,
         provDinner : false,
@@ -76,6 +77,24 @@ app.controller('mainCtrl', function($scope, $http) {
     return days;
   };
 
+  $scope.datePattern = (function() {
+    var regexp = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+    return {
+      test: function(value) {
+        return regexp.test(value);
+      }
+    };
+  })();
+
+  $scope.timePattern = (function() {
+    var regexp = /^([0-1]?\d|2[0-3]):([0-5]?\d)/;
+    return {
+      test: function(value) {
+        return regexp.test(value);
+      }
+    };
+  })();
+
   $scope.delegationCost = function() {
     if(typeof $scope.dateTo === 'undefined' || typeof $scope.dateFrom === 'undefined' || typeof $scope.country === 'undefined')
       return 0;
@@ -84,10 +103,13 @@ app.controller('mainCtrl', function($scope, $http) {
   };
 
   $scope.datesChange = function(f) {
-    if(typeof $scope.dateTo === 'undefined' || typeof $scope.dateFrom === 'undefined')
+    if(typeof $scope.dateTo === 'undefined' || typeof $scope.dateFrom === 'undefined' || typeof $scope.dateTimeTo === 'undefined' || typeof $scope.dateTimeFrom === 'undefined')
       return;
 
-    $scope.days = self.daysDiff($scope.dateFrom, $scope.dateTo);
-    $scope.delegationDays = self.prepareDelegationDays($scope.dateFrom, $scope.dateTo);
+    var dateFrom = new Date($scope.dateFrom + ' ' + $scope.dateTimeFrom);
+    var dateTo = new Date($scope.dateTo + ' ' + $scope.dateTimeTo);
+
+    $scope.days = self.daysDiff(dateFrom, dateTo);
+    $scope.delegationDays = self.prepareDelegationDays(dateFrom, dateTo);
   };
 });
