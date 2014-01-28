@@ -60,20 +60,25 @@
                 <input type="text" class="form-control" id="start-city" placeholder="<%= __('Start city') %>" ng-model="startCity">
               </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <legend><%= __('Delegation details') %> <div class="label label-info pull-right">{{delegationCost() | number:2}} {{country.currency}}</div></legend>
+            <div class="form-group">
+              <label for="submit-date" class="col-sm-3 control-label"><%= __('Submit date') %></label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="submit-date" placeholder="<%= __('dd-mm-yyyy') %>" ng-model="submitDate">
+              </div>
+            </div>
+
+            <legend><%= __('Travel details') %> <div class="label label-info pull-right">{{delegationCost() | number:2}} {{country.currency}}</div></legend>
             <div class="delegation-dates row">
               <div class="col-sm-5">
                 <label><%= __('Departure time') %></label>
                 <div class="date-form">
-                  <datepicker ng-model='dateFrom' date-format="dd-MM-yyyy" time-format="HH:mm" on-change="datesChange()" />
+                  <datepicker ng-model='dateFrom' date-format="dd-MM-yyyy" time-format="HH:mm" on-change="datesChange(this)" />
                 </div>
               </div>
               <div class="col-sm-5">
                 <label><%= __('Arrival time') %></label>
                 <div class="date-form">
-                  <datepicker ng-model='dateTo' date-format="dd-MM-yyyy" time-format="HH:mm" on-change="datesChange()" />
+                  <datepicker ng-model='dateTo' date-format="dd-MM-yyyy" time-format="HH:mm" on-change="datesChange(this)" />
                 </div>
               </div>
               <div class="col-sm-2">
@@ -82,6 +87,29 @@
                 <div><span class="label label-info">to 8h</span> {{days.oneThirdDays}}</div>
               </div>
             </div>
+          </div>
+          <div class="col-sm-6">
+            <legend><%= __('Delegation details') %></legend>
+            <blockquote><%= __('Please select meals that were provided for you (by hotel or company)') %></blockquote>
+
+            <table class="table table-striped days-container">
+              <thead>
+                <tr>
+                  <th><b><%= __('Date') %></b></th>
+                  <th><%= __('Breakfast') %></th>
+                  <th><%= __('Dinner') %></th>
+                  <th><%= __('Supper') %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="day in delegationDays">
+                  <td>{{day.date}}</td>
+                  <td>{{day.provBreakfast}}</td>
+                  <td>{{day.provDinner}}</td>
+                  <td>{{day.provSupper}}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </form>

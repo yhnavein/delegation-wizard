@@ -9,5 +9,13 @@
 	"Start city": "Miasto startowe",
 	"Delegation details": "Szczegóły delegacji",
 	"Departure time": "Data wylotu",
-	"Arrival time": "Data powrotu"
+	"Arrival time": "Data powrotu",
+	"Submit date": "Data rozliczenia",
+	"dd-mm-yyyy": "dd-mm-rrrr",
+	"Travel details": "Szczegóły podróży",
+	"Please select meals that were provided for you (by hotel or company)": "Proszę podać jakie posiłki były Panu/Pani zapewnione w trakcie trwania delegacji",
+	"Date": "Dzień",
+	"Breakfast": "Śniadanie",
+	"Dinner": "Obiad",
+	"Supper": "Kolacja"
 }
