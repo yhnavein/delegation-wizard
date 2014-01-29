@@ -5,10 +5,14 @@
 
 var express = require('express');
 var routes = require('./routes');
-//var user = require('./routes/user');
+var nbp = require('./routes/nbp');
 var http = require('http');
 var path = require('path');
 var i18n = require('./i18n');
+
+if (process.env.NODE_ENV !== 'production'){
+  require('longjohn');
+}
 
 var app = express();
 
@@ -32,6 +36,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+app.get('/nbp/getPLNCourse', nbp.getPLNCourse);
 app.get('/changeLocale/:locale', function (req, res) {
   res.cookie('locale', req.params.locale);
   res.redirect("/");
