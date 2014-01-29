@@ -5,7 +5,7 @@ app.controller('mainCtrl', function($scope, $http) {
   var self = this;
 
   $scope.transportWays = [ 'Train', 'Bus', 'Airplane' ];
-  $scope.submitDate = Globalize.format(new Date(), 'dd-MM-yyyy');
+  $scope.submitDate = Globalize.format(new Date(), 'yyyy-MM-dd');
 
   $http({
       method: 'GET',
@@ -62,7 +62,7 @@ app.controller('mainCtrl', function($scope, $http) {
 
     for(;;) {
       days.push({
-        date: Globalize.format(iterator, 'dd-MM-yyyy'),
+        date: Globalize.format(iterator, 'yyyy-MM-dd (ddd)'),
         dayType: 1,
         provBreakfast : false,
         provDinner : false,
@@ -78,7 +78,7 @@ app.controller('mainCtrl', function($scope, $http) {
   };
 
   $scope.datePattern = (function() {
-    var regexp = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+    var regexp = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
     return {
       test: function(value) {
         return regexp.test(value);
@@ -87,7 +87,7 @@ app.controller('mainCtrl', function($scope, $http) {
   })();
 
   $scope.timePattern = (function() {
-    var regexp = /^([0-1]?\d|2[0-3]):([0-5]?\d)/;
+    var regexp = /^([0-1]?\d|2[0-3]):([0-5]?\d)$/;
     return {
       test: function(value) {
         return regexp.test(value);

@@ -1,3 +1,29 @@
+body {
+  padding-top: 120px;
+}
+
+.navbar.navbar-patterned {
+  height: 80px;
+  background: url(../img/dark_exa.png) repeat;
+  box-shadow: 0 0 8px rgba(0,0,0,.4);
+}
+
+.navbar-patterned .navbar-brand {
+  padding: 28px 15px;
+  font-size: 22px;
+  line-height: 24px;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.navbar-patterned .navbar-brand:hover {
+  color: #fff;
+  background: #ff670f;
+}
+
 input.ng-invalid.ng-dirty {
   border-color: #e9322d;
 }
