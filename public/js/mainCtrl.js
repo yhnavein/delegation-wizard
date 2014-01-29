@@ -74,6 +74,9 @@ app.controller('mainCtrl', function($scope, $http) {
       return days;
 
     for(;;) {
+      if(iterator >= to)
+        break;
+
       days.push({
         date: Globalize.format(iterator, 'yyyy-MM-dd (ddd)'),
         dayType: dateType,
@@ -83,8 +86,6 @@ app.controller('mainCtrl', function($scope, $http) {
         excluded : false
       });
       dateType = 1; //because after first there are only full days
-      if(iterator >= to)
-        break;
       iterator.setDate(iterator.getDate() + 1);
     }
 
