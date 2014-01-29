@@ -19,5 +19,8 @@
 	"Departure date and time": "Data i godzina wylotu",
 	"HH:mm": "hh:mm",
 	"Arrival date and time": "Data i godzina przylotu",
-	"Diem amount": "Kwota diety"
+	"Diem amount": "Kwota diety",
+	"Additional expenses": "Inne poniesione wydatki",
+	"Transport to/from station": "Transport z/do lotniska",
+	"0.00": "0.00"
 }

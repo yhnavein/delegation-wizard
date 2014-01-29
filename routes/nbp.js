@@ -39,23 +39,6 @@ var makeRequest = function(path, success) {
   http.request(options, callback).end();
 };
 
-/*
-var gunzip = zlib.createGunzip();
-        res.pipe(gunzip);
-
-        gunzip.on('data', function(data) {
-            // decompression chunk ready, add it to the buffer
-            buffer.push(data.toString());
-
-        }).on("end", function() {
-            // response and decompression complete, join the buffer and return
-            callback(null, buffer.join(""));
-
-        }).on("error", function(e) {
-            callback(e);
-        });
-*/
-
 exports.getPLNCourse = function(req, res){
   var currency = req.query.currency;
   var day = moment(req.query.date); //date when document will be submitted

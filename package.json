@@ -8,7 +8,7 @@
   "dependencies": {
     "express": "3.4.8",
     "ejs": "*",
-    "moment": "2.*",
+    "moment": "2.5",
     "i18n": "*"
   }
 }

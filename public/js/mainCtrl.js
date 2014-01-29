@@ -65,6 +65,7 @@ app.controller('mainCtrl', function($scope, $http) {
 
   self.prepareDelegationDays = function(from, to) {
     var days = [];
+    var i = 0;
     var iterator = new Date(from.getFullYear(), from.getMonth(), from.getDate());
     var firstDayHours = (24 - Math.abs( from - new Date(from.getFullYear(), from.getMonth(), from.getDate()) ) / (1000 * 60 * 60) );
     var dateType = (firstDayHours >= 12 ? 1 : (firstDayHours <= 8 ? 3 : 2));
@@ -76,7 +77,7 @@ app.controller('mainCtrl', function($scope, $http) {
       days.push({
         date: Globalize.format(iterator, 'yyyy-MM-dd (ddd)'),
         dayType: dateType,
-        provBreakfast : false,
+        provBreakfast : (i++ > 0 ? true : false),
         provDinner : false,
         provSupper : false,
         excluded : false
@@ -114,10 +115,6 @@ app.controller('mainCtrl', function($scope, $http) {
     };
   })();
 
-  $scope.provMealChange = function(meal, day) {
-    console.log(meal, day);
-  };
-
   $scope.delegationCost = function() {
     if(typeof $scope.dateTo === 'undefined' || typeof $scope.dateFrom === 'undefined' || typeof $scope.country === 'undefined')
       return 0;
@@ -134,7 +131,7 @@ app.controller('mainCtrl', function($scope, $http) {
       if($scope.delegationDays[i].provSupper)
         valueToSubstract += 0.30 * dayDiem / $scope.delegationDays[i].dayType;
     }
-    //console.log('Zmniejszono diete o ' + valueToSubstract);
+
     return wholeDiem - valueToSubstract;
   };
 
