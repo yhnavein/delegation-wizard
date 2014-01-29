@@ -11,6 +11,12 @@ app.controller('mainCtrl', function($scope, $http) {
   ];
   $scope.submitDate = Globalize.format(new Date(), 'yyyy-MM-dd');
 
+  //for test currently
+  $scope.dateFrom = '2014-01-05';
+  $scope.dateTimeFrom = '10:00';
+  $scope.dateTo = '2014-01-14';
+  $scope.dateTimeTo = '18:30';
+
   $http({
       method: 'GET',
       url: '/countries.json'
@@ -36,14 +42,14 @@ app.controller('mainCtrl', function($scope, $http) {
 
     var days = Math.floor( Math.abs( fullDate2 - fullDate1 ) / (1000 * 60 * 60 * 24) ) + 1;
 
-    var firstDayHours = (24 - Math.floor( Math.abs( date1 - new Date(date1.getFullYear(), date1.getMonth(), date1.getDate()) ) / (1000 * 60 * 60) ));
+    var firstDayHours = (24 - Math.abs( date1 - new Date(date1.getFullYear(), date1.getMonth(), date1.getDate()) ) / (1000 * 60 * 60) );
     if(firstDayHours < 12) {
       days--;
       fHalfDays += (firstDayHours > 8 ? 1 : 0);
       fOneThirdDays += (firstDayHours <= 8 ? 1 : 0);
     }
 
-    var lastDayHours = Math.floor( Math.abs( date2 - new Date(date2.getFullYear(), date2.getMonth(), date2.getDate()) ) / (1000 * 60 * 60) );
+    var lastDayHours = Math.abs( date2 - new Date(date2.getFullYear(), date2.getMonth(), date2.getDate()) ) / (1000 * 60 * 60);
     if(lastDayHours < 12 && lastDayHours > 0) {
       days--;
       fHalfDays += (lastDayHours > 8 ? 1 : 0);
@@ -60,6 +66,8 @@ app.controller('mainCtrl', function($scope, $http) {
   self.prepareDelegationDays = function(from, to) {
     var days = [];
     var iterator = new Date(from.getFullYear(), from.getMonth(), from.getDate());
+    var firstDayHours = (24 - Math.abs( from - new Date(from.getFullYear(), from.getMonth(), from.getDate()) ) / (1000 * 60 * 60) );
+    var dateType = (firstDayHours >= 12 ? 1 : (firstDayHours <= 8 ? 3 : 2));
 
     if (to <= from)
       return days;
@@ -67,15 +75,22 @@ app.controller('mainCtrl', function($scope, $http) {
     for(;;) {
       days.push({
         date: Globalize.format(iterator, 'yyyy-MM-dd (ddd)'),
-        dayType: 1,
+        dayType: dateType,
         provBreakfast : false,
         provDinner : false,
         provSupper : false,
         excluded : false
       });
+      dateType = 1; //because after first there are only full days
       if(iterator >= to)
         break;
       iterator.setDate(iterator.getDate() + 1);
+    }
+
+    var lastDay = days.last();
+    if(lastDay.date !== days.first().date) {
+      var lastDayHours = Math.abs( to - new Date(to.getFullYear(), to.getMonth(), to.getDate()) ) / (1000 * 60 * 60);
+      lastDay.dayType = (lastDayHours >= 12 ? 1 : (lastDayHours <= 8 ? 3 : 2));
     }
 
     return days;
@@ -99,11 +114,28 @@ app.controller('mainCtrl', function($scope, $http) {
     };
   })();
 
+  $scope.provMealChange = function(meal, day) {
+    console.log(meal, day);
+  };
+
   $scope.delegationCost = function() {
     if(typeof $scope.dateTo === 'undefined' || typeof $scope.dateFrom === 'undefined' || typeof $scope.country === 'undefined')
       return 0;
 
-    return $scope.country.diem * ($scope.days.fullDays + $scope.days.halfDays / 2 + $scope.days.oneThirdDays / 3);
+    var dayDiem = $scope.country.diem;
+    var wholeDiem = dayDiem * ($scope.days.fullDays + $scope.days.halfDays / 2 + $scope.days.oneThirdDays / 3);
+
+    var valueToSubstract = 0;
+    for (var i = 0; i < $scope.delegationDays.length; i++) {
+      if($scope.delegationDays[i].provBreakfast)
+        valueToSubstract += 0.15 * dayDiem / $scope.delegationDays[i].dayType; //day type: 3 when 1/3 day, 2 when 1/2 day for diem, etc
+      if($scope.delegationDays[i].provDinner)
+        valueToSubstract += 0.30 * dayDiem / $scope.delegationDays[i].dayType;
+      if($scope.delegationDays[i].provSupper)
+        valueToSubstract += 0.30 * dayDiem / $scope.delegationDays[i].dayType;
+    }
+    console.log('Zmniejszono diete o ' + valueToSubstract);
+    return wholeDiem - valueToSubstract;
   };
 
   $scope.datesChange = function(f) {

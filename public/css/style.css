@@ -2,6 +2,12 @@ body {
   padding-top: 120px;
 }
 
+#footer {
+  margin-top: 120px;
+  padding: 24px;
+  border-top: 1px solid #efefef;
+}
+
 .navbar.navbar-patterned {
   height: 80px;
   background: url(../img/dark_exa.png) repeat;
@@ -34,3 +40,4 @@ input.ng-invalid.ng-dirty {
   -moz-box-shadow: 0 0 6px #f8b9b7;
   box-shadow: 0 0 6px #f8b9b7;
 }
+

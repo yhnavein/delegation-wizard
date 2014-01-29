@@ -111,6 +111,7 @@
               <thead>
                 <tr>
                   <th><%= __('Date') %></th>
+                  <th></th>
                   <th><%= __('Breakfast') %></th>
                   <th><%= __('Dinner') %></th>
                   <th><%= __('Supper') %></th>
@@ -119,9 +120,20 @@
               <tbody>
                 <tr ng-repeat="day in delegationDays">
                   <td>{{day.date}}</td>
-                  <td>{{day.provBreakfast}}</td>
-                  <td>{{day.provDinner}}</td>
-                  <td>{{day.provSupper}}</td>
+                  <td>
+                    <span class="label label-info" ng-show="day.dayType === 1">1</span>
+                    <span class="label label-info" ng-show="day.dayType === 2">1/2</span>
+                    <span class="label label-info" ng-show="day.dayType === 3">1/3</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" ng-model="day.provBreakfast" ng-change="provMealChange('breakfast', day)" >
+                  </td>
+                  <td>
+                    <input type="checkbox" ng-model="day.provDinner" ng-change="provMealChange('dinner', day)" >
+                  </td>
+                  <td>
+                    <input type="checkbox" ng-model="day.provSupper" ng-change="provMealChange('supper', day)" >
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -135,7 +147,16 @@
               </div> -->
     </div>
 
+    <div id="footer">
+      <div class="container">
+        <p class="centered">
+          Created by <b>PureDev, Piotr Dąbrowski</b>
+        </p>
+      </div>
+    </div>
+
     <script type="text/javascript" src="/bower_components/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/sugar/release/sugar.min.js"></script>
     <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="/bower_components/globalize/lib/globalize.js"></script>
