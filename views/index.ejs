@@ -60,7 +60,7 @@
               <label for="transport-type" class="col-sm-3 control-label"><%= __('Transport type') %></label>
               <div class="col-sm-9">
                 <select class="form-control" id="transport-type" placeholder="<%= __('Transport type') %>" required
-                      ng-model="transportName" ng-options="el for el in transportWays"></select>
+                      ng-model="transportName" ng-options="el.name<%= locale.toUpperCase() %> for el in transportWays"></select>
               </div>
             </div>
             <div class="form-group">

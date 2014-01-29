@@ -4,7 +4,11 @@ var app = angular.module('delegations', []);
 app.controller('mainCtrl', function($scope, $http) {
   var self = this;
 
-  $scope.transportWays = [ 'Train', 'Bus', 'Airplane' ];
+  $scope.transportWays = [
+    { nameEN: 'Train', namePL: 'Pociąg' },
+    { nameEN: 'Bus', namePL: 'Autobus' },
+    { nameEN: 'Airplane',  namePL: 'Samolot' }
+  ];
   $scope.submitDate = Globalize.format(new Date(), 'yyyy-MM-dd');
 
   $http({
