@@ -30,6 +30,17 @@ body {
   background: #ff670f;
 }
 
+.nav .diem { padding: 12px; }
+.nav .diem .title { text-align: center; color: #999; }
+
+.nav .diem .price {
+  color: #ff670f;
+}
+.nav .diem strong {
+  font-size: 32px;
+  line-height: 24px;
+}
+
 input.ng-invalid.ng-dirty {
   border-color: #e9322d;
 }

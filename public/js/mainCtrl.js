@@ -134,11 +134,11 @@ app.controller('mainCtrl', function($scope, $http) {
       if($scope.delegationDays[i].provSupper)
         valueToSubstract += 0.30 * dayDiem / $scope.delegationDays[i].dayType;
     }
-    console.log('Zmniejszono diete o ' + valueToSubstract);
+    //console.log('Zmniejszono diete o ' + valueToSubstract);
     return wholeDiem - valueToSubstract;
   };
 
-  $scope.datesChange = function(f) {
+  $scope.datesChange = function() {
     if(typeof $scope.dateTo === 'undefined' || typeof $scope.dateFrom === 'undefined' || typeof $scope.dateTimeTo === 'undefined' || typeof $scope.dateTimeFrom === 'undefined')
       return;
 
@@ -148,4 +148,6 @@ app.controller('mainCtrl', function($scope, $http) {
     $scope.days = self.daysDiff(dateFrom, dateTo);
     $scope.delegationDays = self.prepareDelegationDays(dateFrom, dateTo);
   };
+
+  $scope.datesChange();
 });
