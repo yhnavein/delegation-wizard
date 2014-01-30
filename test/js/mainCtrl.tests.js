@@ -1,10 +1,9 @@
 /*global describe:false, angular:false, expect:false, it:false, beforeEach:false, module:false, inject:false */
 'use strict';
 
-describe('delegations main controller', function(){
+describe('diffing dates assertions', function(){
     var scope, ctrl, httpBackend;
 
-    beforeEach(module('ngQuickDate'));
     beforeEach(module('delegations'));
 
     beforeEach(inject(function($rootScope, $controller, $httpBackend, $http) {
@@ -94,6 +93,54 @@ describe('delegations main controller', function(){
         expect(days.fullDays).toEqual(3);
         expect(days.halfDays).toEqual(1);
         expect(days.oneThirdDays).toEqual(1);
+    });
+
+});
+
+
+describe('presenting days summary', function(){
+    var scope, ctrl, httpBackend;
+
+    beforeEach(module('delegations'));
+
+    beforeEach(inject(function($rootScope, $controller, $httpBackend, $http) {
+        scope = $rootScope.$new();
+        httpBackend = $httpBackend;
+
+        ctrl = $controller('mainCtrl', { $scope: scope, $http: $http });
+    }));
+
+
+    // date diffing tests
+
+    it('standard date range', function() {
+        var days = ctrl.prepareDelegationDays(new Date(2013,0,2,15,0), new Date(2013,0,5,5,0));
+        //to have 4 days
+        var firstDay = days.first();
+        expect(firstDay.dayType).toEqual(2);
+        var lastDay = days.last();
+        expect(lastDay.dayType).toEqual(3);
+    });
+
+    it('one day date range (around half a day)', function() {
+        var days = ctrl.prepareDelegationDays(new Date(2013,0,2,10,0), new Date(2013,0,2,19,0));
+        //to have 1 day
+        var day = days.first();
+        expect(day.dayType).toEqual(2);
+    });
+
+    it('one day date range (more than half a day)', function() {
+        var days = ctrl.prepareDelegationDays(new Date(2013,0,2,7,0), new Date(2013,0,2,21,0));
+        //to have 1 day
+        var day = days.first();
+        expect(day.dayType).toEqual(1);
+    });
+
+    it('one day date range (less than one third a day)', function() {
+        var days = ctrl.prepareDelegationDays(new Date(2013,0,2,10,15), new Date(2013,0,2,16,0));
+        //to have 1 day
+        var day = days.first();
+        expect(day.dayType).toEqual(3);
     });
 
 });

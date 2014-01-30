@@ -93,6 +93,9 @@ app.controller('mainCtrl', function($scope, $http) {
     if(lastDay.date !== days.first().date) {
       var lastDayHours = Math.abs( to - new Date(to.getFullYear(), to.getMonth(), to.getDate()) ) / (1000 * 60 * 60);
       lastDay.dayType = (lastDayHours >= 12 ? 1 : (lastDayHours <= 8 ? 3 : 2));
+    } else { //first day is also the last day
+      var dayHours = Math.abs( to - from ) / (1000 * 60 * 60);
+      lastDay.dayType = (dayHours >= 12 ? 1 : (dayHours <= 8 ? 3 : 2));
     }
 
     return days;
