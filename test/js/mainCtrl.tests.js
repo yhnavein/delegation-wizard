@@ -1,7 +1,7 @@
 /*global describe:false, angular:false, expect:false, it:false, beforeEach:false, module:false, inject:false */
 'use strict';
 
-describe('diffing dates assertions', function(){
+describe('counting days properly', function(){
     var scope, ctrl, httpBackend;
 
     beforeEach(module('delegations'));
@@ -13,8 +13,6 @@ describe('diffing dates assertions', function(){
         ctrl = $controller('mainCtrl', { $scope: scope, $http: $http });
     }));
 
-
-    // date diffing tests
 
     it('days diff between 2013-01-02 and 2013-01-05 is 4', function() {
         var days = ctrl.daysDiff(new Date(2013,0,2), new Date(2013,0,5));
@@ -111,8 +109,6 @@ describe('presenting days summary', function(){
     }));
 
 
-    // date diffing tests
-
     it('standard date range', function() {
         var days = ctrl.prepareDelegationDays(new Date(2013,0,2,15,0), new Date(2013,0,5,5,0));
         //to have 4 days
@@ -141,6 +137,94 @@ describe('presenting days summary', function(){
         //to have 1 day
         var day = days.first();
         expect(day.dayType).toEqual(3);
+    });
+
+});
+
+
+describe('calculating food costs (for substracing)', function(){
+    var scope, ctrl, httpBackend;
+
+    beforeEach(module('delegations'));
+
+    beforeEach(inject(function($rootScope, $controller, $httpBackend, $http) {
+        scope = $rootScope.$new();
+        httpBackend = $httpBackend;
+
+        scope.country = { nameEN: "United Kingdom", namePL: "Wielka Brytania", code: "GB", diem: 35, currency: "GBP" };
+        ctrl = $controller('mainCtrl', { $scope: scope, $http: $http });
+    }));
+
+
+    it('one day date range (around half a day), no meals', function() {
+        var days = ctrl.prepareDelegationDays(new Date(2013,0,2,10,0), new Date(2013,0,2,19,0));
+        //to have 1 day
+        var day = days.first();
+        day.provBreakfast = false;
+        day.provDinner = false;
+        day.provSupper = false;
+        var foodCost = ctrl.foodCostToSubstract(days, scope.country.diem);
+        expect(foodCost).toEqual(0);
+    });
+
+    it('one day date range (around half a day), all meals', function() {
+        var days = ctrl.prepareDelegationDays(new Date(2013,0,2,10,0), new Date(2013,0,2,19,0));
+        //to have 1 day
+        var day = days.first();
+        day.provBreakfast = true;
+        day.provDinner = true;
+        day.provSupper = true;
+        var foodCost = ctrl.foodCostToSubstract(days, scope.country.diem);
+        expect(foodCost).toEqual(35 * 0.5 * 0.75);
+    });
+
+    it('two days date range, one breakfast, two dinners, one supper', function() {
+        var days = ctrl.prepareDelegationDays(new Date(2013,0,2,19,0), new Date(2013,0,3,19,0));
+        //to have 1 day
+        var day = days.first();
+        day.provBreakfast = false;
+        day.provDinner = true;
+        day.provSupper = false;
+
+        day = days.last();
+        day.provBreakfast = true;
+        day.provDinner = true;
+        day.provSupper = true;
+        var foodCost = ctrl.foodCostToSubstract(days, scope.country.diem);
+        expect(foodCost).toEqual(29.75);
+    });
+
+});
+
+
+describe('calculating diem costs', function(){
+    var scope, ctrl, httpBackend;
+
+    beforeEach(module('delegations'));
+
+    beforeEach(inject(function($rootScope, $controller, $httpBackend, $http) {
+        scope = $rootScope.$new();
+        httpBackend = $httpBackend;
+
+        scope.country = { nameEN: "United Kingdom", namePL: "Wielka Brytania", code: "GB", diem: 35, currency: "GBP" };
+        ctrl = $controller('mainCtrl', { $scope: scope, $http: $http });
+    }));
+
+
+    it('one day date range (around half a day), all meals provided', function() {
+        scope.dateFrom = '2013-01-02';
+        scope.dateTimeFrom = '10:00';
+        scope.dateTo = '2013-01-02';
+        scope.dateTimeTo = '19:00';
+        scope.datesChange();
+
+        //to have 1 day
+        var day = scope.delegationDays.first();
+        day.provBreakfast = true;
+        day.provDinner = true;
+        day.provSupper = true;
+
+        expect(scope.delegationCost()).toEqual(35 * 0.5 * 0.25);
     });
 
 });

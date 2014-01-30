@@ -25,6 +25,12 @@
                 <div class="price"><strong>{{delegationCost() | number:2}}</strong> {{country.currency}}</div>
               </div>
             </li>
+            <li>
+              <div class="diem">
+                <div class="title"><%= __('All costs') %></div>
+                <div class="price"><strong>{{allCosts() | number:2}}</strong> PLN</div>
+              </div>
+            </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

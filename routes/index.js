@@ -4,5 +4,5 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Delegation Wizard' });
+  res.render('index', { title: res.__('Delegation Wizard') });
 };

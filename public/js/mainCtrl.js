@@ -101,6 +101,19 @@ app.controller('mainCtrl', function($scope, $http) {
     return days;
   };
 
+  self.foodCostToSubstract = function(delegationDays, dayDiem) {
+    var valueToSubstract = 0;
+    for (var i = 0; i < delegationDays.length; i++) {
+      if(delegationDays[i].provBreakfast)
+        valueToSubstract += 0.15 * dayDiem / delegationDays[i].dayType; //day type: 3 when 1/3 day, 2 when 1/2 day for diem, etc
+      if(delegationDays[i].provDinner)
+        valueToSubstract += 0.30 * dayDiem / delegationDays[i].dayType;
+      if(delegationDays[i].provSupper)
+        valueToSubstract += 0.30 * dayDiem / delegationDays[i].dayType;
+    }
+    return valueToSubstract;
+  };
+
   $scope.datePattern = (function() {
     var regexp = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
     return {
@@ -125,18 +138,17 @@ app.controller('mainCtrl', function($scope, $http) {
 
     var dayDiem = $scope.country.diem;
     var wholeDiem = dayDiem * ($scope.days.fullDays + $scope.days.halfDays / 2 + $scope.days.oneThirdDays / 3);
-
-    var valueToSubstract = 0;
-    for (var i = 0; i < $scope.delegationDays.length; i++) {
-      if($scope.delegationDays[i].provBreakfast)
-        valueToSubstract += 0.15 * dayDiem / $scope.delegationDays[i].dayType; //day type: 3 when 1/3 day, 2 when 1/2 day for diem, etc
-      if($scope.delegationDays[i].provDinner)
-        valueToSubstract += 0.30 * dayDiem / $scope.delegationDays[i].dayType;
-      if($scope.delegationDays[i].provSupper)
-        valueToSubstract += 0.30 * dayDiem / $scope.delegationDays[i].dayType;
-    }
+    var valueToSubstract = self.foodCostToSubstract($scope.delegationDays, dayDiem);
 
     return wholeDiem - valueToSubstract;
+  };
+
+  $scope.allCosts = function() {
+    return $scope.delegationCost();
+      // parseInt($scope.hotels.selCurr) +
+      // parseInt($scope.transportCost.selCurr) +
+      // parseInt($scope.publicTransport.selCurr) +
+      // parseInt($scope.otherCosts.selCurr);
   };
 
   $scope.datesChange = function() {
