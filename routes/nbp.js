@@ -70,8 +70,8 @@ exports.getPLNRate = function(req, res){
 
   makeRequest('/kursy/xml/dir.txt', function(data) {
     var tableName = findProperExchangeRateTable(data, nbpDate);
-    if(tableName === null){
-      res.send('We can\'t find proper exchange rates!');
+    if(tableName === null || typeof tableName === 'undefined'){
+      res.send(400, 'We can\'t find proper exchange rates!');
       res.end();
     }
 
@@ -84,7 +84,7 @@ exports.getPLNRate = function(req, res){
       });
 
       if(typeof reqCurrency === 'undefined')
-        res.send('Unknown currency!');
+        res.send(400, 'Unknown currency!');
       else
         res.send({
           submitDate: ratesJson.tabela_kursow.data_publikacji,

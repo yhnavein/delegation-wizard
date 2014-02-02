@@ -52,7 +52,7 @@
               <div class="col-sm-9">
                 <div class="row">
                   <div class="col-sm-6">
-                    <select class="form-control" id="destination-country" placeholder="<%= __('Select destination country') %>" required
+                    <select class="form-control" id="destination-country" placeholder="<%= __('Select destination country') %>" ng-change="refreshCurrencyRate()" required
                       ng-model="country" ng-options="el.name<%= locale.toUpperCase() %> for el in countriesList | orderBy:'name<%= locale.toUpperCase() %>'"></select>
                   </div>
                   <div class="col-sm-6">
@@ -83,7 +83,7 @@
             <div class="form-group">
               <label for="submit-date" class="col-sm-3 control-label"><%= __('Submit date') %></label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="submit-date" placeholder="<%= __('yyyy-mm-dd') %>" ng-model="submitDate" required>
+                <input type="text" class="form-control" id="submit-date" placeholder="<%= __('yyyy-mm-dd') %>" ng-model="submitDate" required ng-pattern="datePattern" ng-change="refreshCurrencyRate()">
               </div>
             </div>
 

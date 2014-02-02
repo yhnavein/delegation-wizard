@@ -132,6 +132,22 @@ app.controller('mainCtrl', function($scope, $http) {
     };
   })();
 
+  $scope.refreshCurrencyRate = function() {
+    if(typeof $scope.country === 'undefined' || $scope.country === null)
+      return;
+
+    var curr = $scope.country.currency;
+    var date = $scope.submitDate;
+
+    if(typeof date === 'undefined' || date === null)
+      return;
+
+    $http.get('/nbp/getPLNRate?currency=' + curr + '&date=' + date).success(function(data) {
+      $scope.exchangeRate = data;
+      console.log(data);
+    });
+  };
+
   $scope.delegationCost = function() {
     if(typeof $scope.dateTo === 'undefined' || typeof $scope.dateFrom === 'undefined' || typeof $scope.country === 'undefined')
       return 0;
@@ -144,7 +160,11 @@ app.controller('mainCtrl', function($scope, $http) {
   };
 
   $scope.allCosts = function() {
-    return $scope.delegationCost();
+    var delegationCost = $scope.delegationCost();
+    if($scope.exchangeRate == null)
+      return delegationCost;
+
+    return delegationCost * $scope.exchangeRate.averageRate / $scope.exchangeRate.multiplier;
       // parseInt($scope.hotels.selCurr) +
       // parseInt($scope.transportCost.selCurr) +
       // parseInt($scope.publicTransport.selCurr) +
