@@ -3,6 +3,7 @@ var app = angular.module('delegations', []);
 
 app.controller('mainCtrl', function($scope, $http) {
   var self = this;
+  Globalize.culture('pl');
 
   $scope.transportWays = [
     { nameEN: 'Train', namePL: 'Pociąg' },
@@ -62,8 +63,8 @@ app.controller('mainCtrl', function($scope, $http) {
     if(fullHours <= 24) {
       days.push({
         date: Globalize.format(from, 'yyyy-MM-dd (ddd)'),
-        fromDate: Globalize.format(from, '(ddd) yyyy-MM-dd HH:mm'),
-        toDate: Globalize.format(to, '(ddd) yyyy-MM-dd HH:mm'),
+        fromDate: Globalize.format(from, '(ddd) HH:mm'),
+        toDate: Globalize.format(to, '(ddd) HH:mm'),
         hours: fullHours,
         dayType: (fullHours >= 12 ? 1 : (fullHours <= 8 ? 3 : 2)),
         provBreakfast : false,
@@ -90,11 +91,11 @@ app.controller('mainCtrl', function($scope, $http) {
 
       days.push({
         date: Globalize.format(iterator, 'yyyy-MM-dd (ddd)'),
-        fromDate: Globalize.format(iterator, '(ddd) yyyy-MM-dd HH:mm'),
-        toDate: Globalize.format(nextDay, '(ddd) yyyy-MM-dd HH:mm'),
+        fromDate: Globalize.format(iterator, '(ddd) HH:mm'),
+        toDate: Globalize.format(nextDay, '(ddd) HH:mm'),
         hours: 24,
         dayType: dateType,
-        provBreakfast : (i++ > 0 ? true : false),
+        provBreakfast : true,
         provDinner : false,
         provSupper : false,
         excluded : false
@@ -106,7 +107,8 @@ app.controller('mainCtrl', function($scope, $http) {
 
     var lastDay = days.last();
 
-    lastDay.toDate = Globalize.format(to, '(ddd) yyyy-MM-dd HH:mm');
+    lastDay.provBreakfast = (lastDayHours >= 12);
+    lastDay.toDate = Globalize.format(to, '(ddd) HH:mm');
     lastDay.hours = lastDayHours;
     lastDay.dayType = (lastDayHours >= 12 ? 1 : (lastDayHours <= 8 ? 3 : 2));
 

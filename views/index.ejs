@@ -15,7 +15,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><b>Delegation Wizard</b></a>
+          <a class="navbar-brand" href="#"><b><%= title %></b></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -84,6 +84,12 @@
               <label for="submit-date" class="col-sm-3 control-label"><%= __('Submit date') %></label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" id="submit-date" placeholder="<%= __('yyyy-mm-dd') %>" ng-model="submitDate" required ng-pattern="datePattern" ng-change="refreshCurrencyRate()">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><%= __('Exchange rate date') %></label>
+              <div class="col-sm-9">
+                <strong disabled class="form-control">{{exchangeRate.submitDate}}</strong>
               </div>
             </div>
 
@@ -201,7 +207,7 @@
             <table class="table table-striped days-container">
               <thead>
                 <tr>
-                  <th><%= __('Date') %></th>
+                  <th><%= __('Delegation day') %></th>
                   <th></th>
                   <th><%= __('Breakfast') %></th>
                   <th><%= __('Dinner') %></th>
@@ -209,12 +215,16 @@
                 </tr>
               </thead>
               <tbody>
+                <tr>
+                  <td colspan="5">
+                    <%= __('First day: ') %>
+                    <strong>{{delegationDays.first().date}}</strong>
+                  </td>
+                </tr>
                 <tr ng-repeat="day in delegationDays">
-                  <td>{{day.date}}</td>
+                  <td>{{day.fromDate}} - {{day.toDate}}</td>
                   <td>
-                    <span class="label label-info" ng-show="day.dayType === 1">1</span>
-                    <span class="label label-info" ng-show="day.dayType === 2">1/2</span>
-                    <span class="label label-info" ng-show="day.dayType === 3">1/3</span>
+                    <span class="label label-info">{{day.hours | number:1}}h</span>
                   </td>
                   <td>
                     <input type="checkbox" ng-model="day.provBreakfast" >
@@ -224,6 +234,12 @@
                   </td>
                   <td>
                     <input type="checkbox" ng-model="day.provSupper" >
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="5">
+                    <%= __('Last day: ') %>
+                    <strong>{{delegationDays.last().date}}</strong>
                   </td>
                 </tr>
               </tbody>
