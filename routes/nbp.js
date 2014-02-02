@@ -1,7 +1,8 @@
 var http = require("http"),
     moment = require("moment"),
-    zlib = require("zlib");
-var querystring = require("querystring");
+    zlib = require("zlib"),
+    sugar = require("sugar"),
+    xml2json = require("xml2json");
 
 var options = {
   host: 'www.nbp.pl',
@@ -57,14 +58,17 @@ var findProperExchangeRateTable = function(data, date) {
   return null;
 };
 
-exports.getPLNCourse = function(req, res){
+var fixMoneyValue = function(value) {
+  value = value.replace(',', '.');
+  return parseFloat(value);
+};
+
+exports.getPLNRate = function(req, res){
   var currency = req.query.currency;
   var day = moment(req.query.date); //date when document will be submitted
   var nbpDate = parseInt(day.format("YYMMDD"), 10);
-  console.log('Data: ' + nbpDate);
 
   makeRequest('/kursy/xml/dir.txt', function(data) {
-    console.log('Received response from NBP!');
     var tableName = findProperExchangeRateTable(data, nbpDate);
     if(tableName === null){
       res.send('We can\'t find proper exchange rates!');
@@ -72,12 +76,23 @@ exports.getPLNCourse = function(req, res){
     }
 
     var url = '/kursy/xml/' + tableName.trim() + '.xml';
-    console.log(url);
     makeRequest(url, function(ratesXml) {
-      console.log('Received exchange rates from NBP!');
-      console.log(ratesXml);
+      var ratesJson = JSON.parse( xml2json.toJson(ratesXml) );
 
-      res.send(url);
+      var reqCurrency = ratesJson.tabela_kursow.pozycja.find(function(el) {
+        return el.kod_waluty === currency;
+      });
+
+      if(typeof reqCurrency === 'undefined')
+        res.send('Unknown currency!');
+      else
+        res.send({
+          submitDate: ratesJson.tabela_kursow.data_publikacji,
+          multiplier: reqCurrency.przelicznik,
+          averageRate: fixMoneyValue(reqCurrency.kurs_sredni),
+          currencyCode: reqCurrency.kod_waluty
+        });
+
       res.end();
     });
   });

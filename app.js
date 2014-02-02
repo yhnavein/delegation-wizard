@@ -36,7 +36,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/nbp/getPLNCourse', nbp.getPLNCourse);
+app.get('/nbp/getPLNRate', nbp.getPLNRate);
 app.get('/changeLocale/:locale', function (req, res) {
   res.cookie('locale', req.params.locale);
   res.redirect("/");
