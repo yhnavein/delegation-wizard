@@ -26,12 +26,11 @@ app.controller('mainCtrl', function($scope, $http) {
     });
 
   self.daysDiff = function(date1, date2) {
-    var fHalfDays = 0, fOneThirdDays = 0;
     var fullDate1 = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
     var fullDate2 = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
 
     if(fullDate2 === fullDate1) {
-      var hours = Math.abs( date2 - date1 ) / (1000 * 60 * 60);
+      var hours = Math.abs( date1 - date2 ) / (1000 * 60 * 60);
 
       return {
         fullDays : (hours > 12 ? 1 : 0),
@@ -40,35 +39,47 @@ app.controller('mainCtrl', function($scope, $http) {
       };
     }
 
-    var days = Math.floor( Math.abs( fullDate2 - fullDate1 ) / (1000 * 60 * 60 * 24) ) + 1;
+    var fullHours = Math.abs( date1 - date2 ) / (1000 * 60 * 60);
+    var days = Math.floor( fullHours / 24 );
+    var lastDayHours = fullHours - days * 24;
 
-    var firstDayHours = (24 - Math.abs( date1 - new Date(date1.getFullYear(), date1.getMonth(), date1.getDate()) ) / (1000 * 60 * 60) );
-    if(firstDayHours < 12) {
-      days--;
-      fHalfDays += (firstDayHours > 8 ? 1 : 0);
-      fOneThirdDays += (firstDayHours <= 8 ? 1 : 0);
-    }
-
-    var lastDayHours = Math.abs( date2 - new Date(date2.getFullYear(), date2.getMonth(), date2.getDate()) ) / (1000 * 60 * 60);
-    if(lastDayHours < 12 && lastDayHours > 0) {
-      days--;
-      fHalfDays += (lastDayHours > 8 ? 1 : 0);
-      fOneThirdDays += (lastDayHours <= 8 ? 1 : 0);
-    }
+    if(lastDayHours >= 12)
+      days++;
 
     return {
       fullDays : days,
-      halfDays : fHalfDays,
-      oneThirdDays : fOneThirdDays
+      halfDays : (lastDayHours < 12 && lastDayHours >= 8 ? 1 : 0),
+      oneThirdDays : (lastDayHours < 8 && lastDayHours > 0 ? 1 : 0)
     };
   };
 
   self.prepareDelegationDays = function(from, to) {
     var days = [];
     var i = 0;
-    var iterator = new Date(from.getFullYear(), from.getMonth(), from.getDate());
-    var firstDayHours = (24 - Math.abs( from - new Date(from.getFullYear(), from.getMonth(), from.getDate()) ) / (1000 * 60 * 60) );
-    var dateType = (firstDayHours >= 12 ? 1 : (firstDayHours <= 8 ? 3 : 2));
+
+    var fullHours = Math.abs( to - from ) / (1000 * 60 * 60);
+
+    if(fullHours <= 24) {
+      days.push({
+        date: Globalize.format(from, 'yyyy-MM-dd (ddd)'),
+        fromDate: Globalize.format(from, '(ddd) yyyy-MM-dd HH:mm'),
+        toDate: Globalize.format(to, '(ddd) yyyy-MM-dd HH:mm'),
+        hours: fullHours,
+        dayType: (fullHours >= 12 ? 1 : (fullHours <= 8 ? 3 : 2)),
+        provBreakfast : false,
+        provDinner : false,
+        provSupper : false,
+        excluded : false
+      });
+      return days;
+    }
+
+    var lastDayHours = fullHours % 24;
+    var iterator = new Date(from.getTime());
+    var nextDay = new Date(from.getTime());
+    nextDay.setDate(iterator.getDate() + 1);
+    var dateType = 1;
+
 
     if (to <= from)
       return days;
@@ -79,6 +90,9 @@ app.controller('mainCtrl', function($scope, $http) {
 
       days.push({
         date: Globalize.format(iterator, 'yyyy-MM-dd (ddd)'),
+        fromDate: Globalize.format(iterator, '(ddd) yyyy-MM-dd HH:mm'),
+        toDate: Globalize.format(nextDay, '(ddd) yyyy-MM-dd HH:mm'),
+        hours: 24,
         dayType: dateType,
         provBreakfast : (i++ > 0 ? true : false),
         provDinner : false,
@@ -87,16 +101,14 @@ app.controller('mainCtrl', function($scope, $http) {
       });
       dateType = 1; //because after first there are only full days
       iterator.setDate(iterator.getDate() + 1);
+      nextDay.setDate(iterator.getDate() + 1);
     }
 
     var lastDay = days.last();
-    if(lastDay.date !== days.first().date) {
-      var lastDayHours = Math.abs( to - new Date(to.getFullYear(), to.getMonth(), to.getDate()) ) / (1000 * 60 * 60);
-      lastDay.dayType = (lastDayHours >= 12 ? 1 : (lastDayHours <= 8 ? 3 : 2));
-    } else { //first day is also the last day
-      var dayHours = Math.abs( to - from ) / (1000 * 60 * 60);
-      lastDay.dayType = (dayHours >= 12 ? 1 : (dayHours <= 8 ? 3 : 2));
-    }
+
+    lastDay.toDate = Globalize.format(to, '(ddd) yyyy-MM-dd HH:mm');
+    lastDay.hours = lastDayHours;
+    lastDay.dayType = (lastDayHours >= 12 ? 1 : (lastDayHours <= 8 ? 3 : 2));
 
     return days;
   };

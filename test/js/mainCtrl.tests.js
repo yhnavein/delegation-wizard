@@ -14,9 +14,9 @@ describe('counting days properly', function(){
     }));
 
 
-    it('days diff between 2013-01-02 and 2013-01-05 is 4', function() {
+    it('days diff between 2013-01-02 and 2013-01-05 is 3', function() {
         var days = ctrl.daysDiff(new Date(2013,0,2), new Date(2013,0,5));
-        expect(days.fullDays).toEqual(4);
+        expect(days.fullDays).toEqual(3);
     });
 
     it('days diff between 2013-01-02 and 2013-01-02 is 0', function() {
@@ -55,9 +55,9 @@ describe('counting days properly', function(){
         expect(days.oneThirdDays).toEqual(1);
     });
 
-    it('days diff between 2013-01-02 and 2013-02-02 is 32', function() {
+    it('days diff between 2013-01-02 and 2013-02-02 is 31', function() {
         var days = ctrl.daysDiff(new Date(2013,0,2), new Date(2013,1,2));
-        expect(days.fullDays).toEqual(32);
+        expect(days.fullDays).toEqual(31);
     });
 
     it('days diff between 2013-01-02 10:00 and 2013-01-02 15:00 is 0', function() {
@@ -70,27 +70,35 @@ describe('counting days properly', function(){
     it('days diff between 2013-01-02 10:00 and 2013-01-03 9:00 is 1', function() {
         var days = ctrl.daysDiff(new Date(2013,0,2,10,0,0), new Date(2013,0,3,9,0,0));
         expect(days.fullDays).toEqual(1);
-        expect(days.halfDays).toEqual(1);
+        expect(days.halfDays).toEqual(0);
         expect(days.oneThirdDays).toEqual(0);
     });
 
-    it('days diff between 2013-01-02 19:00 and 2013-01-03 9:00 is 0', function() {
+    it('days diff between 2013-01-02 19:00 and 2013-01-03 9:00 is 1', function() {
         var days = ctrl.daysDiff(new Date(2013,0,2,19,0,0), new Date(2013,0,3,9,0,0));
-        expect(days.fullDays).toEqual(0);
-        expect(days.halfDays).toEqual(1);
-        expect(days.oneThirdDays).toEqual(1);
+        expect(days.fullDays).toEqual(1); // hours diff == 14. 14 > 12, so it's a full day
+        expect(days.halfDays).toEqual(0);
+        expect(days.oneThirdDays).toEqual(0);
     });
 
-    it('days diff between 2013-01-02 10:00 and 2013-01-06 18:30 is 5', function() {
+    it('days diff between 2013-01-02 10:00 and 2013-01-06 18:30 is 4', function() {
         var days = ctrl.daysDiff(new Date(2013,0,2,10,0,0), new Date(2013,0,6,18,30,0));
-        expect(days.fullDays).toEqual(5);
+        expect(days.fullDays).toEqual(4);
+        expect(days.halfDays).toEqual(1);
     });
 
-    it('days diff between 2013-01-02 19:00 and 2013-01-06 11:30 is 3', function() {
+    it('days diff between 2013-01-02 19:00 and 2013-01-06 11:30 is 4', function() {
         var days = ctrl.daysDiff(new Date(2013,0,2,19,0,0), new Date(2013,0,6,11,30,0));
-        expect(days.fullDays).toEqual(3);
-        expect(days.halfDays).toEqual(1);
-        expect(days.oneThirdDays).toEqual(1);
+        expect(days.fullDays).toEqual(4);
+        expect(days.halfDays).toEqual(0);
+        expect(days.oneThirdDays).toEqual(0);
+    });
+
+    it('exactly 24 hours abroad is treated as only 1 day', function() {
+        var days = ctrl.daysDiff(new Date(2013,0,4,19,0,0), new Date(2013,0,5,19,0,0));
+        expect(days.fullDays).toEqual(1);
+        expect(days.halfDays).toEqual(0);
+        expect(days.oneThirdDays).toEqual(0);
     });
 
 });
@@ -111,11 +119,9 @@ describe('presenting days summary', function(){
 
     it('standard date range', function() {
         var days = ctrl.prepareDelegationDays(new Date(2013,0,2,15,0), new Date(2013,0,5,5,0));
-        //to have 4 days
-        var firstDay = days.first();
-        expect(firstDay.dayType).toEqual(2);
+        //to have 3 days
         var lastDay = days.last();
-        expect(lastDay.dayType).toEqual(3);
+        expect(lastDay.dayType).toEqual(1);
     });
 
     it('one day date range (around half a day)', function() {
@@ -178,20 +184,34 @@ describe('calculating food costs (for substracing)', function(){
         expect(foodCost).toEqual(35 * 0.5 * 0.75);
     });
 
-    it('two days date range, one breakfast, two dinners, one supper', function() {
+    it('exactly 24 hours abroad, one breakfast, one dinner', function() {
         var days = ctrl.prepareDelegationDays(new Date(2013,0,2,19,0), new Date(2013,0,3,19,0));
         //to have 1 day
+        var day = days.first();
+        day.provBreakfast = true;
+        day.provDinner = true;
+        day.provSupper = false;
+        var foodCost = ctrl.foodCostToSubstract(days, scope.country.diem);
+        expect(foodCost).toEqual(15.75);
+    });
+
+    it('2+ days, two breakfasts, one dinner', function() {
+        var days = ctrl.prepareDelegationDays(new Date(2013,0,2,19,0), new Date(2013,0,5,5,0));
+        //to have 3 days
         var day = days.first();
         day.provBreakfast = false;
         day.provDinner = true;
         day.provSupper = false;
-
+        day = days[1];
+        day.provBreakfast = true;
+        day.provDinner = false;
+        day.provSupper = false;
         day = days.last();
         day.provBreakfast = true;
-        day.provDinner = true;
-        day.provSupper = true;
+        day.provDinner = false;
+        day.provSupper = false;
         var foodCost = ctrl.foodCostToSubstract(days, scope.country.diem);
-        expect(foodCost).toEqual(29.75);
+        expect(foodCost).toEqual(18.375);
     });
 
 });
