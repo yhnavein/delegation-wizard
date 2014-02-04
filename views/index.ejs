@@ -92,6 +92,12 @@
                 <strong disabled class="form-control">{{exchangeRate.submitDate}}</strong>
               </div>
             </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><%= __('Exchange rate') %></label>
+              <div class="col-sm-9">
+                <strong disabled class="form-control">{{exchangeRate.averageRate | number:4}}</strong>
+              </div>
+            </div>
 
             <legend><%= __('Travel details') %></legend>
             <div class="delegation-dates row">
