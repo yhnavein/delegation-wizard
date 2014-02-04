@@ -37,6 +37,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+app.get('/print', routes.print);
 app.get('/nbp/getPLNRate', nbp.getPLNRate);
 app.get('/changeLocale/:locale', function (req, res) {
   res.cookie('locale', req.params.locale);
