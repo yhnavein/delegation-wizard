@@ -226,20 +226,20 @@ describe('calculating diem costs', function(){
         scope = $rootScope.$new();
         httpBackend = $httpBackend;
 
-        scope.country = { nameEN: "United Kingdom", namePL: "Wielka Brytania", code: "GB", diem: 35, currency: "GBP" };
         ctrl = $controller('mainCtrl', { $scope: scope, $http: $http });
+        scope.root.country = { nameEN: "United Kingdom", namePL: "Wielka Brytania", code: "GB", diem: 35, currency: "GBP" };
     }));
 
 
     it('one day date range (around half a day), all meals provided', function() {
-        scope.dateFrom = '2013-01-02';
-        scope.dateTimeFrom = '10:00';
-        scope.dateTo = '2013-01-02';
-        scope.dateTimeTo = '19:00';
+        scope.root.dateFrom = '2013-01-02';
+        scope.root.dateTimeFrom = '10:00';
+        scope.root.dateTo = '2013-01-02';
+        scope.root.dateTimeTo = '19:00';
         scope.datesChange();
 
         //to have 1 day
-        var day = scope.delegationDays.first();
+        var day = scope.root.delegationDays.first();
         day.provBreakfast = true;
         day.provDinner = true;
         day.provSupper = true;

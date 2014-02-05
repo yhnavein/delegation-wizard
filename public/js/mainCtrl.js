@@ -4,19 +4,23 @@ var app = angular.module('delegations', []);
 app.controller('mainCtrl', function($scope, $http) {
   var self = this;
   Globalize.culture('pl');
+  $scope.root = {};
+
+  // if(typeof window.localStorage.delegation !== 'undefined')
+  //   $scope = window.localStorage.getItem('delegation');
 
   $scope.transportWays = [
     { nameEN: 'Train', namePL: 'Pociąg' },
     { nameEN: 'Bus', namePL: 'Autobus' },
     { nameEN: 'Airplane',  namePL: 'Samolot' }
   ];
-  $scope.submitDate = Globalize.format(new Date(), 'yyyy-MM-dd');
+  $scope.root.submitDate = Globalize.format(new Date(), 'yyyy-MM-dd');
 
   //for test currently
-  $scope.dateFrom = '2014-01-05';
-  $scope.dateTimeFrom = '10:00';
-  $scope.dateTo = '2014-01-14';
-  $scope.dateTimeTo = '18:30';
+  $scope.root.dateFrom = '2014-01-05';
+  $scope.root.dateTimeFrom = '10:00';
+  $scope.root.dateTo = '2014-01-14';
+  $scope.root.dateTimeTo = '18:30';
 
   $http({
       method: 'GET',
@@ -147,38 +151,38 @@ app.controller('mainCtrl', function($scope, $http) {
   })();
 
   $scope.refreshCurrencyRate = function() {
-    if(typeof $scope.country === 'undefined' || $scope.country === null)
+    if(typeof $scope.root.country === 'undefined' || $scope.root.country === null)
       return;
 
-    var curr = $scope.country.currency;
-    var date = $scope.submitDate;
+    var curr = $scope.root.country.currency;
+    var date = $scope.root.submitDate;
 
     if(typeof date === 'undefined' || date === null)
       return;
 
     $http.get('/nbp/getPLNRate?currency=' + curr + '&date=' + date).success(function(data) {
-      $scope.exchangeRate = data;
+      $scope.root.exchangeRate = data;
       console.log(data);
     });
   };
 
   $scope.delegationCost = function() {
-    if(typeof $scope.dateTo === 'undefined' || typeof $scope.dateFrom === 'undefined' || typeof $scope.country === 'undefined')
+    if(typeof $scope.root.dateTo === 'undefined' || typeof $scope.root.dateFrom === 'undefined' || typeof $scope.root.country === 'undefined')
       return 0;
 
-    var dayDiem = $scope.country.diem;
-    var wholeDiem = dayDiem * ($scope.days.fullDays + $scope.days.halfDays / 2 + $scope.days.oneThirdDays / 3);
-    var valueToSubstract = self.foodCostToSubstract($scope.delegationDays, dayDiem);
+    var dayDiem = $scope.root.country.diem;
+    var wholeDiem = dayDiem * ($scope.root.days.fullDays + $scope.root.days.halfDays / 2 + $scope.root.days.oneThirdDays / 3);
+    var valueToSubstract = self.foodCostToSubstract($scope.root.delegationDays, dayDiem);
 
     return wholeDiem - valueToSubstract;
   };
 
   $scope.allCosts = function() {
     var delegationCost = $scope.delegationCost();
-    if($scope.exchangeRate == null)
+    if($scope.root.exchangeRate == null)
       return delegationCost;
 
-    return delegationCost * $scope.exchangeRate.averageRate / $scope.exchangeRate.multiplier;
+    return delegationCost * $scope.root.exchangeRate.averageRate / $scope.root.exchangeRate.multiplier;
       // parseInt($scope.hotels.selCurr) +
       // parseInt($scope.transportCost.selCurr) +
       // parseInt($scope.publicTransport.selCurr) +
@@ -186,18 +190,18 @@ app.controller('mainCtrl', function($scope, $http) {
   };
 
   $scope.datesChange = function() {
-    if(typeof $scope.dateTo === 'undefined' || typeof $scope.dateFrom === 'undefined' || typeof $scope.dateTimeTo === 'undefined' || typeof $scope.dateTimeFrom === 'undefined')
+    if(typeof $scope.root.dateTo === 'undefined' || typeof $scope.root.dateFrom === 'undefined' || typeof $scope.root.dateTimeTo === 'undefined' || typeof $scope.root.dateTimeFrom === 'undefined')
       return;
 
-    var dateFrom = new Date($scope.dateFrom + ' ' + $scope.dateTimeFrom);
-    var dateTo = new Date($scope.dateTo + ' ' + $scope.dateTimeTo);
+    var dateFrom = new Date($scope.root.dateFrom + ' ' + $scope.root.dateTimeFrom);
+    var dateTo = new Date($scope.root.dateTo + ' ' + $scope.root.dateTimeTo);
 
-    $scope.days = self.daysDiff(dateFrom, dateTo);
-    $scope.delegationDays = self.prepareDelegationDays(dateFrom, dateTo);
+    $scope.root.days = self.daysDiff(dateFrom, dateTo);
+    $scope.root.delegationDays = self.prepareDelegationDays(dateFrom, dateTo);
   };
 
   $scope.goToPrint = function() {
-    window.localStorage.setItem('delegation', $scope);
+    window.localStorage.setItem('delegation', angular.toJson($scope.root));
   };
 
   $scope.datesChange();
