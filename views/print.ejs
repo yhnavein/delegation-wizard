@@ -8,14 +8,173 @@
   </head>
   <body ng-controller="mainCtrl">
     <div class="container theme-showcase">
-      Empty for now
-    </div>
+      <h1>Rozliczenie delegacji zagranicznej NR {{delegationNo}}</h1>
 
-    <div id="footer">
-      <div class="container">
-        <p class="centered">
-          Created by <b>PureDev, Piotr Dąbrowski</b>
-        </p>
+      <dl class="dl-horizontal">
+        <dt>Delegowany</dt>
+        <dd>{{fullName}}</dd>
+        <dt>do</dt>
+        <dd>{{country, destCity}}</dd>
+        <dt>na czas od</dt>
+        <dd>
+          <span class="bordered">{{dateFrom}}</span>
+          do
+          <span class="bordered">{{dateTo}}</span>
+        </dd>
+        <dt>w celu:</dt>
+        <dd>{{delegationTitle}}</dd>
+      </dl>
+
+      <h3>Rachunek kosztów podróży</h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th colspan="3">WYJAZD</th>
+            <th colspan="3">PRZYJAZD</th>
+            <th rowspan="2">Środek lokomocji</th>
+          </tr>
+          <tr>
+            <th>Miejscowość</th>
+            <th>Data</th>
+            <th>Godzina</th>
+            <th>Miejscowość</th>
+            <th>Data</th>
+            <th>Godzina</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{startCity}}</td>
+            <td>{{dateFrom}}</td>
+            <td>{{dateTimeFrom}}</td>
+            <td>{{destCity}}</td>
+            <td>??</td>
+            <td>??</td>
+            <td>{{transportName}}</td>
+          </tr>
+          <tr>
+            <td>{{destCity}}</td>
+            <td>??</td>
+            <td>??</td>
+            <td>{{startCity}}</td>
+            <td>{{dateTo}}</td>
+            <td>{{dateTimeTo}}</td>
+            <td>{{transportName}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="delegation-time">
+        Czas trwania:
+        <span>Pełnych dni: później</span>
+        <span>Godzin: później</span>
+        <span>Minut: później</span>
+      </div>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th></th>
+            <th>PLN</th>
+            <th>{{country.currency}}</th>
+            <th>kurs rozliczenia</th>
+            <th>Razem PLN</th>
+            <th>Adnotacje</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1) Koszty przejazdu</td>
+            <td></td>
+            <td></td>
+            <td>{{exchangeRate.averageRate | number:4}}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>2) Noclegi</td>
+            <td></td>
+            <td></td>
+            <td>{{exchangeRate.averageRate | number:4}}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>3) Noclegi - ryczałt</td>
+            <td></td>
+            <td></td>
+            <td>{{exchangeRate.averageRate | number:4}}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>4) Diety</td>
+            <td>0 zł</td>
+            <td>{{delegationCost() | number:2}}</td>
+            <td>{{exchangeRate.averageRate | number:4}}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>5) Dojazd z/do dworca</td>
+            <td></td>
+            <td></td>
+            <td>{{exchangeRate.averageRate | number:4}}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>6) Komunikacja miejska</td>
+            <td></td>
+            <td></td>
+            <td>{{exchangeRate.averageRate | number:4}}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>7) Inne</td>
+            <td></td>
+            <td></td>
+            <td>{{exchangeRate.averageRate | number:4}}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="summary ">
+            <td>RAZEM wydatki</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Pobrane zaliczki</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="summary">
+            <td>Do wypłaty (+) / Do zwrotu (-)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2">{{exchangeRate.multiplier}} {{country.currency}} =</td>
+            <td>{{exchangeRate.averageRate | number:4}} PLN</td>
+            <td colspan="3">- kurs średni NBP z dn. {{exchangeRate.submitDate}}</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div class="some-statement">
+
       </div>
     </div>
 

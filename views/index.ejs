@@ -4,6 +4,7 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css' />
     <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap-theme.css' />
+    <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.min.css' />
     <link rel='stylesheet' href='/css/style.css' />
   </head>
   <body ng-controller="mainCtrl">
@@ -253,11 +254,12 @@
           </div>
         </div>
       </form>
-      <!-- <div class="col-sm-2">
-                <div><span class="label label-info">12h+</span> {{days.fullDays}}</div>
-                <div><span class="label label-info">8h-12h</span> {{days.halfDays}}</div>
-                <div><span class="label label-info">to 8h</span> {{days.oneThirdDays}}</div>
-              </div> -->
+
+      <div class="delegation-controls clearfix">
+        <button class="btn btn-lg btn-success pull-right" ng-click="goToPrint()">
+          <%= __('Print delegation form') %> <i class="icon-caret-right"></i>
+          </button>
+      </div>
     </div>
 
     <div id="footer">

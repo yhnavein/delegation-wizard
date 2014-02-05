@@ -196,5 +196,9 @@ app.controller('mainCtrl', function($scope, $http) {
     $scope.delegationDays = self.prepareDelegationDays(dateFrom, dateTo);
   };
 
+  $scope.goToPrint = function() {
+    window.localStorage.setItem('delegation', $scope);
+  };
+
   $scope.datesChange();
 });
