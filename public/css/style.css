@@ -1,5 +1,5 @@
 body {
-  padding-top: 120px;
+  padding-top: 100px;
 }
 
 #footer {
@@ -54,4 +54,8 @@ input.ng-invalid.ng-dirty {
 
 .delegation-controls {
   margin-top: 24px;
+}
+
+.container fieldset {
+  margin-top: 40px;
 }

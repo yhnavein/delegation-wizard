@@ -1,9 +1,8 @@
-/*global console:false, angular:false, Globalize:false */
+/*global console:false, angular:false */
 var app = angular.module('delegations', []);
 
-app.controller('mainCtrl', function($scope, $http) {
+app.controller('mainCtrl', function($scope, $http, $filter) {
   var self = this;
-  Globalize.culture('pl');
   $scope.root = {};
 
   // if(typeof window.localStorage.delegation !== 'undefined')
@@ -14,7 +13,7 @@ app.controller('mainCtrl', function($scope, $http) {
     { nameEN: 'Bus', namePL: 'Autobus' },
     { nameEN: 'Airplane',  namePL: 'Samolot' }
   ];
-  $scope.root.submitDate = Globalize.format(new Date(), 'yyyy-MM-dd');
+  $scope.root.submitDate = $filter('date')(new Date(), 'yyyy-MM-dd');
 
   //for test currently
   $scope.root.dateFrom = '2014-01-05';
@@ -66,9 +65,9 @@ app.controller('mainCtrl', function($scope, $http) {
 
     if(fullHours <= 24) {
       days.push({
-        date: Globalize.format(from, 'yyyy-MM-dd (ddd)'),
-        fromDate: Globalize.format(from, '(ddd) HH:mm'),
-        toDate: Globalize.format(to, '(ddd) HH:mm'),
+        date: new Date( from.getTime()),
+        fromDate: new Date( from.getTime()),
+        toDate: new Date( to.getTime()),
         hours: fullHours,
         dayType: (fullHours >= 12 ? 1 : (fullHours <= 8 ? 3 : 2)),
         provBreakfast : false,
@@ -94,9 +93,9 @@ app.controller('mainCtrl', function($scope, $http) {
         break;
 
       days.push({
-        date: Globalize.format(iterator, 'yyyy-MM-dd (ddd)'),
-        fromDate: Globalize.format(iterator, '(ddd) HH:mm'),
-        toDate: Globalize.format(nextDay, '(ddd) HH:mm'),
+        date: new Date( iterator.getTime() ),
+        fromDate: new Date( iterator.getTime() ),
+        toDate: new Date( nextDay.getTime() ),
         hours: 24,
         dayType: dateType,
         provBreakfast : true,
@@ -112,7 +111,7 @@ app.controller('mainCtrl', function($scope, $http) {
     var lastDay = days.last();
 
     lastDay.provBreakfast = (lastDayHours >= 12);
-    lastDay.toDate = Globalize.format(to, '(ddd) HH:mm');
+    lastDay.toDate = to;
     lastDay.hours = lastDayHours;
     lastDay.dayType = (lastDayHours >= 12 ? 1 : (lastDayHours <= 8 ? 3 : 2));
 
@@ -179,7 +178,7 @@ app.controller('mainCtrl', function($scope, $http) {
 
   $scope.allCosts = function() {
     var delegationCost = $scope.delegationCost();
-    if($scope.root.exchangeRate == null)
+    if(typeof $scope.root.exchangeRate === 'undefined' || $scope.root.exchangeRate === null)
       return delegationCost;
 
     return delegationCost * $scope.root.exchangeRate.averageRate / $scope.root.exchangeRate.multiplier;
@@ -193,8 +192,8 @@ app.controller('mainCtrl', function($scope, $http) {
     if(typeof $scope.root.dateTo === 'undefined' || typeof $scope.root.dateFrom === 'undefined' || typeof $scope.root.dateTimeTo === 'undefined' || typeof $scope.root.dateTimeFrom === 'undefined')
       return;
 
-    var dateFrom = new Date($scope.root.dateFrom + ' ' + $scope.root.dateTimeFrom);
-    var dateTo = new Date($scope.root.dateTo + ' ' + $scope.root.dateTimeTo);
+    var dateFrom = new Date($scope.root.dateFrom + 'T' + $scope.root.dateTimeFrom + ':00');
+    var dateTo = new Date($scope.root.dateTo + 'T' + $scope.root.dateTimeTo + ':00');
 
     $scope.root.days = self.daysDiff(dateFrom, dateTo);
     $scope.root.delegationDays = self.prepareDelegationDays(dateFrom, dateTo);
