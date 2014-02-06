@@ -192,8 +192,11 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     if(typeof $scope.root.dateTo === 'undefined' || typeof $scope.root.dateFrom === 'undefined' || typeof $scope.root.dateTimeTo === 'undefined' || typeof $scope.root.dateTimeFrom === 'undefined')
       return;
 
-    var dateFrom = new Date($scope.root.dateFrom + 'T' + $scope.root.dateTimeFrom + ':00');
-    var dateTo = new Date($scope.root.dateTo + 'T' + $scope.root.dateTimeTo + ':00');
+    var dateFrom = new Date($scope.root.dateFrom + 'T' + $scope.root.dateTimeFrom.padLeft(5, '0') + ':00');
+    var dateTo = new Date($scope.root.dateTo + 'T' + $scope.root.dateTimeTo.padLeft(5, '0') + ':00');
+
+    if(!dateFrom.isValid() || !dateTo.isValid())
+      return;
 
     $scope.root.days = self.daysDiff(dateFrom, dateTo);
     $scope.root.delegationDays = self.prepareDelegationDays(dateFrom, dateTo);
