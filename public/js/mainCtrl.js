@@ -5,29 +5,16 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
   var self = this;
   $scope.root = {};
 
-  // if(typeof window.localStorage.delegation !== 'undefined')
-  //   $scope = window.localStorage.getItem('delegation');
-
   $scope.transportWays = [
     { nameEN: 'Train', namePL: 'Pociąg' },
     { nameEN: 'Bus', namePL: 'Autobus' },
     { nameEN: 'Airplane',  namePL: 'Samolot' }
   ];
+
+  //putting some default values
   $scope.root.submitDate = $filter('date')(new Date(), 'yyyy-MM-dd');
-
-  //for test currently
-  $scope.root.dateFrom = '2014-01-05';
-  $scope.root.dateTimeFrom = '10:00';
-  $scope.root.dateTo = '2014-01-14';
-  $scope.root.dateTimeTo = '18:30';
-
-  $http({
-      method: 'GET',
-      url: '/countries.json'
-    }).
-      success(function(data) {
-        $scope.countriesList = angular.fromJson(data);
-    });
+  $scope.root.transportName = $scope.transportWays.last();
+  $scope.root.startCity = 'Warszawa';
 
   self.daysDiff = function(date1, date2) {
     var fullDate1 = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
@@ -57,10 +44,24 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     };
   };
 
+  self.onLoadComplete = function(data) {
+    $scope.countriesList = angular.fromJson(data);
+
+    if(typeof window.localStorage.delegation !== 'undefined'){
+      $scope.root = angular.fromJson( window.localStorage.getItem('delegation') );
+      $scope.root.country = $scope.countriesList.find(function(el) {
+        return el.code === $scope.root.country.code;
+      });
+      $scope.root.transportName = $scope.transportWays.find(function(el) {
+        return el.namePL === $scope.root.transportName.namePL;
+      });
+    }
+    else
+      $scope.datesChange();
+  };
+
   self.prepareDelegationDays = function(from, to) {
     var days = [];
-    var i = 0;
-
     var fullHours = Math.abs( to - from ) / (1000 * 60 * 60);
 
     if(fullHours <= 24) {
@@ -206,5 +207,9 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     window.localStorage.setItem('delegation', angular.toJson($scope.root));
   };
 
-  $scope.datesChange();
+  $http({
+    method: 'GET',
+    url: '/countries.json'
+  }).success(self.onLoadComplete);
+
 });

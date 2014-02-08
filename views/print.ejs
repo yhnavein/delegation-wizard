@@ -14,7 +14,7 @@
         <dt>Delegowany</dt>
         <dd>{{root.fullName}}</dd>
         <dt>do</dt>
-        <dd>{{root.country}}, {{root.destCity}}</dd>
+        <dd>{{root.country.namePL}}, {{root.destCity}}</dd>
         <dt>na czas od</dt>
         <dd>
           <span class="bordered">{{root.dateFrom}}</span>
@@ -50,7 +50,7 @@
             <td>{{root.destCity}}</td>
             <td>??</td>
             <td>??</td>
-            <td>{{root.transportName}}</td>
+            <td>{{root.transportName.namePL}}</td>
           </tr>
           <tr>
             <td>{{root.destCity}}</td>
@@ -59,7 +59,7 @@
             <td>{{root.startCity}}</td>
             <td>{{root.dateTo}}</td>
             <td>{{root.dateTimeTo}}</td>
-            <td>{{root.transportName}}</td>
+            <td>{{root.transportName.namePL}}</td>
           </tr>
         </tbody>
       </table>
@@ -166,7 +166,7 @@
         </tbody>
         <tfoot>
           <tr>
-            <td colspan="2">{{root.exchangeRate.multiplier}} {{root.country.currency}} =</td>
+            <td colspan="2" style="text-align: right;">{{root.exchangeRate.multiplier}} {{root.country.currency}} =</td>
             <td>{{root.exchangeRate.averageRate | number:4}} PLN</td>
             <td colspan="3">- kurs średni NBP z dn. {{root.exchangeRate.submitDate}}</td>
           </tr>

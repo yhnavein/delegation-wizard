@@ -73,7 +73,7 @@
                 <label for="transport-type" class="col-sm-3 control-label"><%= __('Transport type') %></label>
                 <div class="col-sm-9">
                   <select class="form-control" id="transport-type" placeholder="<%= __('Transport type') %>" required
-                        ng-model="root.transportName" ng-options="el.name<%= locale.toUpperCase() %> for el in transportWays"></select>
+                    ng-model="root.transportName" ng-options="el.name<%= locale.toUpperCase() %> for el in transportWays"></select>
                 </div>
               </div>
               <div class="form-group">
@@ -264,7 +264,7 @@
       </form>
 
       <div class="delegation-controls clearfix">
-        <button class="btn btn-lg btn-success pull-right" disabled ng-click="goToPrint()">
+        <button class="btn btn-lg btn-success pull-right" ng-click="goToPrint()">
           <%= __('Print delegation form') %> <i class="icon-caret-right"></i>
           </button>
       </div>
