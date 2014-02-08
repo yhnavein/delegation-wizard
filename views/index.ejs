@@ -21,6 +21,14 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li>
+              <div class="steps">
+                <button class="step btn btn-default"><%= __('Step') %> 1</button> <i class="icon-caret-right icon-light"></i>
+                <button class="step btn btn-default"><%= __('Step') %> 2</button> <i class="icon-caret-right icon-light"></i>
+                <button class="step btn btn-default"><%= __('Step') %> 3</button> <i class="icon-caret-right icon-light"></i>
+                <button class="step btn btn-success step-final" ng-click="goToPrint()" disabled><%= __('Print') %></button>
+              </div>
+            </li>
+            <li>
               <div class="diem">
                 <div class="title"><%= __('Diem amount') %></div>
                 <div class="price"><strong>{{delegationCost() | number:2}}</strong> {{root.country.currency}}</div>

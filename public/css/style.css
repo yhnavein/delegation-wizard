@@ -59,3 +59,9 @@ input.ng-invalid.ng-dirty {
 .container fieldset {
   margin-top: 40px;
 }
+
+.steps {
+  padding: 20px 48px 0 0;
+}
+
+.steps i { padding: 0 4px; }
