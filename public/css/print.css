@@ -1,0 +1,11 @@
+.container-a4 {
+  width: 900px;
+}
+
+h1.title {
+  font-weight: bold;
+  text-align: center;
+  font-size: 14px;
+  border-bottom: 1px solid #000;
+  margin-bottom: 12px;
+}

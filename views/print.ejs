@@ -7,26 +7,26 @@
     <link rel='stylesheet' href='/css/print.css' />
   </head>
   <body ng-controller="mainCtrl">
-    <div class="container theme-showcase">
-      <h1>Rozliczenie delegacji zagranicznej NR {{delegationNo}}</h1>
+    <div class="container theme-showcase container-a4">
+      <h1 class="title">Rozliczenie delegacji zagranicznej NR {{root.delegationNo}}</h1>
 
       <dl class="dl-horizontal">
         <dt>Delegowany</dt>
-        <dd>{{fullName}}</dd>
+        <dd>{{root.fullName}}</dd>
         <dt>do</dt>
-        <dd>{{country, destCity}}</dd>
+        <dd>{{root.country}}, {{root.destCity}}</dd>
         <dt>na czas od</dt>
         <dd>
-          <span class="bordered">{{dateFrom}}</span>
+          <span class="bordered">{{root.dateFrom}}</span>
           do
-          <span class="bordered">{{dateTo}}</span>
+          <span class="bordered">{{root.dateTo}}</span>
         </dd>
         <dt>w celu:</dt>
-        <dd>{{delegationTitle}}</dd>
+        <dd>{{root.delegationTitle}}</dd>
       </dl>
 
       <h3>Rachunek kosztów podróży</h3>
-      <table class="table table-striped">
+      <table class="table table-condensed">
         <thead>
           <tr>
             <th colspan="3">WYJAZD</th>
@@ -44,22 +44,22 @@
         </thead>
         <tbody>
           <tr>
-            <td>{{startCity}}</td>
-            <td>{{dateFrom}}</td>
-            <td>{{dateTimeFrom}}</td>
-            <td>{{destCity}}</td>
+            <td>{{root.startCity}}</td>
+            <td>{{root.dateFrom}}</td>
+            <td>{{root.dateTimeFrom}}</td>
+            <td>{{root.destCity}}</td>
             <td>??</td>
             <td>??</td>
-            <td>{{transportName}}</td>
+            <td>{{root.transportName}}</td>
           </tr>
           <tr>
-            <td>{{destCity}}</td>
+            <td>{{root.destCity}}</td>
             <td>??</td>
             <td>??</td>
-            <td>{{startCity}}</td>
-            <td>{{dateTo}}</td>
-            <td>{{dateTimeTo}}</td>
-            <td>{{transportName}}</td>
+            <td>{{root.startCity}}</td>
+            <td>{{root.dateTo}}</td>
+            <td>{{root.dateTimeTo}}</td>
+            <td>{{root.transportName}}</td>
           </tr>
         </tbody>
       </table>
@@ -71,12 +71,12 @@
         <span>Minut: później</span>
       </div>
 
-      <table class="table table-striped">
+      <table class="table table-condensed">
         <thead>
           <tr>
             <th></th>
             <th>PLN</th>
-            <th>{{country.currency}}</th>
+            <th>{{root.country.currency}}</th>
             <th>kurs rozliczenia</th>
             <th>Razem PLN</th>
             <th>Adnotacje</th>
@@ -87,7 +87,7 @@
             <td>1) Koszty przejazdu</td>
             <td></td>
             <td></td>
-            <td>{{exchangeRate.averageRate | number:4}}</td>
+            <td>{{root.exchangeRate.averageRate | number:4}}</td>
             <td></td>
             <td></td>
           </tr>
@@ -95,7 +95,7 @@
             <td>2) Noclegi</td>
             <td></td>
             <td></td>
-            <td>{{exchangeRate.averageRate | number:4}}</td>
+            <td>{{root.exchangeRate.averageRate | number:4}}</td>
             <td></td>
             <td></td>
           </tr>
@@ -103,15 +103,15 @@
             <td>3) Noclegi - ryczałt</td>
             <td></td>
             <td></td>
-            <td>{{exchangeRate.averageRate | number:4}}</td>
+            <td>{{root.exchangeRate.averageRate | number:4}}</td>
             <td></td>
             <td></td>
           </tr>
           <tr>
             <td>4) Diety</td>
             <td>0 zł</td>
-            <td>{{delegationCost() | number:2}}</td>
-            <td>{{exchangeRate.averageRate | number:4}}</td>
+            <td>{{root.delegationCost() | number:2}}</td>
+            <td>{{root.exchangeRate.averageRate | number:4}}</td>
             <td></td>
             <td></td>
           </tr>
@@ -119,7 +119,7 @@
             <td>5) Dojazd z/do dworca</td>
             <td></td>
             <td></td>
-            <td>{{exchangeRate.averageRate | number:4}}</td>
+            <td>{{root.exchangeRate.averageRate | number:4}}</td>
             <td></td>
             <td></td>
           </tr>
@@ -127,7 +127,7 @@
             <td>6) Komunikacja miejska</td>
             <td></td>
             <td></td>
-            <td>{{exchangeRate.averageRate | number:4}}</td>
+            <td>{{root.exchangeRate.averageRate | number:4}}</td>
             <td></td>
             <td></td>
           </tr>
@@ -135,7 +135,7 @@
             <td>7) Inne</td>
             <td></td>
             <td></td>
-            <td>{{exchangeRate.averageRate | number:4}}</td>
+            <td>{{root.exchangeRate.averageRate | number:4}}</td>
             <td></td>
             <td></td>
           </tr>
@@ -166,9 +166,9 @@
         </tbody>
         <tfoot>
           <tr>
-            <td colspan="2">{{exchangeRate.multiplier}} {{country.currency}} =</td>
-            <td>{{exchangeRate.averageRate | number:4}} PLN</td>
-            <td colspan="3">- kurs średni NBP z dn. {{exchangeRate.submitDate}}</td>
+            <td colspan="2">{{root.exchangeRate.multiplier}} {{root.country.currency}} =</td>
+            <td>{{root.exchangeRate.averageRate | number:4}} PLN</td>
+            <td colspan="3">- kurs średni NBP z dn. {{root.exchangeRate.submitDate}}</td>
           </tr>
         </tfoot>
       </table>
