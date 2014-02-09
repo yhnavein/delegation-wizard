@@ -56,6 +56,10 @@ input.ng-invalid.ng-dirty {
   margin-top: 24px;
 }
 
+.delegation-dates .date-form {
+  margin-bottom: 24px;
+}
+
 .container fieldset {
   margin-top: 40px;
 }
@@ -65,3 +69,4 @@ input.ng-invalid.ng-dirty {
 }
 
 .steps i { padding: 0 4px; }
+

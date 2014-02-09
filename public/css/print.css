@@ -9,3 +9,11 @@ h1.title {
   border-bottom: 1px solid #000;
   margin-bottom: 12px;
 }
+
+.basic-stuff .bordered {
+  display: inline-block;
+  width: 120px;
+  border: 1px solid #ccc;
+  padding: 2px 4px;
+  margin-right: 24px;
+}

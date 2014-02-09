@@ -11,6 +11,8 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     { nameEN: 'Airplane',  namePL: 'Samolot' }
   ];
 
+  $scope.step = 1;
+
   //putting some default values
   $scope.root.submitDate = $filter('date')(new Date(), 'yyyy-MM-dd');
   $scope.root.transportName = $scope.transportWays.last();
@@ -204,7 +206,9 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
   };
 
   $scope.goToPrint = function() {
+    $scope.root.delegationCost = $scope.delegationCost();
     window.localStorage.setItem('delegation', angular.toJson($scope.root));
+    window.location = '/print';
   };
 
   $http({

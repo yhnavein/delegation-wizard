@@ -47,228 +47,228 @@
     <div class="container theme-showcase">
 
       <form novalidate class="form-horizontal" role="form">
-        <div class="row">
-          <div class="col-sm-6">
-            <fieldset>
-              <legend><%= __('Basic stuff') %></legend>
-              <div class="form-group">
-                <label for="name" class="col-sm-3 control-label"><%= __('Your name') %></label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" id="name" placeholder="<%= __('Your name') %>" ng-model="root.fullName" required>
-                </div>
+        <fieldset ng-show="step === 1" class="row">
+          <div class="col-sm-8">
+            <legend><%= __('Basic stuff') %></legend>
+            <div class="form-group">
+              <label for="name" class="col-sm-3 control-label"><%= __('Your name') %></label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="name" placeholder="<%= __('Your name') %>" ng-model="root.fullName" required>
               </div>
-              <div class="form-group">
-                <label for="destination-country" class="col-sm-3 control-label"><%= __('Country, City') %></label>
-                <div class="col-sm-9">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <select class="form-control" id="destination-country" placeholder="<%= __('Select destination country') %>" ng-change="refreshCurrencyRate()" required
-                        ng-model="root.country" ng-options="el.name<%= locale.toUpperCase() %> for el in countriesList | orderBy:'name<%= locale.toUpperCase() %>'"></select>
-                    </div>
-                    <div class="col-sm-6">
-                      <input type="text" class="form-control" id="destination" placeholder="<%= __('City') %>" ng-model="root.destCity">
-                    </div>
+            </div>
+            <div class="form-group">
+              <label for="destination-country" class="col-sm-3 control-label"><%= __('Country, City') %></label>
+              <div class="col-sm-9">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <select class="form-control" id="destination-country" placeholder="<%= __('Select destination country') %>" ng-change="refreshCurrencyRate()" required
+                      ng-model="root.country" ng-options="el.name<%= locale.toUpperCase() %> for el in countriesList | orderBy:'name<%= locale.toUpperCase() %>'"></select>
+                  </div>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control" id="destination" placeholder="<%= __('City') %>" ng-model="root.destCity">
                   </div>
                 </div>
               </div>
-              <div class="form-group">
-                <label for="delegation-title" class="col-sm-3 control-label"><%= __('Delegation title') %></label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" id="delegation-title" placeholder="<%= __('Delegation title') %>" ng-model="root.delegationTitle" required>
-                </div>
+            </div>
+            <div class="form-group">
+              <label for="delegation-title" class="col-sm-3 control-label"><%= __('Delegation title') %></label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="delegation-title" placeholder="<%= __('Delegation title') %>" ng-model="root.delegationTitle" required>
               </div>
-              <div class="form-group">
-                <label for="transport-type" class="col-sm-3 control-label"><%= __('Transport type') %></label>
-                <div class="col-sm-9">
-                  <select class="form-control" id="transport-type" placeholder="<%= __('Transport type') %>" required
-                    ng-model="root.transportName" ng-options="el.name<%= locale.toUpperCase() %> for el in transportWays"></select>
-                </div>
+            </div>
+            <div class="form-group">
+              <label for="delegation-no" class="col-sm-3 control-label"><%= __('Delegation number') %></label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="delegation-no" placeholder="<%= __('for example: 4/12/2013') %>" ng-model="root.delegationNo" required>
               </div>
-              <div class="form-group">
-                <label for="start-city" class="col-sm-3 control-label"><%= __('Start city') %></label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" id="start-city" placeholder="<%= __('Start city') %>" ng-model="root.startCity">
-                </div>
+            </div>
+            <div class="form-group">
+              <label for="transport-type" class="col-sm-3 control-label"><%= __('Transport type') %></label>
+              <div class="col-sm-9">
+                <select class="form-control" id="transport-type" placeholder="<%= __('Transport type') %>" required
+                  ng-model="root.transportName" ng-options="el.name<%= locale.toUpperCase() %> for el in transportWays"></select>
               </div>
-              <div class="form-group">
-                <label for="submit-date" class="col-sm-3 control-label"><%= __('Submit date') %></label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" id="submit-date" placeholder="<%= __('yyyy-mm-dd') %>" ng-model="root.submitDate" required ng-pattern="datePattern" ng-change="refreshCurrencyRate()">
-                </div>
+            </div>
+            <div class="form-group">
+              <label for="start-city" class="col-sm-3 control-label"><%= __('Start city') %></label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="start-city" placeholder="<%= __('Start city') %>" ng-model="root.startCity">
               </div>
-              <div class="form-group">
-                <label class="col-sm-3 control-label"><%= __('Exchange rate date') %></label>
-                <div class="col-sm-9">
-                  <strong disabled class="form-control">{{root.exchangeRate.submitDate}}</strong>
-                </div>
+            </div>
+            <div class="form-group">
+              <label for="submit-date" class="col-sm-3 control-label"><%= __('Submit date') %></label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="submit-date" placeholder="<%= __('yyyy-mm-dd') %>" ng-model="root.submitDate" required ng-pattern="datePattern" ng-change="refreshCurrencyRate()">
               </div>
-              <div class="form-group">
-                <label class="col-sm-3 control-label"><%= __('Exchange rate') %></label>
-                <div class="col-sm-9">
-                  <strong disabled class="form-control">{{root.exchangeRate.averageRate | number:4}}</strong>
-                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><%= __('Exchange rate date') %></label>
+              <div class="col-sm-9">
+                <strong disabled class="form-control">{{root.exchangeRate.submitDate}}</strong>
               </div>
-            </fieldset>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><%= __('Exchange rate') %></label>
+              <div class="col-sm-9">
+                <strong disabled class="form-control">{{root.exchangeRate.averageRate | number:4}}</strong>
+              </div>
+            </div>
+          </div>
 
-            <fieldset>
-              <legend><%= __('Travel details') %></legend>
-              <div class="delegation-dates row">
+
+          <div class="col-sm-4">
+            <legend><%= __('Travel details') %></legend>
+            <div class="delegation-dates">
+              <label><%= __('Departure date and time') %></label>
+              <div class="date-form row">
                 <div class="col-sm-6">
-                  <label><%= __('Departure date and time') %></label>
-                  <div class="date-form row">
-                    <div class="col-sm-6">
-                      <input type="text" class="form-control" required ng-model="root.dateFrom" placeholder="<%= __('yyyy-mm-dd') %>" ng-change="datesChange(this)" ng-pattern="datePattern">
-                    </div>
-                    <div class="col-sm-6">
-                      <input type="text" class="form-control" required ng-model="root.dateTimeFrom" placeholder="<%= __('HH:mm') %>" ng-change="datesChange(this)" ng-pattern="timePattern">
-                    </div>
-                  </div>
+                  <input type="text" class="form-control" required ng-model="root.dateFrom" placeholder="<%= __('yyyy-mm-dd') %>" ng-change="datesChange(this)" ng-pattern="datePattern">
                 </div>
                 <div class="col-sm-6">
-                  <label><%= __('Arrival date and time') %></label>
-                  <div class="date-form row">
-                    <div class="col-sm-6">
-                      <input type="text" class="form-control" required ng-model="root.dateTo" placeholder="<%= __('yyyy-mm-dd') %>" ng-change="datesChange(this)" ng-pattern="datePattern">
-                    </div>
-                    <div class="col-sm-6">
-                      <input type="text" class="form-control" required ng-model="root.dateTimeTo" placeholder="<%= __('HH:mm') %>" ng-change="datesChange(dateTimeTo)" ng-pattern="timePattern">
-                    </div>
-                  </div>
+                  <input type="text" class="form-control" required ng-model="root.dateTimeFrom" placeholder="<%= __('HH:mm') %>" ng-change="datesChange(this)" ng-pattern="timePattern">
                 </div>
-
               </div>
-            </fieldset>
+              <label><%= __('Arrival date and time') %></label>
+              <div class="date-form row">
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" required ng-model="root.dateTo" placeholder="<%= __('yyyy-mm-dd') %>" ng-change="datesChange(this)" ng-pattern="datePattern">
+                </div>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" required ng-model="root.dateTimeTo" placeholder="<%= __('HH:mm') %>" ng-change="datesChange(dateTimeTo)" ng-pattern="timePattern">
+                </div>
+              </div>
 
-            <fieldset>
-              <legend><%= __('Additional expenses') %></legend>
-              <div class="expenses-group">
-                <div class="form-group">
-                  <label for="hotel-cost1" class="col-sm-3 control-label"><%= __('Hotels') %></label>
-                  <div class="col-sm-9">
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <div class="input-group">
-                          <input type="text" class="form-control" id="hotel-cost1" placeholder="<%= __('0.00') %>" ng-model="root.hotels.selCurr">
-                          <span class="input-group-addon">{{root.country.currency}}</span>
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="input-group">
-                          <input type="text" class="form-control" id="hotel-cost2" placeholder="<%= __('0.00') %>" ng-model="root.hotels.plnCurr">
-                          <span class="input-group-addon">PLN</span>
-                        </div>
-                      </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset ng-show="step === 2">
+          <legend><%= __('Delegation details') %></legend>
+          <blockquote><%= __('Please select meals that were provided for you (by hotel or company)') %></blockquote>
+
+          <table class="table table-striped days-container">
+            <thead>
+              <tr>
+                <th><%= __('Delegation day') %></th>
+                <th></th>
+                <th><%= __('Breakfast') %></th>
+                <th><%= __('Dinner') %></th>
+                <th><%= __('Supper') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="5">
+                  <%= __('First day: ') %>
+                  <strong>{{root.delegationDays.first().date | date:'yyyy-MM-dd (EEEE)'}}</strong>
+                </td>
+              </tr>
+              <tr ng-repeat="day in root.delegationDays">
+                <td>{{day.fromDate | date:'(EEE) HH:mm'}} - {{day.toDate | date:'(EEE) HH:mm'}}</td>
+                <td>
+                  <span class="label label-info">{{day.hours | number:1}}h</span>
+                </td>
+                <td>
+                  <input type="checkbox" ng-model="day.provBreakfast" >
+                </td>
+                <td>
+                  <input type="checkbox" ng-model="day.provDinner" >
+                </td>
+                <td>
+                  <input type="checkbox" ng-model="day.provSupper" >
+                </td>
+              </tr>
+              <tr>
+                <td colspan="5">
+                  <%= __('Last day: ') %>
+                  <strong>{{root.delegationDays.last().date | date:'yyyy-MM-dd (EEEE)'}}</strong>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </fieldset>
+
+        <fieldset ng-show="step === 3">
+          <legend><%= __('Additional expenses') %></legend>
+          <div class="expenses-group">
+            <div class="form-group">
+              <label for="hotel-cost1" class="col-sm-3 control-label"><%= __('Hotels') %></label>
+              <div class="col-sm-9">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="hotel-cost1" placeholder="<%= __('0.00') %>" ng-model="root.hotels.selCurr">
+                      <span class="input-group-addon">{{root.country.currency}}</span>
                     </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label for="transport-cost1" class="col-sm-3 control-label"><%= __('Transport to/from station') %></label>
-                  <div class="col-sm-9">
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <div class="input-group">
-                          <input type="text" class="form-control" id="transport-cost1" placeholder="<%= __('0.00') %>" ng-model="root.transportCost.selCurr">
-                          <span class="input-group-addon">{{root.country.currency}}</span>
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="input-group">
-                          <input type="text" class="form-control" id="transport-cost2" placeholder="<%= __('0.00') %>" ng-model="root.transportCost.plnCurr">
-                          <span class="input-group-addon">PLN</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="public-transport1" class="col-sm-3 control-label"><%= __('Public transport cost') %></label>
-                  <div class="col-sm-9">
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <div class="input-group">
-                          <input type="text" class="form-control" id="public-transport1" placeholder="<%= __('0.00') %>" ng-model="root.publicTransport.selCurr">
-                          <span class="input-group-addon">{{root.country.currency}}</span>
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="input-group">
-                          <input type="text" class="form-control" id="public-transport2" placeholder="<%= __('0.00') %>" ng-model="root.publicTransport.plnCurr">
-                          <span class="input-group-addon">PLN</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="other-costs1" class="col-sm-3 control-label"><%= __('Other costs') %></label>
-                  <div class="col-sm-9">
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <div class="input-group">
-                          <input type="text" class="form-control" id="other-costs1" placeholder="<%= __('0.00') %>" ng-model="root.otherCosts.selCurr">
-                          <span class="input-group-addon">{{root.country.currency}}</span>
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="input-group">
-                          <input type="text" class="form-control" id="other-costs2" placeholder="<%= __('0.00') %>" ng-model="root.otherCosts.plnCurr">
-                          <span class="input-group-addon">PLN</span>
-                        </div>
-                      </div>
+                  <div class="col-sm-6">
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="hotel-cost2" placeholder="<%= __('0.00') %>" ng-model="root.hotels.plnCurr">
+                      <span class="input-group-addon">PLN</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </fieldset>
-          <div class="col-sm-6">
-            <fieldset>
-              <legend><%= __('Delegation details') %></legend>
-              <blockquote><%= __('Please select meals that were provided for you (by hotel or company)') %></blockquote>
-
-              <table class="table table-striped days-container">
-                <thead>
-                  <tr>
-                    <th><%= __('Delegation day') %></th>
-                    <th></th>
-                    <th><%= __('Breakfast') %></th>
-                    <th><%= __('Dinner') %></th>
-                    <th><%= __('Supper') %></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td colspan="5">
-                      <%= __('First day: ') %>
-                      <strong>{{root.delegationDays.first().date | date:'yyyy-MM-dd (EEEE)'}}</strong>
-                    </td>
-                  </tr>
-                  <tr ng-repeat="day in root.delegationDays">
-                    <td>{{day.fromDate | date:'(EEE) HH:mm'}} - {{day.toDate | date:'(EEE) HH:mm'}}</td>
-                    <td>
-                      <span class="label label-info">{{day.hours | number:1}}h</span>
-                    </td>
-                    <td>
-                      <input type="checkbox" ng-model="day.provBreakfast" >
-                    </td>
-                    <td>
-                      <input type="checkbox" ng-model="day.provDinner" >
-                    </td>
-                    <td>
-                      <input type="checkbox" ng-model="day.provSupper" >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="5">
-                      <%= __('Last day: ') %>
-                      <strong>{{root.delegationDays.last().date | date:'yyyy-MM-dd (EEEE)'}}</strong>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </fieldset>
+            <div class="form-group">
+              <label for="transport-cost1" class="col-sm-3 control-label"><%= __('Transport to/from station') %></label>
+              <div class="col-sm-9">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="transport-cost1" placeholder="<%= __('0.00') %>" ng-model="root.transportCost.selCurr">
+                      <span class="input-group-addon">{{root.country.currency}}</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="transport-cost2" placeholder="<%= __('0.00') %>" ng-model="root.transportCost.plnCurr">
+                      <span class="input-group-addon">PLN</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="public-transport1" class="col-sm-3 control-label"><%= __('Public transport cost') %></label>
+              <div class="col-sm-9">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="public-transport1" placeholder="<%= __('0.00') %>" ng-model="root.publicTransport.selCurr">
+                      <span class="input-group-addon">{{root.country.currency}}</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="public-transport2" placeholder="<%= __('0.00') %>" ng-model="root.publicTransport.plnCurr">
+                      <span class="input-group-addon">PLN</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="other-costs1" class="col-sm-3 control-label"><%= __('Other costs') %></label>
+              <div class="col-sm-9">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="other-costs1" placeholder="<%= __('0.00') %>" ng-model="root.otherCosts.selCurr">
+                      <span class="input-group-addon">{{root.country.currency}}</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="other-costs2" placeholder="<%= __('0.00') %>" ng-model="root.otherCosts.plnCurr">
+                      <span class="input-group-addon">PLN</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        </fieldset>
       </form>
 
       <div class="delegation-controls clearfix">
