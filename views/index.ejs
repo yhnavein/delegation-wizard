@@ -22,9 +22,9 @@
           <ul class="nav navbar-nav navbar-right">
             <li>
               <div class="steps">
-                <button class="step btn btn-default"><%= __('Step') %> 1</button> <i class="icon-caret-right icon-light"></i>
-                <button class="step btn btn-default"><%= __('Step') %> 2</button> <i class="icon-caret-right icon-light"></i>
-                <button class="step btn btn-default"><%= __('Step') %> 3</button> <i class="icon-caret-right icon-light"></i>
+                <button class="step btn btn-default" ng-click="changeStep(1)"><%= __('Step') %> 2</button> <i class="icon-caret-right icon-light"></i>
+                <button class="step btn btn-default" ng-click="changeStep(2)"><%= __('Step') %> 1</button> <i class="icon-caret-right icon-light"></i>
+                <button class="step btn btn-default" ng-click="changeStep(3)"><%= __('Step') %> 3</button> <i class="icon-caret-right icon-light"></i>
                 <button class="step btn btn-success step-final" ng-click="goToPrint()" disabled><%= __('Print') %></button>
               </div>
             </li>
@@ -271,15 +271,16 @@
         </fieldset>
       </form>
 
-      <div class="delegation-controls clearfix">
-        <button class="btn btn-lg btn-success pull-right" ng-click="goToPrint()">
-          <%= __('Print delegation form') %> <i class="icon-caret-right"></i>
-          </button>
-      </div>
     </div>
 
     <div id="footer">
       <div class="container">
+        <button class="btn btn-lg btn-success pull-right" ng-show="step === 3" ng-click="goToPrint()">
+          <%= __('Print delegation form') %> <i class="icon-caret-right"></i>
+        </button>
+        <button class="btn btn-lg btn-default pull-right" ng-show="step < 3" ng-click="changeStep(step + 1)">
+          <%= __('Go to the next step') %> <i class="icon-caret-right"></i>
+        </button>
         <p class="centered">
           Created by <b>PureDev, Piotr Dąbrowski</b>
         </p>

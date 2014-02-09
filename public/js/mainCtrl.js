@@ -211,6 +211,10 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     window.location = '/print';
   };
 
+  $scope.changeStep = function(step) {
+    $scope.step = step;
+  };
+
   $http({
     method: 'GET',
     url: '/countries.json'
