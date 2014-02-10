@@ -168,8 +168,14 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     });
   };
 
+  $scope.isValid = function(validation) {
+    if(validation.$valid)
+      return true;
+    return false;
+  };
+
   $scope.delegationCost = function() {
-    if(typeof $scope.root.dateTo === 'undefined' || typeof $scope.root.dateFrom === 'undefined' || typeof $scope.root.country === 'undefined')
+    if($scope.root.days === null || typeof $scope.root.days === 'undefined' || typeof $scope.root.country === 'undefined')
       return 0;
 
     var dayDiem = $scope.root.country.diem;

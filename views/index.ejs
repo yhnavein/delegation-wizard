@@ -22,10 +22,10 @@
           <ul class="nav navbar-nav navbar-right">
             <li>
               <div class="steps">
-                <button class="step btn btn-default" ng-click="changeStep(1)"><%= __('Step') %> 2</button> <i class="icon-caret-right icon-light"></i>
-                <button class="step btn btn-default" ng-click="changeStep(2)"><%= __('Step') %> 1</button> <i class="icon-caret-right icon-light"></i>
-                <button class="step btn btn-default" ng-click="changeStep(3)"><%= __('Step') %> 3</button> <i class="icon-caret-right icon-light"></i>
-                <button class="step btn btn-success step-final" ng-click="goToPrint()" disabled><%= __('Print') %></button>
+                <button class="step btn btn-default" ng-click="changeStep(1)"><%= __('Step') %> 1</button> <i class="icon-caret-right icon-light"></i>
+                <button class="step btn btn-default" ng-click="changeStep(2)" ng-disabled="step1Form.$invalid"><%= __('Step') %> 2</button> <i class="icon-caret-right icon-light"></i>
+                <button class="step btn btn-default" ng-click="changeStep(3)" ng-disabled="step1Form.$invalid"><%= __('Step') %> 3</button> <i class="icon-caret-right icon-light"></i>
+                <button class="step btn btn-success step-final" ng-click="goToPrint()" ng-disabled="step3Form.$invalid"><%= __('Print') %></button>
               </div>
             </li>
             <li>
@@ -47,7 +47,7 @@
     <div class="container theme-showcase">
 
       <form novalidate class="form-horizontal" role="form">
-        <fieldset ng-show="step === 1" class="row">
+        <fieldset ng-show="step === 1" class="row" ng-form="step1Form">
           <div class="col-sm-8">
             <legend><%= __('Basic stuff') %></legend>
             <div class="form-group">
@@ -142,7 +142,7 @@
           </div>
         </fieldset>
 
-        <fieldset ng-show="step === 2">
+        <fieldset ng-show="step === 2" ng-form="step2Form">
           <legend><%= __('Delegation details') %></legend>
           <blockquote><%= __('Please select meals that were provided for you (by hotel or company)') %></blockquote>
 
@@ -188,7 +188,7 @@
           </table>
         </fieldset>
 
-        <fieldset ng-show="step === 3">
+        <fieldset ng-show="step === 3" ng-form="step3Form">
           <legend><%= __('Additional expenses') %></legend>
           <div class="expenses-group">
             <div class="form-group">
@@ -275,7 +275,7 @@
 
     <div id="footer">
       <div class="container">
-        <button class="btn btn-lg btn-success pull-right" ng-show="step === 3" ng-click="goToPrint()">
+        <button class="btn btn-lg btn-success pull-right" ng-show="step === 3"  ng-click="goToPrint()">
           <%= __('Print delegation form') %> <i class="icon-caret-right"></i>
         </button>
         <button class="btn btn-lg btn-default pull-right" ng-show="step < 3" ng-click="changeStep(step + 1)">
