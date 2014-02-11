@@ -16,9 +16,7 @@
 	"Breakfast": "Śniadanie",
 	"Dinner": "Obiad",
 	"Supper": "Kolacja",
-	"Departure date and time": "Data i godzina wylotu",
 	"HH:mm": "hh:mm",
-	"Arrival date and time": "Data i godzina przylotu",
 	"Diem amount": "Kwota diety",
 	"Additional expenses": "Inne poniesione wydatki",
 	"Transport to/from station": "Transport z/do lotniska",
@@ -39,5 +37,9 @@
 	"Print": "Wydruk",
 	"Delegation number": "Numer delegacji",
 	"for example: 4/12/2013": "na przykład: 4/12/2013",
-	"Go to the next step": "Następny krok"
+	"Go to the next step": "Następny krok",
+	"Departure": "Wylot",
+	"Arrival": "Przylot",
+	"Date and time": "Data i godzina",
+	"Travel time": "Długość podróży"
 }

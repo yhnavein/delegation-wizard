@@ -85,8 +85,6 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     var iterator = new Date(from.getTime());
     var nextDay = new Date(from.getTime());
     nextDay.setDate(iterator.getDate() + 1);
-    var dateType = 1;
-
 
     if (to <= from)
       return days;
@@ -100,13 +98,12 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
         fromDate: new Date( iterator.getTime() ),
         toDate: new Date( nextDay.getTime() ),
         hours: 24,
-        dayType: dateType,
+        dayType: 1,
         provBreakfast : true,
         provDinner : false,
         provSupper : false,
         excluded : false
       });
-      dateType = 1; //because after first there are only full days
       iterator.setDate(iterator.getDate() + 1);
       nextDay.setDate(iterator.getDate() + 1);
     }
@@ -200,11 +197,11 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
   };
 
   $scope.datesChange = function() {
-    if(typeof $scope.root.dateTo === 'undefined' || typeof $scope.root.dateFrom === 'undefined' || typeof $scope.root.dateTimeTo === 'undefined' || typeof $scope.root.dateTimeFrom === 'undefined')
+    if(typeof $scope.root.departure.date === 'undefined' || typeof $scope.root.arrival.date === 'undefined' || typeof $scope.root.arrival.time === 'undefined' || typeof $scope.root.departure.time === 'undefined')
       return;
 
-    var dateFrom = new Date($scope.root.dateFrom + 'T' + $scope.root.dateTimeFrom.padLeft(5, '0') + ':00');
-    var dateTo = new Date($scope.root.dateTo + 'T' + $scope.root.dateTimeTo.padLeft(5, '0') + ':00');
+    var dateFrom = new Date($scope.root.departure.date + 'T' + $scope.root.departure.time.padLeft(5, '0') + ':00');
+    var dateTo = new Date($scope.root.arrival.date + 'T' + $scope.root.arrival.time.padLeft(5, '0') + ':00');
 
     if(!dateFrom.isValid() || !dateTo.isValid())
       return;
