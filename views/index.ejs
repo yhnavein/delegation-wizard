@@ -25,7 +25,7 @@
                 <button class="step btn btn-default" ng-click="changeStep(1)"><%= __('Step') %> 1</button> <i class="icon-caret-right icon-light"></i>
                 <button class="step btn btn-default" ng-click="changeStep(2)" ng-disabled="step1Form.$invalid"><%= __('Step') %> 2</button> <i class="icon-caret-right icon-light"></i>
                 <button class="step btn btn-default" ng-click="changeStep(3)" ng-disabled="step1Form.$invalid"><%= __('Step') %> 3</button> <i class="icon-caret-right icon-light"></i>
-                <button class="step btn btn-success step-final" ng-click="goToPrint()" ng-disabled="step3Form.$invalid"><%= __('Print') %></button>
+                <button class="step btn btn-success step-final" ng-click="goToPrint()" ng-disabled="step3Form.$invalid || step1Form.$invalid"><%= __('Print') %></button>
               </div>
             </li>
             <li>
@@ -197,13 +197,13 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="input-group">
-                      <input type="text" class="form-control" id="hotel-cost1" placeholder="<%= __('0.00') %>" ng-model="root.hotels.selCurr">
+                      <input type="text" class="form-control" id="hotel-cost1" placeholder="<%= __('0.00') %>" ng-model="root.hotels.selCurr" ng-pattern="/^\d+$/">
                       <span class="input-group-addon">{{root.country.currency}}</span>
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="input-group">
-                      <input type="text" class="form-control" id="hotel-cost2" placeholder="<%= __('0.00') %>" ng-model="root.hotels.plnCurr">
+                      <input type="text" class="form-control" id="hotel-cost2" placeholder="<%= __('0.00') %>" ng-model="root.hotels.plnCurr" ng-pattern="/^\d+$/">
                       <span class="input-group-addon">PLN</span>
                     </div>
                   </div>
@@ -216,13 +216,13 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="input-group">
-                      <input type="text" class="form-control" id="transport-cost1" placeholder="<%= __('0.00') %>" ng-model="root.transportCost.selCurr">
+                      <input type="text" class="form-control" id="transport-cost1" placeholder="<%= __('0.00') %>" ng-model="root.transportCost.selCurr" ng-pattern="/^\d+$/">
                       <span class="input-group-addon">{{root.country.currency}}</span>
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="input-group">
-                      <input type="text" class="form-control" id="transport-cost2" placeholder="<%= __('0.00') %>" ng-model="root.transportCost.plnCurr">
+                      <input type="text" class="form-control" id="transport-cost2" placeholder="<%= __('0.00') %>" ng-model="root.transportCost.plnCurr" ng-pattern="/^\d+$/">
                       <span class="input-group-addon">PLN</span>
                     </div>
                   </div>
@@ -235,13 +235,13 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="input-group">
-                      <input type="text" class="form-control" id="public-transport1" placeholder="<%= __('0.00') %>" ng-model="root.publicTransport.selCurr">
+                      <input type="text" class="form-control" id="public-transport1" placeholder="<%= __('0.00') %>" ng-model="root.publicTransport.selCurr" ng-pattern="/^\d+$/">
                       <span class="input-group-addon">{{root.country.currency}}</span>
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="input-group">
-                      <input type="text" class="form-control" id="public-transport2" placeholder="<%= __('0.00') %>" ng-model="root.publicTransport.plnCurr">
+                      <input type="text" class="form-control" id="public-transport2" placeholder="<%= __('0.00') %>" ng-model="root.publicTransport.plnCurr" ng-pattern="/^\d+$/">
                       <span class="input-group-addon">PLN</span>
                     </div>
                   </div>
@@ -275,10 +275,10 @@
 
     <div id="footer">
       <div class="container">
-        <button class="btn btn-lg btn-success pull-right" ng-show="step === 3"  ng-click="goToPrint()">
+        <button class="btn btn-lg btn-success pull-right" ng-show="step === 3"  ng-click="goToPrint()" ng-disabled="!isValid(step1Form, step3Form)">
           <%= __('Print delegation form') %> <i class="icon-caret-right"></i>
         </button>
-        <button class="btn btn-lg btn-default pull-right" ng-show="step < 3" ng-click="changeStep(step + 1)">
+        <button class="btn btn-lg btn-default pull-right" ng-show="step < 3" ng-click="changeStep(step + 1)" ng-disabled="!isValid(step1Form, step3Form)">
           <%= __('Go to the next step') %> <i class="icon-caret-right"></i>
         </button>
         <p class="centered">

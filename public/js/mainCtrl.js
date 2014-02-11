@@ -168,10 +168,8 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     });
   };
 
-  $scope.isValid = function(validation) {
-    if(validation.$valid)
-      return true;
-    return false;
+  $scope.isValid = function(validationStep1, validationStep3) {
+    return (validationStep1.$valid && validationStep3.$valid);
   };
 
   $scope.delegationCost = function() {
