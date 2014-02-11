@@ -168,6 +168,10 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     });
   };
 
+  $scope.isStepValid = function(validationStep1, validationStep3) {
+    return ($scope.step > 0 && $scope.step < 3 && validationStep1.$valid) || ($scope.step === 3 && validationStep3.$valid);
+  };
+
   $scope.isValid = function(validationStep1, validationStep3) {
     return (validationStep1.$valid && validationStep3.$valid);
   };

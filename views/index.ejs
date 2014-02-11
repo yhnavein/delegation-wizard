@@ -278,7 +278,7 @@
         <button class="btn btn-lg btn-success pull-right" ng-show="step === 3"  ng-click="goToPrint()" ng-disabled="!isValid(step1Form, step3Form)">
           <%= __('Print delegation form') %> <i class="icon-caret-right"></i>
         </button>
-        <button class="btn btn-lg btn-default pull-right" ng-show="step < 3" ng-click="changeStep(step + 1)" ng-disabled="!isValid(step1Form, step3Form)">
+        <button class="btn btn-lg btn-default pull-right" ng-show="step < 3" ng-click="changeStep(step + 1)" ng-disabled="!isStepValid(step1Form, step3Form)">
           <%= __('Go to the next step') %> <i class="icon-caret-right"></i>
         </button>
         <p class="centered">
