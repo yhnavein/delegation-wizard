@@ -83,13 +83,6 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="transport-type" class="col-sm-3 control-label"><%= __('Transport type') %></label>
-              <div class="col-sm-9">
-                <select class="form-control" id="transport-type" placeholder="<%= __('Transport type') %>" required
-                  ng-model="root.transportName" ng-options="el.name<%= locale.toUpperCase() %> for el in transportWays"></select>
-              </div>
-            </div>
-            <div class="form-group">
               <label for="start-city" class="col-sm-3 control-label"><%= __('Start city') %></label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" id="start-city" placeholder="<%= __('Start city') %>" ng-model="root.startCity">
@@ -123,7 +116,7 @@
               <label>
                 <%= __('Date and time') %> ({{root.startCity}})
               </label>
-              <div class="row">
+              <div class="row form-group">
                 <div class="col-sm-7">
                   <input type="text" class="form-control" required ng-model="root.departure.date" placeholder="<%= __('yyyy-mm-dd') %>" ng-change="datesChange(this)" ng-pattern="datePattern">
                 </div>
@@ -140,12 +133,19 @@
                   </div>
                 </div>
               </div>
+              <div class="form-group">
+                <label for="depTransport" class="col-sm-7 control-label"><%= __('Transport type') %></label>
+                <div class="col-sm-5">
+                  <select class="form-control" id="depTransport" placeholder="<%= __('Transport type') %>" required
+                    ng-model="root.departure.transport" ng-options="el.name<%= locale.toUpperCase() %> for el in transportWays"></select>
+                </div>
+              </div>
 
               <h4><%= __('Arrival') %></h4>
               <label>
                 <%= __('Date and time') %> ({{root.startCity}})
               </label>
-              <div class="row">
+              <div class="row form-group">
                 <div class="col-sm-7">
                   <input type="text" class="form-control" required ng-model="root.arrival.date" placeholder="<%= __('yyyy-mm-dd') %>" ng-change="datesChange(this)" ng-pattern="datePattern">
                 </div>
@@ -160,6 +160,13 @@
                     <input type="text" class="form-control" id="arrDuration" ng-model="root.arrival.duration" required ng-pattern="/^\d+$/">
                     <span class="input-group-addon">h</span>
                   </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="arrTransport" class="col-sm-7 control-label"><%= __('Transport type') %></label>
+                <div class="col-sm-5">
+                  <select class="form-control" id="arrTransport" placeholder="<%= __('Transport type') %>" required
+                    ng-model="root.arrival.transport" ng-options="el.name<%= locale.toUpperCase() %> for el in transportWays"></select>
                 </div>
               </div>
 

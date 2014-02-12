@@ -3,7 +3,7 @@ var app = angular.module('delegations', []);
 
 app.controller('mainCtrl', function($scope, $http, $filter) {
   var self = this;
-  $scope.root = {};
+  $scope.root = { departure: {}, arrival: {} };
 
   $scope.transportWays = [
     { nameEN: 'Train', namePL: 'Pociąg' },
@@ -15,7 +15,8 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
 
   //putting some default values
   $scope.root.submitDate = $filter('date')(new Date(), 'yyyy-MM-dd');
-  $scope.root.transportName = $scope.transportWays.last();
+  $scope.root.departure.transport = $scope.transportWays.last();
+  $scope.root.arrival.transport = $scope.transportWays.last();
   $scope.root.startCity = 'Warszawa';
 
   self.daysDiff = function(date1, date2) {
@@ -68,9 +69,9 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
 
     if(fullHours <= 24) {
       days.push({
-        date: new Date( from.getTime()),
-        fromDate: new Date( from.getTime()),
-        toDate: new Date( to.getTime()),
+        date: new Date( from.getTime() ),
+        fromDate: new Date( from.getTime() ),
+        toDate: new Date( to.getTime() ),
         hours: fullHours,
         dayType: (fullHours >= 12 ? 1 : (fullHours <= 8 ? 3 : 2)),
         provBreakfast : false,
@@ -154,10 +155,16 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
       return;
 
     var curr = $scope.root.country.currency;
+    var travelTime = $scope.root.country.travelTime;
     var date = $scope.root.submitDate;
 
     if(typeof date === 'undefined' || date === null)
       return;
+
+    if(travelTime && !($scope.root.departure.duration || $scope.root.arrival.duration)) {
+      $scope.root.departure.duration = travelTime;
+      $scope.root.arrival.duration = travelTime;
+    }
 
     $http.get('/nbp/getPLNRate?currency=' + curr + '&date=' + date).success(function(data) {
       $scope.root.exchangeRate = data;

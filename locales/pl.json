@@ -1,5 +1,5 @@
 {
-	"Transport type": "Transport",
+	"Transport type": "Środek transportu",
 	"Basic stuff": "Podstawowe informacje",
 	"Your name": "Imię Nazwisko",
 	"Country, City": "Kraj i Miasto",
@@ -38,8 +38,8 @@
 	"Delegation number": "Numer delegacji",
 	"for example: 4/12/2013": "na przykład: 4/12/2013",
 	"Go to the next step": "Następny krok",
-	"Departure": "Wylot",
-	"Arrival": "Przylot",
+	"Departure": "Wyjazd",
+	"Arrival": "Przyjazd",
 	"Date and time": "Data i godzina",
 	"Travel time": "Długość podróży"
 }
