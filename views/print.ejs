@@ -31,7 +31,7 @@
           <tr>
             <th colspan="3">WYJAZD</th>
             <th colspan="3">PRZYJAZD</th>
-            <th rowspan="2">Środek lokomocji</th>
+            <th rowspan="2" width="120px" style="text-align: center;">Środek lokomocji</th>
           </tr>
           <tr>
             <th>Miejscowość</th>
@@ -48,14 +48,14 @@
             <td>{{root.departure.date}}</td>
             <td>{{root.departure.time}}</td>
             <td>{{root.destCity}}</td>
-            <td>??</td>
-            <td>??</td>
+            <td>{{root.departureEnd | date:'yyyy-MM-dd'}}</td>
+            <td>{{root.departureEnd | date:'HH:mm'}}</td>
             <td>{{root.departure.transport.namePL}}</td>
           </tr>
           <tr>
             <td>{{root.destCity}}</td>
-            <td>??</td>
-            <td>??</td>
+            <td>{{root.arrivalStart | date:'yyyy-MM-dd'}}</td>
+            <td>{{root.arrivalStart | date:'HH:mm'}}</td>
             <td>{{root.startCity}}</td>
             <td>{{root.arrival.date}}</td>
             <td>{{root.arrival.time}}</td>
@@ -66,9 +66,9 @@
 
       <div class="delegation-time">
         Czas trwania:
-        <span>Pełnych dni: później</span>
-        <span>Godzin: później</span>
-        <span>Minut: później</span>
+        <span>Pełnych dni: {{root.days.fullDays}}</span>
+        <span>Godzin: {{root.days.hours | number:0}}</span>
+        <span>Minut: {{root.days.minutes | number:0}}</span>
       </div>
 
       <table class="table table-condensed">
@@ -112,7 +112,7 @@
             <td>0 zł</td>
             <td>{{root.delegationCost | number:2}}</td>
             <td>{{root.exchangeRate.averageRate | number:4}}</td>
-            <td></td>
+            <td>{{root.delegationCost * root.exchangeRate.averageRate | number:2}}</td>
             <td></td>
           </tr>
           <tr>

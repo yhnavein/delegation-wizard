@@ -43,7 +43,9 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     return {
       fullDays : days,
       halfDays : (lastDayHours < 12 && lastDayHours >= 8 ? 1 : 0),
-      oneThirdDays : (lastDayHours < 8 && lastDayHours > 0 ? 1 : 0)
+      oneThirdDays : (lastDayHours < 8 && lastDayHours > 0 ? 1 : 0),
+      hours : lastDayHours,
+      minutes : (fullHours - Math.floor( fullHours )) * 60
     };
   };
 
@@ -55,8 +57,11 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
       $scope.root.country = $scope.countriesList.find(function(el) {
         return el.code === $scope.root.country.code;
       });
-      $scope.root.transportName = $scope.transportWays.find(function(el) {
-        return el.namePL === $scope.root.transportName.namePL;
+      $scope.root.departure.transport = $scope.transportWays.find(function(el) {
+        return el.namePL === $scope.root.departure.transport.namePL;
+      });
+      $scope.root.arrival.transport = $scope.transportWays.find(function(el) {
+        return el.namePL === $scope.root.arrival.transport.namePL;
       });
     }
     else
