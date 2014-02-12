@@ -17,9 +17,9 @@
         <dd>{{root.country.namePL}}, {{root.destCity}}</dd>
         <dt>na czas od</dt>
         <dd>
-          <span class="bordered">{{root.dateFrom}}</span>
+          <span class="bordered">{{root.departure.date}}</span>
           do
-          <span class="bordered">{{root.dateTo}}</span>
+          <span class="bordered">{{root.arrival.date}}</span>
         </dd>
         <dt>w celu:</dt>
         <dd>{{root.delegationTitle}}</dd>
@@ -45,21 +45,21 @@
         <tbody>
           <tr>
             <td>{{root.startCity}}</td>
-            <td>{{root.dateFrom}}</td>
-            <td>{{root.dateTimeFrom}}</td>
+            <td>{{root.departure.date}}</td>
+            <td>{{root.departure.time}}</td>
             <td>{{root.destCity}}</td>
             <td>??</td>
             <td>??</td>
-            <td>{{root.transportName.namePL}}</td>
+            <td>{{root.departure.transport.namePL}}</td>
           </tr>
           <tr>
             <td>{{root.destCity}}</td>
             <td>??</td>
             <td>??</td>
             <td>{{root.startCity}}</td>
-            <td>{{root.dateTo}}</td>
-            <td>{{root.dateTimeTo}}</td>
-            <td>{{root.transportName.namePL}}</td>
+            <td>{{root.arrival.date}}</td>
+            <td>{{root.arrival.time}}</td>
+            <td>{{root.arrival.transport.namePL}}</td>
           </tr>
         </tbody>
       </table>
@@ -174,7 +174,16 @@
       </table>
 
       <div class="some-statement">
-
+        <div class="row">
+          <div class="col-sm-4 col-sm-offset-2">
+            <div><b>{{root.submitDate}}</b></div>
+            <div>Data rozliczenia</div>
+          </div>
+          <div class="col-sm-6">
+            <div>....................................</div>
+            <div>Podpis delegowanego</div>
+          </div>
+        </div>
       </div>
     </div>
 

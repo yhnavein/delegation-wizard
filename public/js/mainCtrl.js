@@ -168,7 +168,6 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
 
     $http.get('/nbp/getPLNRate?currency=' + curr + '&date=' + date).success(function(data) {
       $scope.root.exchangeRate = data;
-      console.log(data);
     });
   };
 

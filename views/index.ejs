@@ -128,7 +128,7 @@
                 <label for="depDuration" class="col-sm-7 control-label"><%= __('Travel time') %></label>
                 <div class="col-sm-5">
                   <div class="input-group">
-                    <input type="text" class="form-control" id="depDuration" ng-model="root.departure.duration" required ng-pattern="/^\d+$/">
+                    <input type="text" class="form-control" id="depDuration" ng-model="root.departure.duration" required ng-pattern="/^\d*\.?\d*$/">
                     <span class="input-group-addon">h</span>
                   </div>
                 </div>
@@ -157,7 +157,7 @@
                 <label for="arrDuration" class="col-sm-7 control-label"><%= __('Travel time') %></label>
                 <div class="col-sm-5">
                   <div class="input-group">
-                    <input type="text" class="form-control" id="arrDuration" ng-model="root.arrival.duration" required ng-pattern="/^\d+$/">
+                    <input type="text" class="form-control" id="arrDuration" ng-model="root.arrival.duration" required ng-pattern="/^\d*\.?\d*$/">
                     <span class="input-group-addon">h</span>
                   </div>
                 </div>
