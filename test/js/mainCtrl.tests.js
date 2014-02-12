@@ -232,10 +232,14 @@ describe('calculating diem costs', function(){
 
 
     it('one day date range (around half a day), all meals provided', function() {
-        scope.root.dateFrom = '2013-01-02';
-        scope.root.dateTimeFrom = '10:00';
-        scope.root.dateTo = '2013-01-02';
-        scope.root.dateTimeTo = '19:00';
+        scope.root.departure = {
+            date: '2013-01-02',
+            time: '10:00'
+        };
+        scope.root.arrival = {
+            date: '2013-01-02',
+            time: '19:00'
+        };
         scope.datesChange();
 
         //to have 1 day
