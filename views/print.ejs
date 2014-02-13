@@ -26,7 +26,7 @@
       </dl>
 
       <h3>Rachunek kosztów podróży</h3>
-      <table class="table table-condensed">
+      <table class="table table-condensed table-bordered">
         <thead>
           <tr>
             <th colspan="3">WYJAZD</th>
@@ -71,7 +71,7 @@
         <span>Minut: {{root.days.minutes | number:0}}</span>
       </div>
 
-      <table class="table table-condensed">
+      <table class="table table-condensed table-bordered">
         <thead>
           <tr>
             <th></th>
@@ -110,9 +110,9 @@
           <tr>
             <td>4) Diety</td>
             <td>0 zł</td>
-            <td>{{root.delegationCost | number:2}}</td>
+            <td>{{root.delegationCost | number:2}} {{root.country.currency}}</td>
             <td>{{root.exchangeRate.averageRate | number:4}}</td>
-            <td>{{root.delegationCost * root.exchangeRate.averageRate | number:2}}</td>
+            <td>{{root.delegationCost * root.exchangeRate.averageRate | number:2}} zł</td>
             <td></td>
           </tr>
           <tr>
@@ -149,10 +149,10 @@
           </tr>
           <tr>
             <td>Pobrane zaliczki</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>0 zł</td>
+            <td>0 {{root.country.currency}}</td>
+            <td>{{root.exchangeRate.averageRate | number:4}}</td>
+            <td>0 zł</td>
             <td></td>
           </tr>
           <tr class="summary">
