@@ -1,5 +1,5 @@
 /*global console:false, angular:false */
-var app = angular.module('delegations', []);
+var app = angular.module('delegations', ['ui.bootstrap']);
 
 app.controller('mainCtrl', function($scope, $http, $filter) {
   var self = this;
@@ -137,14 +137,15 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     return valueToSubstract;
   };
 
-  $scope.datePattern = (function() {
-    var regexp = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
-    return {
-      test: function(value) {
-        return regexp.test(value);
-      }
-    };
-  })();
+  self.addTime = function(date, time) {
+    var parts = time.split(':');
+    if(parts.length < 2)
+      return;
+
+    date.reset(); //resetting time part
+    date.addHours(parts[0]);
+    date.addMinutes(parts[1]);
+  };
 
   $scope.timePattern = (function() {
     var regexp = /^([0-1]?\d|2[0-3]):([0-5]?\d)$/;
@@ -211,8 +212,16 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     if(typeof $scope.root.departure.date === 'undefined' || typeof $scope.root.arrival.date === 'undefined' || typeof $scope.root.arrival.time === 'undefined' || typeof $scope.root.departure.time === 'undefined')
       return;
 
-    var dateFrom = new Date($scope.root.departure.date + 'T' + $scope.root.departure.time.padLeft(5, '0') + ':00');
-    var dateTo = new Date($scope.root.arrival.date + 'T' + $scope.root.arrival.time.padLeft(5, '0') + ':00');
+    if(typeof $scope.root.departure.date === 'string')
+      $scope.root.departure.date = new Date($scope.root.departure.date);
+    if(typeof $scope.root.arrival.date === 'string')
+      $scope.root.arrival.date = new Date($scope.root.arrival.date);
+
+    var dateFrom = $scope.root.departure.date.clone();
+    var dateTo = $scope.root.arrival.date.clone();
+
+    self.addTime(dateFrom, $scope.root.departure.time);
+    self.addTime(dateTo, $scope.root.arrival.time);
 
     if(!dateFrom.isValid() || !dateTo.isValid())
       return;
@@ -220,6 +229,12 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     $scope.root.days = self.daysDiff(dateFrom, dateTo);
     $scope.root.delegationDays = self.prepareDelegationDays(dateFrom, dateTo);
   };
+
+  $scope.dateOptions = {
+    startingDay: 1,
+    showWeeks: false
+  };
+
 
   $scope.goToPrint = function() {
     $scope.root.delegationCost = $scope.delegationCost();

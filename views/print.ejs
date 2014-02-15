@@ -17,9 +17,9 @@
         <dd>{{root.country.namePL}}, {{root.destCity}}</dd>
         <dt>na czas od</dt>
         <dd>
-          <span class="bordered">{{root.departure.date}}</span>
+          <span class="bordered">{{root.departure.date | date:'yyyy-MM-dd'}}</span>
           do
-          <span class="bordered">{{root.arrival.date}}</span>
+          <span class="bordered">{{root.arrival.date | date:'yyyy-MM-dd'}}</span>
         </dd>
         <dt>w celu:</dt>
         <dd>{{root.delegationTitle}}</dd>
@@ -45,7 +45,7 @@
         <tbody>
           <tr>
             <td>{{root.startCity}}</td>
-            <td>{{root.departure.date}}</td>
+            <td>{{root.departure.date | date:'yyyy-MM-dd'}}</td>
             <td>{{root.departure.time}}</td>
             <td>{{root.destCity}}</td>
             <td>{{root.departureEnd | date:'yyyy-MM-dd'}}</td>
@@ -57,7 +57,7 @@
             <td>{{root.arrivalStart | date:'yyyy-MM-dd'}}</td>
             <td>{{root.arrivalStart | date:'HH:mm'}}</td>
             <td>{{root.startCity}}</td>
-            <td>{{root.arrival.date}}</td>
+            <td>{{root.arrival.date | date:'yyyy-MM-dd'}}</td>
             <td>{{root.arrival.time}}</td>
             <td>{{root.arrival.transport.namePL}}</td>
           </tr>
@@ -176,7 +176,7 @@
       <div class="some-statement">
         <div class="row">
           <div class="col-sm-4 col-sm-offset-2">
-            <div><b>{{root.submitDate}}</b></div>
+            <div><b>{{root.submitDate | date:'yyyy-MM-dd'}}</b></div>
             <div>Data rozliczenia</div>
           </div>
           <div class="col-sm-6">
@@ -191,8 +191,7 @@
     <script type="text/javascript" src="/bower_components/sugar/release/sugar.min.js"></script>
     <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
-    <script type="text/javascript" src="/bower_components/globalize/lib/globalize.js"></script>
-    <script type="text/javascript" src="/bower_components/globalize/lib/cultures/globalize.culture.pl.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-i18n/angular-locale_pl.js"></script>
     <script type="text/javascript" src="/js/printCtrl.js"></script>
   </body>
 </html>
