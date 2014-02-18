@@ -41,5 +41,9 @@
 	"Departure": "Wyjazd",
 	"Arrival": "Przyjazd",
 	"Date and time": "Data i godzina",
-	"Travel time": "Długość podróży"
+	"Travel time": "Długość podróży",
+	"Expense name": "Nazwa wydatku",
+	"Annotations": "Adnotacje",
+	"Add another expense": "Dodaj wydatek",
+	"Diem": "Dieta"
 }

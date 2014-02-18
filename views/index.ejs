@@ -224,82 +224,46 @@
         <fieldset ng-show="step === 3" ng-form="step3Form">
           <legend><%= __('Additional expenses') %></legend>
           <div class="expenses-group">
-            <div class="form-group">
-              <label for="hotel-cost1" class="col-sm-3 control-label"><%= __('Hotels') %></label>
-              <div class="col-sm-9">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="input-group">
-                      <input type="text" class="form-control" id="hotel-cost1" placeholder="<%= __('0.00') %>" ng-model="root.hotels.selCurr" ng-pattern="/^\d+$/">
-                      <span class="input-group-addon">{{root.country.currency}}</span>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="input-group">
-                      <input type="text" class="form-control" id="hotel-cost2" placeholder="<%= __('0.00') %>" ng-model="root.hotels.plnCurr" ng-pattern="/^\d+$/">
-                      <span class="input-group-addon">PLN</span>
-                    </div>
-                  </div>
+            <div class="expense">
+              <div class="row">
+                <div class="col-sm-4">
+                  <b><%= __('Diem') %></b>
+                </div>
+                <div class="col-sm-4">
+                  <b>{{delegationCost() | number:2}} {{root.country.currency}}</b>
+                </div>
+                <div class="col-sm-4">
+
                 </div>
               </div>
             </div>
-            <div class="form-group">
-              <label for="transport-cost1" class="col-sm-3 control-label"><%= __('Transport to/from station') %></label>
-              <div class="col-sm-9">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="input-group">
-                      <input type="text" class="form-control" id="transport-cost1" placeholder="<%= __('0.00') %>" ng-model="root.transportCost.selCurr" ng-pattern="/^\d+$/">
-                      <span class="input-group-addon">{{root.country.currency}}</span>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="input-group">
-                      <input type="text" class="form-control" id="transport-cost2" placeholder="<%= __('0.00') %>" ng-model="root.transportCost.plnCurr" ng-pattern="/^\d+$/">
-                      <span class="input-group-addon">PLN</span>
+
+            <div class="expense" ng-repeat="exp in root.expenses">
+              <div class="row">
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="<%= __('Expense name') %>" ng-model="exp.name">
+                </div>
+                <div class="col-sm-4">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="<%= __('0.00') %>" ng-model="exp.price" ng-pattern="/^\d+$/">
+                    <div class="input-group-btn">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{exp.currency}} <span class="caret"></span></button>
+                      <ul class="dropdown-menu">
+                        <li ng-class="{ 'active': exp.currency == root.country.currency }"><a href="#" ng-click="changeCurrency(exp, root.country.currency)">{{root.country.currency}}</a></li>
+                        <li ng-class="{ 'active': exp.currency == 'PLN' }"><a href="#" ng-click="changeCurrency(exp, 'PLN')">PLN</a></li>
+                      </ul>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="public-transport1" class="col-sm-3 control-label"><%= __('Public transport cost') %></label>
-              <div class="col-sm-9">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="input-group">
-                      <input type="text" class="form-control" id="public-transport1" placeholder="<%= __('0.00') %>" ng-model="root.publicTransport.selCurr" ng-pattern="/^\d+$/">
-                      <span class="input-group-addon">{{root.country.currency}}</span>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="input-group">
-                      <input type="text" class="form-control" id="public-transport2" placeholder="<%= __('0.00') %>" ng-model="root.publicTransport.plnCurr" ng-pattern="/^\d+$/">
-                      <span class="input-group-addon">PLN</span>
-                    </div>
-                  </div>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="<%= __('Annotations') %>" ng-model="exp.desc">
                 </div>
               </div>
             </div>
-            <div class="form-group">
-              <label for="other-costs1" class="col-sm-3 control-label"><%= __('Other costs') %></label>
-              <div class="col-sm-9">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="input-group">
-                      <input type="text" class="form-control" id="other-costs1" placeholder="<%= __('0.00') %>" ng-model="root.otherCosts.selCurr">
-                      <span class="input-group-addon">{{root.country.currency}}</span>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="input-group">
-                      <input type="text" class="form-control" id="other-costs2" placeholder="<%= __('0.00') %>" ng-model="root.otherCosts.plnCurr">
-                      <span class="input-group-addon">PLN</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+            <button class="btn btn-lg btn-primary" ng-click="addExpense()">
+              <%= __('Add another expense') %>
+            </button>
           </div>
         </fieldset>
       </form>

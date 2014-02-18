@@ -18,6 +18,7 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
   $scope.root.departure.transport = $scope.transportWays.last();
   $scope.root.arrival.transport = $scope.transportWays.last();
   $scope.root.startCity = 'Warszawa';
+  $scope.root.expenses = [];
 
   self.daysDiff = function(date1, date2) {
     var fullDate1 = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
@@ -155,6 +156,18 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
       }
     };
   })();
+
+  $scope.changeCurrency = function(exp, curr){
+    exp.currency = curr;
+  };
+  $scope.addExpense = function(){
+    if(typeof $scope.root.expenses === 'undefined')
+      $scope.root.expenses = [];
+
+    $scope.root.expenses.push({
+      currency: $scope.root.country.currency
+    });
+  };
 
   $scope.refreshCurrencyRate = function() {
     if(typeof $scope.root.country === 'undefined' || $scope.root.country === null)

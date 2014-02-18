@@ -69,3 +69,14 @@ input.ng-invalid.ng-dirty {
 }
 
 .steps i { padding: 0 4px; }
+
+.expenses-group .expense {
+  padding: 12px 4px;
+  margin: 6px 0;
+  border-bottom: 1px solid #efefef;
+}
+
+.expenses-group .expense:hover {
+  background: #f9f9f9;
+  border-bottom: 1px solid #dedede;
+}
