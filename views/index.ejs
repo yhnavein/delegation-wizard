@@ -42,7 +42,7 @@
 
       <form novalidate class="form-horizontal" role="form">
         <fieldset ng-show="step === 1" class="row" ng-form="step1Form">
-          <div class="col-sm-8">
+          <div class="col-md-8  col-sm-12">
             <legend><%= __('Basic stuff') %></legend>
             <div class="form-group">
               <label for="name" class="col-sm-3 control-label"><%= __('Your name') %></label>
@@ -54,11 +54,11 @@
               <label for="destination-country" class="col-sm-3 control-label"><%= __('Country, City') %></label>
               <div class="col-sm-9">
                 <div class="row">
-                  <div class="col-sm-6">
+                  <div class="col-sm-6 col-xs-6">
                     <select class="form-control" id="destination-country" placeholder="<%= __('Select destination country') %>" ng-change="refreshCurrencyRate()" required
                       ng-model="root.country" ng-options="el.name<%= locale.toUpperCase() %> for el in countriesList | orderBy:'name<%= locale.toUpperCase() %>'"></select>
                   </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-6 col-xs-6">
                     <input type="text" class="form-control" id="destination" placeholder="<%= __('City') %>" ng-model="root.destCity">
                   </div>
                 </div>
@@ -107,66 +107,70 @@
           </div>
 
 
-          <div class="col-sm-4">
+          <div class="col-md-4 col-sm-12">
             <legend><%= __('Travel details') %></legend>
-            <div class="delegation-dates">
-              <h4><%= __('Departure') %></h4>
-              <label>
-                <%= __('Date and time') %> ({{root.startCity}})
-              </label>
-              <div class="row form-group">
-                <div class="col-sm-7">
-                  <input type="text" class="form-control" placeholder="<%= __('yyyy-mm-dd') %>" datepicker-popup="yyyy-MM-dd" ng-model="root.departure.date" datepicker-options="dateOptions" ng-required="true"  ng-change="datesChange(this)" />
-                </div>
-                <div class="col-sm-5">
-                  <input type="text" class="form-control" required ng-model="root.departure.time" placeholder="<%= __('HH:mm') %>" ng-change="datesChange(this)" ng-pattern="timePattern">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="depDuration" class="col-sm-7 control-label"><%= __('Travel time') %></label>
-                <div class="col-sm-5">
-                  <div class="input-group">
-                    <input type="number" min="0" required class="form-control" id="depDuration" ng-model="root.departure.duration" >
-                    <span class="input-group-addon">h</span>
+            <div class="delegation-dates row">
+              <div class="col-sm-6 col-md-12">
+                <h4><%= __('Departure') %></h4>
+                <label>
+                  <%= __('Date and time') %> ({{root.startCity}})
+                </label>
+                <div class="row form-group">
+                  <div class="col-sm-7 col-xs-7">
+                    <input type="text" class="form-control" placeholder="<%= __('yyyy-mm-dd') %>" datepicker-popup="yyyy-MM-dd" ng-model="root.departure.date" datepicker-options="dateOptions" ng-required="true"  ng-change="datesChange(this)" />
+                  </div>
+                  <div class="col-sm-5 col-xs-5">
+                    <input type="text" class="form-control" required ng-model="root.departure.time" placeholder="<%= __('HH:mm') %>" ng-change="datesChange(this)" ng-pattern="timePattern">
                   </div>
                 </div>
-              </div>
-              <div class="form-group">
-                <label for="depTransport" class="col-sm-7 control-label"><%= __('Transport type') %></label>
-                <div class="col-sm-5">
-                  <select class="form-control" id="depTransport" placeholder="<%= __('Transport type') %>" required
-                    ng-model="root.departure.transport" ng-options="el.name<%= locale.toUpperCase() %> for el in transportWays"></select>
-                </div>
-              </div>
-
-              <hr/>
-
-              <h4><%= __('Arrival') %></h4>
-              <label>
-                <%= __('Date and time') %> ({{root.startCity}})
-              </label>
-              <div class="row form-group">
-                <div class="col-sm-7">
-                  <input type="text" class="form-control" placeholder="<%= __('yyyy-mm-dd') %>" datepicker-popup="yyyy-MM-dd" ng-model="root.arrival.date" datepicker-options="dateOptions" ng-required="true"  ng-change="datesChange(this)" />
-                </div>
-                <div class="col-sm-5">
-                  <input type="text" class="form-control" required ng-model="root.arrival.time" placeholder="<%= __('HH:mm') %>" ng-change="datesChange(this)" ng-pattern="timePattern">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="arrDuration" class="col-sm-7 control-label"><%= __('Travel time') %></label>
-                <div class="col-sm-5">
-                  <div class="input-group">
-                    <input type="number" min="0" required class="form-control" id="arrDuration" ng-model="root.arrival.duration" >
-                    <span class="input-group-addon">h</span>
+                <div class="form-group">
+                  <label for="depDuration" class="col-sm-7 control-label"><%= __('Travel time') %></label>
+                  <div class="col-sm-5">
+                    <div class="input-group">
+                      <input type="number" min="0" required class="form-control" id="depDuration" ng-model="root.departure.duration" >
+                      <span class="input-group-addon">h</span>
+                    </div>
                   </div>
                 </div>
+                <div class="form-group">
+                  <label for="depTransport" class="col-sm-7 control-label"><%= __('Transport type') %></label>
+                  <div class="col-sm-5">
+                    <select class="form-control" id="depTransport" placeholder="<%= __('Transport type') %>" required
+                      ng-model="root.departure.transport" ng-options="el.name<%= locale.toUpperCase() %> for el in transportWays"></select>
+                  </div>
+                </div>
+
+                <hr/>
               </div>
-              <div class="form-group">
-                <label for="arrTransport" class="col-sm-7 control-label"><%= __('Transport type') %></label>
-                <div class="col-sm-5">
-                  <select class="form-control" id="arrTransport" placeholder="<%= __('Transport type') %>" required
-                    ng-model="root.arrival.transport" ng-options="el.name<%= locale.toUpperCase() %> for el in transportWays"></select>
+
+              <div class="col-sm-6 col-md-12">
+                <h4><%= __('Arrival') %></h4>
+                <label>
+                  <%= __('Date and time') %> ({{root.startCity}})
+                </label>
+                <div class="row form-group">
+                  <div class="col-sm-7 col-xs-7">
+                    <input type="text" class="form-control" placeholder="<%= __('yyyy-mm-dd') %>" datepicker-popup="yyyy-MM-dd" ng-model="root.arrival.date" datepicker-options="dateOptions" ng-required="true"  ng-change="datesChange(this)" />
+                  </div>
+                  <div class="col-sm-5 col-xs-5">
+                    <input type="text" class="form-control" required ng-model="root.arrival.time" placeholder="<%= __('HH:mm') %>" ng-change="datesChange(this)" ng-pattern="timePattern">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="arrDuration" class="col-sm-7 control-label"><%= __('Travel time') %></label>
+                  <div class="col-sm-5">
+                    <div class="input-group">
+                      <input type="number" min="0" required class="form-control" id="arrDuration" ng-model="root.arrival.duration" >
+                      <span class="input-group-addon">h</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="arrTransport" class="col-sm-7 control-label"><%= __('Transport type') %></label>
+                  <div class="col-sm-5">
+                    <select class="form-control" id="arrTransport" placeholder="<%= __('Transport type') %>" required
+                      ng-model="root.arrival.transport" ng-options="el.name<%= locale.toUpperCase() %> for el in transportWays"></select>
+                  </div>
                 </div>
               </div>
 
@@ -226,10 +230,10 @@
           <div class="expenses-group">
             <div class="expense">
               <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-3 col-xs-6">
                   <b><%= __('Diem') %></b>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-3 col-xs-6">
                   <b>{{delegationCost() | number:2}} {{root.country.currency}}</b>
                 </div>
                 <div class="col-sm-6">
@@ -243,7 +247,7 @@
                 <div class="col-sm-3">
                   <input type="text" required class="form-control" placeholder="<%= __('Expense name') %>" ng-model="exp.name">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-3 col-xs-6">
                   <div class="input-group">
                     <input type="number" min="0" required class="form-control" placeholder="<%= __('0.00') %>" ng-model="exp.price">
                     <div class="input-group-btn">
@@ -255,7 +259,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-3 col-xs-6">
                   <div ng-show="!exp.rateType">
                     <div class="input-group">
                       <span class="input-group-btn">
