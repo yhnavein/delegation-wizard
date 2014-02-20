@@ -198,7 +198,7 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
   };
 
   $scope.isFirstStepValid = function(validationStep1) {
-    return $scope.step > 0 && $scope.step < 3 && validationStep1.$valid && $scope.root.delegationDays.length > 0;
+    return validationStep1.$valid && $scope.root.delegationDays.length > 0;
   };
 
   $scope.isStepValid = function(validationStep1, validationStep3) {
