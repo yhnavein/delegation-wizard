@@ -4,6 +4,7 @@
 describe('counting days properly', function(){
     var scope, ctrl, httpBackend;
 
+    beforeEach(module('ui.bootstrap'));
     beforeEach(module('delegations'));
 
     beforeEach(inject(function($rootScope, $controller, $httpBackend, $http) {

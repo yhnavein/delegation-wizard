@@ -14,12 +14,12 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-          "../../public/bower_components/angular/angular.js"
-        , "../../public/bower_components/angular-i18n/angular-locale_pl.js"
-        , "../../public/bower_components/angular-mocks/angular-mocks.js"
-        , "../../public/bower_components/angular-resource/angular-resource.js"
-	, "../../public/bower_components/ngQuickDate/dist/ng-quick-date.min.js"
-        , "mocks/ngQuickDate.js"
+          '../../public/bower_components/angular/angular.js'
+        , '../../public/bower_components/angular-i18n/angular-locale_pl.js'
+        , '../../public/bower_components/angular-mocks/angular-mocks.js'
+        , '../../public/bower_components/angular-resource/angular-resource.js'
+        , '../../public/bower_components/angular-bootstrap/ui-bootstrap.min.js'
+        , 'mocks/ngQuickDate.js'
         , '*.js'
     ],
 
