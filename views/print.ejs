@@ -84,67 +84,29 @@
         </thead>
         <tbody>
           <tr>
-            <td>1) Koszty przejazdu</td>
-            <td></td>
-            <td></td>
-            <td>{{root.exchangeRate.averageRate | number:4}}</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>2) Noclegi</td>
-            <td></td>
-            <td></td>
-            <td>{{root.exchangeRate.averageRate | number:4}}</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>3) Noclegi - ryczałt</td>
-            <td></td>
-            <td></td>
-            <td>{{root.exchangeRate.averageRate | number:4}}</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>4) Diety</td>
-            <td>0 zł</td>
+            <td>Diety (food)</td>
+            <td>{{0 | number:2}} zł</td>
             <td>{{root.delegationCost | number:2}} {{root.country.currency}}</td>
             <td>{{root.exchangeRate.averageRate | number:4}}</td>
             <td>{{root.delegationCost * root.exchangeRate.averageRate | number:2}} zł</td>
             <td></td>
           </tr>
-          <tr>
-            <td>5) Dojazd z/do dworca</td>
-            <td></td>
-            <td></td>
-            <td>{{root.exchangeRate.averageRate | number:4}}</td>
-            <td></td>
-            <td></td>
+
+          <tr ng-repeat="exp in root.expenses">
+            <td>{{exp.name}}</td>
+            <td>{{(exp.currency == 'PLN' ? exp.price : 0) | number:2}} zł</td>
+            <td>{{(exp.currency != 'PLN' ? exp.price : 0) | number:2}} {{(exp.currency == 'PLN' ? root.country.currency : exp.currency)}}</td>
+            <td>{{exp.rate | number:4}}</td>
+            <td>{{exp.plnValue | number:2}} zł</td>
+            <td><em>{{exp.desc}}</em></td>
           </tr>
-          <tr>
-            <td>6) Komunikacja miejska</td>
-            <td></td>
-            <td></td>
-            <td>{{root.exchangeRate.averageRate | number:4}}</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>7) Inne</td>
-            <td></td>
-            <td></td>
-            <td>{{root.exchangeRate.averageRate | number:4}}</td>
-            <td></td>
-            <td></td>
-          </tr>
+
           <tr class="summary ">
-            <td>RAZEM wydatki</td>
+            <td>RAZEM wydatki (all expenses)</td>
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
+            <td>{{sumExpenses() | number:2}} zł</td>
             <td></td>
           </tr>
           <tr>
@@ -160,7 +122,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
+            <td>{{sumExpenses() | number:2}} zł</td>
             <td></td>
           </tr>
         </tbody>

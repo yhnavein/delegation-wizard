@@ -44,5 +44,15 @@ app.controller('printCtrl', function($scope) {
       $scope.errorMsg = 'Nie znaleziono delegacji do pokazania!';
   };
 
+  $scope.sumExpenses = function() {
+    var sum = $scope.root.delegationCost * $scope.root.exchangeRate.averageRate;
+
+    for (var i = 0; i < $scope.root.expenses.length; i++) {
+      sum += $scope.root.expenses[i].plnValue;
+    }
+
+    return sum;
+  };
+
   self.init();
 });

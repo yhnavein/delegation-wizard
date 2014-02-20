@@ -154,6 +154,19 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     date.addMinutes(parts[1]);
   };
 
+  self.prepareExpenses = function(root) {
+    for(var i=0;i<root.expenses.length;i++) {
+      root.expenses[i].rate = root.expenses[i].rateType ? root.expenses[i].customRate : root.exchangeRate.averageRate;
+
+      if(root.expenses[i].currency === 'PLN'){
+        root.expenses[i].plnValue = root.expenses[i].price;
+        root.expenses[i].rate = root.exchangeRate.averageRate;
+      }
+      else
+        root.expenses[i].plnValue = (root.expenses[i].rate * root.expenses[i].price).round(2);
+    }
+  };
+
   $scope.timePattern = (function() {
     var regexp = /^([0-1]?\d|2[0-3]):([0-5]?\d)$/;
     return {
@@ -254,9 +267,9 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     showWeeks: false
   };
 
-
   $scope.goToPrint = function() {
-    $scope.root.delegationCost = $scope.delegationCost();
+    $scope.root.delegationCost = $scope.delegationCost().round(2);
+    self.prepareExpenses($scope.root);
     window.localStorage.setItem('delegation', angular.toJson($scope.root));
     window.location = '/print';
   };

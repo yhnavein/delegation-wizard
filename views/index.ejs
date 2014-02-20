@@ -126,7 +126,7 @@
                 <label for="depDuration" class="col-sm-7 control-label"><%= __('Travel time') %></label>
                 <div class="col-sm-5">
                   <div class="input-group">
-                    <input type="text" class="form-control" id="depDuration" ng-model="root.departure.duration" required ng-pattern="/^\d*\.?\d*$/">
+                    <input type="number" min="0" required class="form-control" id="depDuration" ng-model="root.departure.duration" >
                     <span class="input-group-addon">h</span>
                   </div>
                 </div>
@@ -157,7 +157,7 @@
                 <label for="arrDuration" class="col-sm-7 control-label"><%= __('Travel time') %></label>
                 <div class="col-sm-5">
                   <div class="input-group">
-                    <input type="text" class="form-control" id="arrDuration" ng-model="root.arrival.duration" required ng-pattern="/^\d*\.?\d*$/">
+                    <input type="number" min="0" required class="form-control" id="arrDuration" ng-model="root.arrival.duration" >
                     <span class="input-group-addon">h</span>
                   </div>
                 </div>
@@ -241,11 +241,11 @@
             <div class="expense" ng-repeat="exp in root.expenses">
               <div class="row">
                 <div class="col-sm-3">
-                  <input type="text" class="form-control" placeholder="<%= __('Expense name') %>" ng-model="exp.name">
+                  <input type="text" required class="form-control" placeholder="<%= __('Expense name') %>" ng-model="exp.name">
                 </div>
                 <div class="col-sm-3">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="<%= __('0.00') %>" ng-model="exp.price" ng-pattern="/^\d+$/">
+                    <input type="number" min="0" required class="form-control" placeholder="<%= __('0.00') %>" ng-model="exp.price">
                     <div class="input-group-btn">
                       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{exp.currency}} <span class="caret"></span></button>
                       <ul class="dropdown-menu">
@@ -273,7 +273,7 @@
                           <i class="icon-remove"></i>
                         </button>
                       </span>
-                      <input type="text" class="form-control" placeholder="<%= __('Custom rate') %>" ng-model="exp.customRate" ng-show="exp.rateType">
+                      <input type="number" min="0" class="form-control" placeholder="<%= __('Custom rate') %>" ng-model="exp.customRate" ng-show="exp.rateType">
                       <span class="input-group-addon">zł</span>
                     </div>
                   </div>
