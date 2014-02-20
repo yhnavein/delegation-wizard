@@ -24,6 +24,9 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     var fullDate1 = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
     var fullDate2 = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
 
+    if(date1 >= date2)
+      return { fullDays: 0, halfDays: 0, oneThirdDays: 0 };
+
     if(fullDate2 === fullDate1) {
       var hours = Math.abs( date1 - date2 ) / (1000 * 60 * 60);
 
@@ -71,7 +74,10 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
 
   self.prepareDelegationDays = function(from, to) {
     var days = [];
-    var fullHours = Math.abs( to - from ) / (1000 * 60 * 60);
+    var fullHours = (to - from) / (1000 * 60 * 60);
+
+    if(fullHours < 0)
+      return days;
 
     if(fullHours <= 24) {
       days.push({
@@ -160,6 +166,7 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
   $scope.changeCurrency = function(exp, curr){
     exp.currency = curr;
   };
+
   $scope.addExpense = function(){
     if(typeof $scope.root.expenses === 'undefined')
       $scope.root.expenses = [];
@@ -190,12 +197,16 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     });
   };
 
+  $scope.isFirstStepValid = function(validationStep1) {
+    return $scope.step > 0 && $scope.step < 3 && validationStep1.$valid && $scope.root.delegationDays.length > 0;
+  };
+
   $scope.isStepValid = function(validationStep1, validationStep3) {
-    return ($scope.step > 0 && $scope.step < 3 && validationStep1.$valid) || ($scope.step === 3 && validationStep3.$valid);
+    return ($scope.step > 0 && $scope.step < 3 && validationStep1.$valid && $scope.root.delegationDays.length > 0) || ($scope.step === 3 && validationStep3.$valid);
   };
 
   $scope.isValid = function(validationStep1, validationStep3) {
-    return (validationStep1.$valid && validationStep3.$valid);
+    return (validationStep1.$valid && $scope.root.delegationDays.length > 0 && validationStep3.$valid);
   };
 
   $scope.delegationCost = function() {

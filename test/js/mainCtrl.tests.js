@@ -20,13 +20,6 @@ describe('counting days properly', function(){
         expect(days.fullDays).toEqual(3);
     });
 
-    it('days diff between 2013-01-02 and 2013-01-02 is 0', function() {
-        var days = ctrl.daysDiff(new Date(2013,0,2), new Date(2013,0,2));
-        expect(days.fullDays).toEqual(0);
-        expect(days.halfDays).toEqual(0);
-        expect(days.oneThirdDays).toEqual(1);
-    });
-
     it('days diff between 2013-01-02 10:00 and 2013-01-02 23:00 is 1', function() {
         var days = ctrl.daysDiff(new Date(2013,0,2,10,0,0), new Date(2013,0,2,23,0,0));
         expect(days.fullDays).toEqual(1);
@@ -95,6 +88,13 @@ describe('counting days properly', function(){
         expect(days.oneThirdDays).toEqual(0);
     });
 
+    it('days diff between 2013-01-02 19:00 and 2013-01-01 11:30 is 0', function() {
+        var days = ctrl.daysDiff(new Date(2013,0,2,19,0,0), new Date(2013,0,1,11,30,0));
+        expect(days.fullDays).toEqual(0);
+        expect(days.halfDays).toEqual(0);
+        expect(days.oneThirdDays).toEqual(0);
+    });
+
     it('exactly 24 hours abroad is treated as only 1 day', function() {
         var days = ctrl.daysDiff(new Date(2013,0,4,19,0,0), new Date(2013,0,5,19,0,0));
         expect(days.fullDays).toEqual(1);
@@ -120,30 +120,35 @@ describe('presenting days summary', function(){
 
     it('standard date range', function() {
         var days = ctrl.prepareDelegationDays(new Date(2013,0,2,15,0), new Date(2013,0,5,5,0));
-        //to have 3 days
+        expect(days.length).toEqual(3);
         var lastDay = days.last();
         expect(lastDay.dayType).toEqual(1);
     });
 
     it('one day date range (around half a day)', function() {
         var days = ctrl.prepareDelegationDays(new Date(2013,0,2,10,0), new Date(2013,0,2,19,0));
-        //to have 1 day
+        expect(days.length).toEqual(1);
         var day = days.first();
         expect(day.dayType).toEqual(2);
     });
 
     it('one day date range (more than half a day)', function() {
         var days = ctrl.prepareDelegationDays(new Date(2013,0,2,7,0), new Date(2013,0,2,21,0));
-        //to have 1 day
+        expect(days.length).toEqual(1);
         var day = days.first();
         expect(day.dayType).toEqual(1);
     });
 
     it('one day date range (less than one third a day)', function() {
         var days = ctrl.prepareDelegationDays(new Date(2013,0,2,10,15), new Date(2013,0,2,16,0));
-        //to have 1 day
+        expect(days.length).toEqual(1);
         var day = days.first();
         expect(day.dayType).toEqual(3);
+    });
+
+    it('reversed 1 day date range', function() {
+        var days = ctrl.prepareDelegationDays(new Date(2013,0,3,10,15), new Date(2013,0,2,9,0));
+        expect(days.length).toEqual(0);
     });
 
 });

@@ -23,9 +23,9 @@
             <li>
               <div class="steps">
                 <button class="step btn btn-default" ng-click="changeStep(1)"><%= __('Step') %> 1</button> <i class="icon-caret-right icon-light"></i>
-                <button class="step btn btn-default" ng-click="changeStep(2)" ng-disabled="step1Form.$invalid"><%= __('Step') %> 2</button> <i class="icon-caret-right icon-light"></i>
-                <button class="step btn btn-default" ng-click="changeStep(3)" ng-disabled="step1Form.$invalid"><%= __('Step') %> 3</button> <i class="icon-caret-right icon-light"></i>
-                <button class="step btn btn-success step-final" ng-click="goToPrint()" ng-disabled="step3Form.$invalid || step1Form.$invalid"><%= __('Print') %></button>
+                <button class="step btn btn-default" ng-click="changeStep(2)" ng-disabled="!isFirstStepValid(step1Form)"><%= __('Step') %> 2</button> <i class="icon-caret-right icon-light"></i>
+                <button class="step btn btn-default" ng-click="changeStep(3)" ng-disabled="!isFirstStepValid(step1Form)"><%= __('Step') %> 3</button> <i class="icon-caret-right icon-light"></i>
+                <button class="step btn btn-success step-final" ng-click="goToPrint()" ng-disabled="!isFirstStepValid(step1Form) || step1Form.$invalid"><%= __('Print') %></button>
               </div>
             </li>
             <li>
