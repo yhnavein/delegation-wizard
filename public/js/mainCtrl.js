@@ -220,16 +220,11 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     return wholeDiem - valueToSubstract;
   };
 
-  $scope.allCosts = function() {
-    var delegationCost = $scope.delegationCost();
-    if(typeof $scope.root.exchangeRate === 'undefined' || $scope.root.exchangeRate === null)
-      return delegationCost;
+  $scope.changeRateType = function(exp, type) {
+    if(type === 0)
+      exp.customRate = null;
 
-    return delegationCost * $scope.root.exchangeRate.averageRate / $scope.root.exchangeRate.multiplier;
-      // parseInt($scope.hotels.selCurr) +
-      // parseInt($scope.transportCost.selCurr) +
-      // parseInt($scope.publicTransport.selCurr) +
-      // parseInt($scope.otherCosts.selCurr);
+    exp.rateType = type;
   };
 
   $scope.datesChange = function() {

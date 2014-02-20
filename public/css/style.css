@@ -80,3 +80,8 @@ input.ng-invalid.ng-dirty {
   background: #f9f9f9;
   border-bottom: 1px solid #dedede;
 }
+
+.form-control.readonly {
+  background: #f1f1f1;
+  color: #aaa;
+}

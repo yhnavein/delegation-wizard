@@ -45,5 +45,8 @@
 	"Expense name": "Nazwa wydatku",
 	"Annotations": "Adnotacje",
 	"Add another expense": "Dodaj wydatek",
-	"Diem": "Dieta"
+	"Diem": "Dieta",
+	"Edit rate for this expense": "Podaj niestandardowy kurs wymiany",
+	"Custom rate": "Kurs wymiany",
+	"Use default rate": "Użyj domyślnej wartości kursu"
 }
