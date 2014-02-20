@@ -32,3 +32,10 @@ h1.title {
 }
 
 .table tr.summary td { font-weight: bold; text-align: right; }
+
+@media print {
+  .dl-horizontal dt {
+    float: left;
+    width: 160px;
+  }
+}

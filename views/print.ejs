@@ -2,9 +2,9 @@
 <html ng-app="delegations">
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css' />
+    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css' media="all" />
     <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap-theme.css' />
-    <link rel='stylesheet' href='/css/print.css' />
+    <link rel='stylesheet' href='/css/print.css' media="all" />
   </head>
   <body ng-controller="printCtrl">
     <div class="container theme-showcase container-a4">
@@ -137,11 +137,11 @@
 
       <div class="some-statement">
         <div class="row">
-          <div class="col-sm-4 col-sm-offset-2">
+          <div class="col-xs-4 col-xs-offset-2">
             <div><b>{{root.submitDate | date:'yyyy-MM-dd'}}</b></div>
             <div>Data rozliczenia</div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-xs-6">
             <div>....................................</div>
             <div>Podpis delegowanego</div>
           </div>
