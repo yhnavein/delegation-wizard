@@ -269,7 +269,7 @@
                     <div ng-show="!exp.rateType">
                       <div class="input-group">
                         <span class="input-group-btn">
-                          <button class="btn btn-default" type="button" ng-click="changeRateType(exp, 1)" title="<%= __('Edit rate for this expense') %>">
+                          <button class="btn btn-default" type="button" ng-click="changeRateType(exp, 1)" tooltip="<%= __('Edit rate for this expense') %>">
                             <i class="icon-pencil"></i>
                           </button>
                         </span>
@@ -279,7 +279,7 @@
                     <div ng-show="exp.rateType">
                       <div class="input-group">
                         <span class="input-group-btn">
-                          <button class="btn btn-default" type="button" ng-click="changeRateType(exp, 0)" title="<%= __('Use default rate') %>">
+                          <button class="btn btn-default" type="button" ng-click="changeRateType(exp, 0)" tooltip="<%= __('Use default rate') %>">
                             <i class="icon-remove"></i>
                           </button>
                         </span>
