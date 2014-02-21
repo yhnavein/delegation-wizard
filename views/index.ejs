@@ -16,7 +16,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><b><%= title %></b></a>
+          <a class="navbar-brand" href="/" ng-click="changeStep(1)"><b><%= title %></b></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -42,6 +42,9 @@
 
       <form novalidate class="form-horizontal" role="form">
         <fieldset ng-show="step === 1" class="row" ng-form="step1Form">
+          <blockquote>
+            <%= __('This tool is dedicated for calculating abroad delegations. You can\'t use it for domestic delegations! It may change hovewer in future') %>
+          </blockquote>
           <div class="col-md-8  col-sm-12">
             <legend><%= __('Basic stuff') %></legend>
             <div class="form-group">
@@ -111,8 +114,13 @@
             <legend><%= __('Travel details') %></legend>
             <div class="delegation-dates row">
               <div class="col-sm-6 col-md-12">
-                <h4><%= __('Departure') %></h4>
-                <label>
+                <h4>
+                  <%= __('Departure') %>
+                  <a href="#" class="pull-right btn btn-info btn-xs" popover-placement="left" popover="<%= __('Date and time of departure from last Polish city') %>">
+                    <i class="icon-question-sign icon-large"></i>
+                  </a>
+                </h4>
+                <label class="block">
                   <%= __('Date and time') %> ({{root.startCity}})
                 </label>
                 <div class="row form-group">
@@ -144,8 +152,13 @@
               </div>
 
               <div class="col-sm-6 col-md-12">
-                <h4><%= __('Arrival') %></h4>
-                <label>
+                <h4>
+                  <%= __('Arrival') %>
+                  <a href="#" class="pull-right btn btn-info btn-xs" popover-placement="left" popover="<%= __('Date and time of arrival to first Polish city') %>">
+                    <i class="icon-question-sign icon-large"></i>
+                  </a>
+                </h4>
+                <label class="block">
                   <%= __('Date and time') %> ({{root.startCity}})
                 </label>
                 <div class="row form-group">

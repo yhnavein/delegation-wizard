@@ -155,6 +155,9 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
   };
 
   self.prepareExpenses = function(root) {
+    if(typeof root.expenses === 'undefined' || root.expenses === null)
+      return;
+
     for(var i=0;i<root.expenses.length;i++) {
       root.expenses[i].rate = root.expenses[i].rateType ? root.expenses[i].customRate : root.exchangeRate.averageRate;
 

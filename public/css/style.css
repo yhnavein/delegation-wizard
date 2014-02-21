@@ -86,3 +86,13 @@ input.ng-invalid.ng-dirty {
   background: #f1f1f1;
   color: #aaa;
 }
+
+label.block {
+  display: block;
+  width: 100%;
+}
+
+.popover-inner .popover-content {
+  font-size: 13px;
+  font-weight: normal;
+}

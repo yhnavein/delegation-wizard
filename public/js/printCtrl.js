@@ -47,6 +47,9 @@ app.controller('printCtrl', function($scope) {
   $scope.sumExpenses = function() {
     var sum = $scope.root.delegationCost * $scope.root.exchangeRate.averageRate;
 
+    if(typeof $scope.root.expenses === 'undefined' || $scope.root.expenses === null)
+      return sum;
+
     for (var i = 0; i < $scope.root.expenses.length; i++) {
       sum += $scope.root.expenses[i].plnValue;
     }
