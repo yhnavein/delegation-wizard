@@ -85,6 +85,11 @@ input.ng-invalid.ng-dirty {
   padding-right: 56px;
 }
 
+.expenses-group .expense .exchange-na {
+  padding: 6px;
+  text-align: center;
+}
+
 .expenses-group .expense .btn-danger {
   display: none;
 }

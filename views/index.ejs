@@ -238,7 +238,7 @@
                   <b>{{delegationCost() | number:2}} {{root.country.currency}}</b>
                 </div>
                 <div class="col-sm-6">
-
+                  <b>{{root.exchangeRate.averageRate | number:4}} zł</b>
                 </div>
               </div>
             </div>
@@ -265,27 +265,33 @@
                   </div>
                 </div>
                 <div class="col-sm-3 col-xs-6">
-                  <div ng-show="!exp.rateType">
-                    <div class="input-group">
-                      <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" ng-click="changeRateType(exp, 1)" title="<%= __('Edit rate for this expense') %>">
-                          <i class="icon-pencil"></i>
-                        </button>
-                      </span>
-                      <span class="form-control readonly" ng-show="!exp.rateType">{{root.exchangeRate.averageRate | number:4}} zł</span>
+                  <div ng-show="exp.currency !== 'PLN'">
+                    <div ng-show="!exp.rateType">
+                      <div class="input-group">
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" type="button" ng-click="changeRateType(exp, 1)" title="<%= __('Edit rate for this expense') %>">
+                            <i class="icon-pencil"></i>
+                          </button>
+                        </span>
+                        <span class="form-control readonly" ng-show="!exp.rateType">{{root.exchangeRate.averageRate | number:4}} zł</span>
+                      </div>
+                    </div>
+                    <div ng-show="exp.rateType">
+                      <div class="input-group">
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" type="button" ng-click="changeRateType(exp, 0)" title="<%= __('Use default rate') %>">
+                            <i class="icon-remove"></i>
+                          </button>
+                        </span>
+                        <input type="number" min="0" class="form-control" placeholder="<%= __('Custom rate') %>" ng-model="exp.customRate" ng-show="exp.rateType">
+                        <span class="input-group-addon">zł</span>
+                      </div>
                     </div>
                   </div>
-                  <div ng-show="exp.rateType">
-                    <div class="input-group">
-                      <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" ng-click="changeRateType(exp, 0)" title="<%= __('Use default rate') %>">
-                          <i class="icon-remove"></i>
-                        </button>
-                      </span>
-                      <input type="number" min="0" class="form-control" placeholder="<%= __('Custom rate') %>" ng-model="exp.customRate" ng-show="exp.rateType">
-                      <span class="input-group-addon">zł</span>
-                    </div>
+                  <div ng-show="exp.currency === 'PLN'">
+                    <div class="form-control-static exchange-na">N/A</div>
                   </div>
+
                 </div>
                 <div class="col-sm-3">
                   <input type="text" class="form-control" placeholder="<%= __('Annotations') %>" ng-model="exp.desc">
