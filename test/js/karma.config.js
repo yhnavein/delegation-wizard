@@ -17,10 +17,10 @@ module.exports = function(config) {
           '../../public/bower_components/angular/angular.js'
         , '../../public/bower_components/angular-i18n/angular-locale_pl.js'
         , '../../public/bower_components/angular-mocks/angular-mocks.js'
+        , '../../public/bower_components/sugar/release/sugar.min.js'
         , '../../public/bower_components/angular-resource/angular-resource.js'
         , '../../public/bower_components/angular-bootstrap/ui-bootstrap.min.js'
-        , 'mocks/ngQuickDate.js'
-        , '*.js'
+        , '*Spec.js'
     ],
 
 
