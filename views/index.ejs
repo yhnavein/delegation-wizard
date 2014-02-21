@@ -207,14 +207,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td colspan="5">
-                  <%= __('First day: ') %>
-                  <strong>{{root.delegationDays.first().date | date:'yyyy-MM-dd (EEEE)'}}</strong>
-                </td>
-              </tr>
               <tr ng-repeat="day in root.delegationDays">
-                <td>{{day.fromDate | date:'(EEE) HH:mm'}} - {{day.toDate | date:'(EEE) HH:mm'}}</td>
+                <td>{{day.date | date:'yyyy-MM-dd (EEEE)'}}</td>
                 <td>
                   <span class="label label-info">{{day.hours | number:1}}h</span>
                 </td>
@@ -226,12 +220,6 @@
                 </td>
                 <td>
                   <input type="checkbox" ng-model="day.provSupper" >
-                </td>
-              </tr>
-              <tr>
-                <td colspan="5">
-                  <%= __('Last day: ') %>
-                  <strong>{{root.delegationDays.last().date | date:'yyyy-MM-dd (EEEE)'}}</strong>
                 </td>
               </tr>
             </tbody>
