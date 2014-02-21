@@ -8,20 +8,22 @@
   </head>
   <body ng-controller="printCtrl">
     <div class="container theme-showcase container-a4">
-      <h1 class="title">Rozliczenie delegacji zagranicznej NR {{root.delegationNo}}</h1>
+      <h1 class="title">
+        Rozliczenie delegacji zagranicznej NR {{root.delegationNo}}
+      </h1>
 
       <dl class="dl-horizontal basic-stuff">
-        <dt>Delegowany</dt>
+        <dt><em class="eng">(Employee)</em> Delegowany:</dt>
         <dd>{{root.fullName}}</dd>
-        <dt>do</dt>
+        <dt><em class="eng">(to)</em> do:</dt>
         <dd>{{root.country.namePL}}, {{root.destCity}}</dd>
-        <dt>na czas od</dt>
+        <dt><em class="eng">(duration)</em> na czas od:</dt>
         <dd>
           <span class="bordered">{{root.departure.date | date:'yyyy-MM-dd'}}</span>
           do
           <span class="bordered">{{root.arrival.date | date:'yyyy-MM-dd'}}</span>
         </dd>
-        <dt>w celu:</dt>
+        <dt><em class="eng">(purpose)</em> w celu:</dt>
         <dd>{{root.delegationTitle}}</dd>
       </dl>
 
@@ -50,7 +52,7 @@
             <td>{{root.destCity}}</td>
             <td>{{root.departureEnd | date:'yyyy-MM-dd'}}</td>
             <td>{{root.departureEnd | date:'HH:mm'}}</td>
-            <td>{{root.departure.transport.namePL}}</td>
+            <td>{{root.departure.transport.namePL}} <em class="eng">({{root.departure.transport.nameEN}})</em></td>
           </tr>
           <tr>
             <td>{{root.destCity}}</td>
@@ -59,16 +61,16 @@
             <td>{{root.startCity}}</td>
             <td>{{root.arrival.date | date:'yyyy-MM-dd'}}</td>
             <td>{{root.arrival.time}}</td>
-            <td>{{root.arrival.transport.namePL}}</td>
+            <td>{{root.arrival.transport.namePL}} <em class="eng">({{root.arrival.transport.nameEN}})</em></td>
           </tr>
         </tbody>
       </table>
 
       <div class="delegation-time">
         Czas trwania <em class="eng">(Duration)</em>:
-        <span>Pełnych dni <em class="eng">(Full days)</em>: {{root.days.fullDays}}</span>
-        <span>Godzin <em class="eng">(hours)</em>: {{root.days.hours | number:0}}</span>
-        <span>Minut <em class="eng">(mins)</em>: {{root.days.minutes | number:0}}</span>
+        <span>Pełnych dni <em class="eng">(Full days)</em>: <b>{{root.days.fullDays}}</b></span>,
+        <span>Godzin <em class="eng">(hours)</em>: <b>{{root.days.hours | number:0}}</b></span>,
+        <span>Minut <em class="eng">(mins)</em>: <b>{{root.days.minutes | number:0}}</b></span>
       </div>
 
       <table class="table table-condensed table-bordered">
@@ -154,7 +156,7 @@
         <div class="row">
           <div class="col-xs-4 col-xs-offset-2">
             <div><b>{{root.submitDate | date:'yyyy-MM-dd'}}</b></div>
-            <div>Data rozliczenia <em class="eng">(Submit date)</em></div>
+            <div>Data rozliczenia <br/><em class="eng">(Submit date)</em></div>
           </div>
           <div class="col-xs-3">
             <div>....................................</div>

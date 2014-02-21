@@ -40,6 +40,8 @@ em.eng { font-size: 80%; font-weight: normal; }
 @media print {
   .dl-horizontal dt {
     float: left;
-    width: 160px;
+    width: 200px;
+    text-align: right;
   }
+  .dl-horizontal dd { margin-left: 220px; }
 }
