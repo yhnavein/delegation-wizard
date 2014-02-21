@@ -29,17 +29,17 @@
       <table class="table table-condensed table-bordered">
         <thead>
           <tr>
-            <th colspan="3">WYJAZD</th>
-            <th colspan="3">PRZYJAZD</th>
-            <th rowspan="2" width="120px" style="text-align: center;">Środek lokomocji</th>
+            <th colspan="3">WYJAZD <em class="eng">(Departure)</em></th>
+            <th colspan="3">PRZYJAZD <em class="eng">(Arrival)</em></th>
+            <th rowspan="2" width="120px" style="text-align: center;">Środek lokomocji <em class="eng">(Transport)</em></th>
           </tr>
           <tr>
-            <th>Miejscowość</th>
-            <th>Data</th>
-            <th>Godzina</th>
-            <th>Miejscowość</th>
-            <th>Data</th>
-            <th>Godzina</th>
+            <th>Miejscowość <em class="eng">(City)</em></th>
+            <th>Data <em class="eng">(Date)</em></th>
+            <th>Godzina <em class="eng">(Time)</em></th>
+            <th>Miejscowość <em class="eng">(City)</em></th>
+            <th>Data <em class="eng">(Date)</em></th>
+            <th>Godzina <em class="eng">(Time)</em></th>
           </tr>
         </thead>
         <tbody>
@@ -65,10 +65,10 @@
       </table>
 
       <div class="delegation-time">
-        Czas trwania:
-        <span>Pełnych dni: {{root.days.fullDays}}</span>
-        <span>Godzin: {{root.days.hours | number:0}}</span>
-        <span>Minut: {{root.days.minutes | number:0}}</span>
+        Czas trwania <em class="eng">(Duration)</em>:
+        <span>Pełnych dni <em class="eng">(Full days)</em>: {{root.days.fullDays}}</span>
+        <span>Godzin <em class="eng">(hours)</em>: {{root.days.hours | number:0}}</span>
+        <span>Minut <em class="eng">(mins)</em>: {{root.days.minutes | number:0}}</span>
       </div>
 
       <table class="table table-condensed table-bordered">
@@ -77,9 +77,9 @@
             <th></th>
             <th>PLN</th>
             <th>{{root.country.currency}}</th>
-            <th>kurs rozliczenia</th>
-            <th>Razem PLN</th>
-            <th>Adnotacje</th>
+            <th><em class="eng">(exchange rate)</em> <br/> kurs rozliczenia </th>
+            <th>Razem PLN <em class="eng">(sum in PLN)</em></th>
+            <th>Adnotacje <em class="eng">(Annotations)</em></th>
           </tr>
         </thead>
         <tbody>
@@ -102,7 +102,7 @@
           </tr>
 
           <tr class="summary ">
-            <td>RAZEM wydatki (all expenses)</td>
+            <td>RAZEM wydatki <em class="eng">(all expenses)</em></td>
             <td class="price"></td>
             <td class="price"></td>
             <td class="price"></td>
@@ -129,9 +129,24 @@
       </table>
 
       <div class="row">
-        <div class="col-xs-6 col-xs-offset-4">
+        <div class="col-xs-8 col-xs-offset-4">
           {{root.exchangeRate.multiplier}} {{root.country.currency}} = <b>{{root.exchangeRate.averageRate | number:4}}</b> PLN
-          - kurs średni NBP z dn. <b>{{root.exchangeRate.submitDate}}</b>
+          - <em class="eng">(average exchange rate as for)</em> kurs średni NBP z dn. <b>{{root.exchangeRate.submitDate}}</b>
+        </div>
+      </div>
+
+      <div class="some-statement">
+        <div ng-show="breakfastDays.length > 0">
+          Oświadczam, że miał(em/am) zapewnione śniadanie w hotelu w nast. dni:
+          <span ng-repeat="day in breakfastDays">{{day | date:'EEEE'}}, </span>
+        </div>
+        <div ng-show="dinnerDays.length > 0">
+          Oświadczam, że miał(em/am) zapewniony obiad w nast. dni:
+          <span ng-repeat="day in dinnerDays">{{day | date:'EEEE'}}, </span>
+        </div>
+        <div ng-show="supperDays.length > 0">
+          Oświadczam, że miał(em/am) zapewnioną kolację w nast. dni:
+          <span ng-repeat="day in supperDays">{{day | date:'EEEE'}}, </span>
         </div>
       </div>
 
@@ -139,11 +154,15 @@
         <div class="row">
           <div class="col-xs-4 col-xs-offset-2">
             <div><b>{{root.submitDate | date:'yyyy-MM-dd'}}</b></div>
-            <div>Data rozliczenia</div>
+            <div>Data rozliczenia <em class="eng">(Submit date)</em></div>
           </div>
-          <div class="col-xs-6">
+          <div class="col-xs-3">
             <div>....................................</div>
-            <div>Podpis delegowanego</div>
+            <div>Podpis delegowanego <br/><em class="eng">(Employee's signature)</em></div>
+          </div>
+          <div class="col-xs-3">
+            <div>....................................</div>
+            <div>Podpis przełożonego <br/><em class="eng">(Manager's signature)</em></div>
           </div>
         </div>
       </div>

@@ -24,6 +24,16 @@ app.controller('printCtrl', function($scope) {
     return newDate;
   };
 
+  self.extractDates = function(func) {
+    var dates = $scope.root.delegationDays.findAll(func);
+    if(typeof dates === 'undefined' || dates === null)
+      return [];
+
+    return dates.map(function(el) {
+      return new Date( el.date );
+    });
+  };
+
   self.prepareData = function() {
 
     var departureEnd = self.fixDate($scope.root.departure.date, $scope.root.departure.time);
@@ -33,6 +43,16 @@ app.controller('printCtrl', function($scope) {
     arrivalStart.setTime(arrivalStart.getTime() - $scope.root.arrival.duration * 60 * 60 * 1000);
     $scope.root.departureEnd = departureEnd;
     $scope.root.arrivalStart = arrivalStart;
+
+    $scope.breakfastDays = self.extractDates(function(el) {
+      return el.provBreakfast === true;
+    });
+    $scope.dinnerDays = self.extractDates(function(el) {
+      return el.provDinner === true;
+    });
+    $scope.supperDays = self.extractDates(function(el) {
+      return el.provSupper === true;
+    });
   };
 
   self.init = function() {

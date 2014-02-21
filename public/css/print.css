@@ -35,6 +35,8 @@ h1.title {
 .table td.price { text-align: right; }
 .table thead th { text-align: center; }
 
+em.eng { font-size: 80%; font-weight: normal; }
+
 @media print {
   .dl-horizontal dt {
     float: left;
