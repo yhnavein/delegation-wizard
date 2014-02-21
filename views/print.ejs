@@ -85,36 +85,36 @@
         <tbody>
           <tr>
             <td>Diety (food)</td>
-            <td>{{0 | number:2}} zł</td>
-            <td>{{root.delegationCost | number:2}} {{root.country.currency}}</td>
-            <td>{{root.exchangeRate.averageRate | number:4}}</td>
-            <td>{{root.delegationCost * root.exchangeRate.averageRate | number:2}} zł</td>
+            <td class="price">{{0 | number:2}} zł</td>
+            <td class="price">{{root.delegationCost | number:2}} {{root.country.currency}}</td>
+            <td class="price">{{root.exchangeRate.averageRate | number:4}}</td>
+            <td class="price">{{root.delegationCost * root.exchangeRate.averageRate | number:2}} zł</td>
             <td></td>
           </tr>
 
           <tr ng-repeat="exp in root.expenses">
             <td>{{exp.name}}</td>
-            <td>{{(exp.currency == 'PLN' ? exp.price : 0) | number:2}} zł</td>
-            <td>{{(exp.currency != 'PLN' ? exp.price : 0) | number:2}} {{(exp.currency == 'PLN' ? root.country.currency : exp.currency)}}</td>
-            <td>{{exp.rate | number:4}}</td>
-            <td>{{exp.plnValue | number:2}} zł</td>
+            <td class="price">{{(exp.currency == 'PLN' ? exp.price : 0) | number:2}} zł</td>
+            <td class="price">{{(exp.currency != 'PLN' ? exp.price : 0) | number:2}} {{(exp.currency == 'PLN' ? root.country.currency : exp.currency)}}</td>
+            <td class="price">{{exp.rate | number:4}}</td>
+            <td class="price">{{exp.plnValue | number:2}} zł</td>
             <td><em>{{exp.desc}}</em></td>
           </tr>
 
           <tr class="summary ">
             <td>RAZEM wydatki (all expenses)</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>{{sumExpenses() | number:2}} zł</td>
+            <td class="price"></td>
+            <td class="price"></td>
+            <td class="price"></td>
+            <td class="price">{{sumExpenses() | number:2}} zł</td>
             <td></td>
           </tr>
           <tr>
             <td>Pobrane zaliczki</td>
-            <td>0 zł</td>
-            <td>0 {{root.country.currency}}</td>
-            <td>{{root.exchangeRate.averageRate | number:4}}</td>
-            <td>0 zł</td>
+            <td class="price">0 zł</td>
+            <td class="price">0 {{root.country.currency}}</td>
+            <td class="price">{{root.exchangeRate.averageRate | number:4}}</td>
+            <td class="price">0 zł</td>
             <td></td>
           </tr>
           <tr class="summary">
@@ -122,18 +122,18 @@
             <td></td>
             <td></td>
             <td></td>
-            <td>{{sumExpenses() | number:2}} zł</td>
+            <td class="price">{{sumExpenses() | number:2}} zł</td>
             <td></td>
           </tr>
         </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="2" style="text-align: right;">{{root.exchangeRate.multiplier}} {{root.country.currency}} =</td>
-            <td>{{root.exchangeRate.averageRate | number:4}} PLN</td>
-            <td colspan="3">- kurs średni NBP z dn. {{root.exchangeRate.submitDate}}</td>
-          </tr>
-        </tfoot>
       </table>
+
+      <div class="row">
+        <div class="col-xs-6 col-xs-offset-4">
+          {{root.exchangeRate.multiplier}} {{root.country.currency}} = <b>{{root.exchangeRate.averageRate | number:4}}</b> PLN
+          - kurs średni NBP z dn. <b>{{root.exchangeRate.submitDate}}</b>
+        </div>
+      </div>
 
       <div class="some-statement">
         <div class="row">

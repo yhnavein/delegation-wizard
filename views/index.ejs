@@ -256,6 +256,10 @@
             </div>
 
             <div class="expense" ng-repeat="exp in root.expenses">
+              <button class="btn btn-danger pull-right" tooltip="<%= __('Remove expense') %>" ng-click="removeExpense(exp)">
+                <i class="icon-trash icon-large"></i>
+              </button>
+
               <div class="row">
                 <div class="col-sm-3">
                   <input type="text" required class="form-control" placeholder="<%= __('Expense name') %>" ng-model="exp.name">

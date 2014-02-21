@@ -76,11 +76,19 @@ input.ng-invalid.ng-dirty {
   border-bottom: 1px solid #efefef;
 }
 
-
 .expenses-group .expense:hover {
   background: #f9f9f9;
   border-bottom: 1px solid #dedede;
 }
+
+.expenses-group .expense .row {
+  padding-right: 56px;
+}
+
+.expenses-group .expense .btn-danger {
+  display: none;
+}
+.expenses-group .expense:hover .btn-danger { display: block; }
 
 .form-control.readonly {
   background: #f1f1f1;

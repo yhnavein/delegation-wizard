@@ -32,6 +32,8 @@ h1.title {
 }
 
 .table tr.summary td { font-weight: bold; text-align: right; }
+.table td.price { text-align: right; }
+.table thead th { text-align: center; }
 
 @media print {
   .dl-horizontal dt {

@@ -192,6 +192,13 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     });
   };
 
+  $scope.removeExpense = function(exp) {
+    if(typeof $scope.root.expenses === 'undefined')
+      return;
+
+    $scope.root.expenses.remove(exp);
+  };
+
   $scope.refreshCurrencyRate = function() {
     if(typeof $scope.root.country === 'undefined' || $scope.root.country === null)
       return;

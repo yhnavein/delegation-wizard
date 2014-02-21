@@ -51,5 +51,6 @@
 	"Use default rate": "Użyj domyślnej wartości kursu",
 	"Date and time of departure from last Polish city": "Czas opuszczenia ostatniego polskiego miasta na trasie podróży służbowej",
 	"Date and time of arrival to first Polish city": "Czas przybycia do pierwszego polskiego miasta na trasie podróży służbowej",
-	"This tool is dedicated for calculating abroad delegations. You can't use it for domestic delegations! It may change hovewer in future" : "To narzędzie służy do wyliczania jedynie delegacji zagranicznej! Podróż krajowa jest rozliczana na zupełnie innych zasadach - proszę tu używać innych narzędzi"
+	"This tool is dedicated for calculating abroad delegations. You can't use it for domestic delegations! It may change hovewer in future": "To narzędzie służy do wyliczania jedynie delegacji zagranicznej! Podróż krajowa jest rozliczana na zupełnie innych zasadach - proszę tu używać innych narzędzi",
+	"Remove expense": "Usuń wydatek"
 }
