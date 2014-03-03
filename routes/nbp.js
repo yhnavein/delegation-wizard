@@ -2,6 +2,7 @@ var http = require("http"),
     moment = require("moment"),
     zlib = require("zlib"),
     sugar = require("sugar"),
+    nbpDirCache = require("../nbpDirCache")(),
     xml2json = require("xml2json");
 
 var options = {
@@ -46,6 +47,20 @@ var makeRequest = function(path, success) {
   http.request(options, callback).end();
 };
 
+var makeDirRequest = function(successCallback) {
+  var cache = nbpDirCache.get(Date.now());
+
+  if(cache !== null){
+    successCallback(cache);
+    return;
+  }
+
+  makeRequest('/kursy/xml/dir.txt', function(data) {
+    nbpDirCache.set(Date.now(), data);
+    successCallback(data);
+  });
+};
+
 var findProperExchangeRateTable = function(data, date) {
   var lines = data.split('\n');
   var dateNo;
@@ -68,7 +83,7 @@ exports.getPLNRate = function(req, res){
   var day = moment(req.query.date); //date when document will be submitted
   var nbpDate = parseInt(day.format("YYMMDD"), 10);
 
-  makeRequest('/kursy/xml/dir.txt', function(data) {
+  makeDirRequest(function(data) {
     var tableName = findProperExchangeRateTable(data, nbpDate);
     if(tableName === null || typeof tableName === 'undefined'){
       res.send(400, 'We can\'t find proper exchange rates!');
