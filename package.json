@@ -12,6 +12,7 @@
     "moment": "2.5",
     "sugar": "*",
     "xml2json" : "*",
-    "i18n": "*"
+    "i18n": "*",
+    "mongojs": "*"
   }
 }
