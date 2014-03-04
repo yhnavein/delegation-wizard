@@ -1,4 +1,4 @@
-var nbpDirCache = module.exports = function () {
+var nbpIndexCache = module.exports = function () {
   var dir = null;
   var prevDate = null;
 

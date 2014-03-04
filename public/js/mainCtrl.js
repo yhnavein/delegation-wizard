@@ -210,6 +210,8 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     if(typeof date === 'undefined' || date === null)
       return;
 
+    date = $filter('date')(date, 'yyyy-MM-dd');
+
     if(travelTime && !($scope.root.departure.duration || $scope.root.arrival.duration)) {
       $scope.root.departure.duration = travelTime;
       $scope.root.arrival.duration = travelTime;
