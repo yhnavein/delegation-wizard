@@ -12,6 +12,7 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
   ];
 
   $scope.step = 1;
+  $scope.showSpinner = false;
 
   //putting some default values
   $scope.root.submitDate = $filter('date')(new Date(), 'yyyy-MM-dd');
@@ -217,8 +218,10 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
       $scope.root.arrival.duration = travelTime;
     }
 
+    $scope.showSpinner = true;
     $http.get('/nbp/getPLNRate?currency=' + curr + '&date=' + date).success(function(data) {
       $scope.root.exchangeRate = data;
+      $scope.showSpinner = false;
     });
   };
 

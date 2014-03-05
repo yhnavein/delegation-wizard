@@ -92,19 +92,28 @@
                   <div class="col-sm-6">
                     <input type="text" class="form-control" id="submit-date" placeholder="<%= __('yyyy-mm-dd') %>" datepicker-popup="yyyy-MM-dd" ng-model="root.submitDate" datepicker-options="dateOptions" ng-required="true"  ng-change="refreshCurrencyRate()" />
                   </div>
+                  <div class="col-sm-6" ng-show="showSpinner">
+                    <div class="spinner"><i class="icon-refresh icon-spin icon-2x"></i></div>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-3 control-label"><%= __('Exchange rate date') %></label>
               <div class="col-sm-9">
-                <strong disabled class="form-control">{{root.exchangeRate.submitDate}}</strong>
+                <strong class="form-control-value">{{root.exchangeRate.submitDate}}</strong>
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-3 control-label"><%= __('Exchange rate') %></label>
               <div class="col-sm-9">
-                <strong disabled class="form-control">{{root.exchangeRate.averageRate | number:4}}</strong>
+                <strong class="form-control-value">{{root.exchangeRate.averageRate | number:4}}</strong>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><%= __('Daily diem') %></label>
+              <div class="col-sm-9">
+                <strong class="form-control-value">{{root.country.diem | number:2}} {{root.country.currency}}</strong>
               </div>
             </div>
           </div>

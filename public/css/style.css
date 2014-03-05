@@ -109,3 +109,15 @@ label.block {
   font-size: 13px;
   font-weight: normal;
 }
+
+.form-group .form-control-value {
+  display: block;
+  width: 100%;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #555;
+  vertical-align: middle;
+}
+
+.spinner { color: #18618C; }
