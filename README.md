@@ -23,10 +23,11 @@ What you need to run this app succesfully
 * **[python-2.*](www.python.org/download/)** - is needed by one of dependent libraries
 * **[bower](http://bower.io/)** - for managing front-end packages
 * **[pm2](https://github.com/Unitech/pm2)** - not necessary for development, but essential if you want to use this site on Live server
+* **[mongodb](http://www.mongodb.org/)** - it's used for storing exchange rates.
 
 ## Starting and initial configuration
 
-I am assuming Linux as a standard environment, but with proper modifications, application is working also on Windows without problems
+I am assuming Linux as a standard environment, but with proper modifications, application is working also on Windows without bigger problems
 
 ```
 git clone https://bitbucket.org/puredev/delegation-wizard.git
@@ -36,7 +37,7 @@ cd public/ && bower install -d && cd ../
 node app
 ```
 
-After that open http://localhost:3001/ using your favourite browser.
+After that open http://localhost:3001/ using your favourite browser (not IE).
 
 
 ## Licence
