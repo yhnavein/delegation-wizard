@@ -36,13 +36,19 @@ var processExchangeRates = function(err, data, currency, res, date) {
     return;
   }
 
-  exchangeRates.save({
-    json: data,
-    date: date.format("YYMMDD")
-  }, function(err, saved) {
-    console.log('ratesJson: ' + data);
+  //we want to ensure that we will store in our DB only those proper and archived exchange rates
+  //this will also ensure that no future exchange rates will be stored
+  if(moment.duration(new Date() - date).asHours() > 48) {
+    exchangeRates.save({
+      json: data,
+      date: date.format("YYMMDD")
+    }, function(err, saved) {
+      console.log('Saved exchange rates for date: ' + date.format("YYYY-MM-DD"));
+      processResponse(data, currency, res);
+    });
+  } else {
     processResponse(data, currency, res);
-  });
+  }
 };
 
 exports.getPLNRate = function(req, res){
@@ -51,7 +57,7 @@ exports.getPLNRate = function(req, res){
 
   exchangeRates.findOne({date: day.format("YYMMDD")}, function(err, data) {
     if( err || !data)
-      console.log("No records returned!");
+      console.log("Exchange rates for " + day.format("YYMMDD") + " were not found in our internal DB!");
     else {
       processResponse(data.json, currency, res);
       return;
