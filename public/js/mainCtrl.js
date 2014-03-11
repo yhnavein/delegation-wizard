@@ -13,6 +13,7 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
 
   $scope.step = 1;
   $scope.showSpinner = false;
+  $scope.defaults = { provBreakfast : true };
 
   //putting some default values
   $scope.root.submitDate = $filter('date')(new Date(), 'yyyy-MM-dd');
@@ -179,6 +180,15 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
       }
     };
   })();
+
+  $scope.changeProvMeal = function (mealName) {
+    var keyName = 'prov' + mealName;
+    var newValue = $scope.defaults[keyName];
+
+    for (var i = 0; i < $scope.root.delegationDays.length; i++) {
+      $scope.root.delegationDays[i][keyName] = newValue;
+    }
+  };
 
   $scope.changeCurrency = function(exp, curr){
     exp.currency = curr;

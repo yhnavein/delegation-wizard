@@ -210,9 +210,18 @@
               <tr>
                 <th><%= __('Delegation day') %></th>
                 <th></th>
-                <th><%= __('Breakfast') %></th>
-                <th><%= __('Dinner') %></th>
-                <th><%= __('Supper') %></th>
+                <th>
+                  <input type="checkbox" ng-model="defaults.provBreakfast" ng-change="changeProvMeal('Breakfast')" />
+                  <%= __('Breakfast') %>
+                </th>
+                <th>
+                  <input type="checkbox" ng-model="defaults.provDinner" ng-change="changeProvMeal('Dinner')" />
+                  <%= __('Dinner') %>
+                </th>
+                <th>
+                  <input type="checkbox" ng-model="defaults.provSupper" ng-change="changeProvMeal('Supper')" />
+                  <%= __('Supper') %>
+                </th>
               </tr>
             </thead>
             <tbody>
