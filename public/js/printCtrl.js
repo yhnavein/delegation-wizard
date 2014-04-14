@@ -54,7 +54,7 @@ app.controller('printCtrl', function($scope) {
       return el.provSupper === true;
     });
 
-    $scope.root.days.hours = Math.floor($scope.days.hours);
+    $scope.root.days.hours = Math.floor($scope.root.days.hours);
   };
 
   self.init = function() {
