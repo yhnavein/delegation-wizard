@@ -53,6 +53,8 @@ app.controller('printCtrl', function($scope) {
     $scope.supperDays = self.extractDates(function(el) {
       return el.provSupper === true;
     });
+    
+    $scope.days.hours = Math.floor($scope.days.hours);
   };
 
   self.init = function() {
