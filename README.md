@@ -1,6 +1,8 @@
 Delegation Wizard
 =====================
 
+[![Build Status](https://travis-ci.org/yhnavein/delegation-wizard.svg?branch=master)](https://travis-ci.org/yhnavein/delegation-wizard)
+
 It's an application which helps prepare a document with Delegation Summary, which is quite useful
 if you are having many abroad business trips over year and you are a employee registered in Poland.
 
