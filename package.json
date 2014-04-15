@@ -4,15 +4,20 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "test" : "jasmine-node test/js/*Spec.js"
+    "test": "karma start test/js/karma.config.js test/js/mainCtrlSpec.js"
   },
   "dependencies": {
     "express": "3.4.8",
     "ejs": "*",
     "moment": "2.5",
     "sugar": "*",
-    "xml2json" : "*",
+    "xml2json": "*",
     "i18n": "*",
     "mongojs": "*"
+  },
+  "devDependencies": {
+    "karma": "~0.12.0",
+    "karma-jasmine": "~0.1.0",
+    "karma-chrome-launcher": "^0.1.3"
   }
 }
