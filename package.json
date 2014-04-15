@@ -16,8 +16,8 @@
     "mongojs": "*"
   },
   "devDependencies": {
-    "karma": "~0.12.0",
+    "karma": "0.*",
     "karma-jasmine": "~0.1.0",
-    "karma-chrome-launcher": "^0.1.3"
+    "karma-chrome-launcher": "0.1.3"
   }
 }
