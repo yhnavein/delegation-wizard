@@ -3,3 +3,5 @@ node_js:
     - "0.10"
 before_script:
     - "npm i -g karma-cli"
+    - "npm i -g bower"
+    - "cd public && bower install -d && cd ../"
