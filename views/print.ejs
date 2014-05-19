@@ -7,6 +7,11 @@
     <link rel='stylesheet' href='/css/print.css' media="all" />
   </head>
   <body ng-controller="printCtrl">
+
+    <div class="alert alert-info pull-right not-printable">
+      <%= __('If form is correct, please just print this web page') %>
+    </div>
+
     <div class="container theme-showcase container-a4">
       <h1 class="title">
         Rozliczenie delegacji zagranicznej NR {{root.delegationNo}}

@@ -44,4 +44,6 @@ em.eng { font-size: 80%; font-weight: normal; }
     text-align: right;
   }
   .dl-horizontal dd { margin-left: 220px; }
+
+  .not-printable { display: none; }
 }
