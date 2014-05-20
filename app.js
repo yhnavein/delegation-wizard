@@ -10,9 +10,9 @@ var http = require('http');
 var path = require('path');
 var i18n = require('./i18n');
 
-if (process.env.NODE_ENV !== 'production'){
-  require('longjohn');
-}
+// if (process.env.NODE_ENV !== 'production'){
+//   require('longjohn');
+// }
 
 var app = express();
 

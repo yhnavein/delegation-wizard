@@ -34,7 +34,7 @@ I am assuming Linux as a standard environment, but with proper modifications, ap
 ```
 git clone https://bitbucket.org/puredev/delegation-wizard.git
 cd delegations
-npm install -d
+npm install -d # -msvs_version=2013 if you have only VS2013 installed
 cd public/ && bower install -d && cd ../
 node app
 ```

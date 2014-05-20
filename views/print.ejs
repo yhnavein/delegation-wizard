@@ -7,6 +7,15 @@
     <link rel='stylesheet' href='/css/print.css' media="all" />
   </head>
   <body ng-controller="printCtrl">
+
+    <div class="alert-container pull-right">
+      <div class="alert alert-info not-printable">
+        <span class="glyphicon glyphicon-print"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="margin-left: 16px;">&times;</button>
+        <%= __('If form is correct, please just print this web page') %>
+      </div>
+    </div>
+
     <div class="container theme-showcase container-a4">
       <h1 class="title">
         Rozliczenie delegacji zagranicznej NR {{root.delegationNo}}
@@ -86,7 +95,7 @@
         </thead>
         <tbody>
           <tr>
-            <td>Diety (food)</td>
+            <td>Diety (subsistence allowance)</td>
             <td class="price">{{0 | number:2}} zł</td>
             <td class="price">{{root.delegationCost | number:2}} {{root.country.currency}}</td>
             <td class="price">{{root.exchangeRate.averageRate | number:4}}</td>
@@ -170,7 +179,7 @@
       </div>
     </div>
 
-    <script type="text/javascript" src="/bower_components/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/bower_components/sugar/release/sugar.min.js"></script>
     <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
