@@ -31,6 +31,14 @@ h1.title {
   margin-top: 24px 0 12px;
 }
 
+.alert-container {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+}
+.alert-container .alert { vertical-align: top; }
+.alert-container .glyphicon { font-size: 18px; margin-right: 8px; }
+
 .table tr.summary td { font-weight: bold; text-align: right; }
 .table td.price { text-align: right; }
 .table thead th { text-align: center; }
