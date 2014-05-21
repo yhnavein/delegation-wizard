@@ -10,7 +10,7 @@
         "angular-i18n" : "1.2.*",
         "jquery": "1.*",
         "font-awesome": "3.*",
-        "bootstrap": "3.0.3",
+        "bootstrap": "3.*",
         "angular-bootstrap": "0.10.0",
         "sugar": "*",
         "angular-ui-utils": "0.1.0"
