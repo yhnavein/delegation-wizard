@@ -7,7 +7,7 @@
     <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.min.css' />
     <link rel='stylesheet' href='/css/style.css' />
   </head>
-  <body ng-controller="mainCtrl">
+  <body ng-controller="mainCtrl" >
     <div class="navbar navbar-inverse navbar-patterned navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -38,7 +38,7 @@
         </div><!--/.nav-collapse -->
       </div>
     </div>
-    <div class="container theme-showcase">
+    <div class="container theme-showcase" ng-cloak>
 
       <form novalidate class="form-horizontal" role="form">
         <fieldset ng-show="step === 1" class="row" ng-form="step1Form">
@@ -340,7 +340,7 @@
       </div>
     </div>
 
-    <script type="text/javascript" src="/bower_components/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/bower_components/sugar/release/sugar.min.js"></script>
     <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
