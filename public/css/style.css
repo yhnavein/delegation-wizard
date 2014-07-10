@@ -2,6 +2,8 @@ body {
   padding-top: 100px;
 }
 
+[ng-cloak], .ng-cloak { display: none; }
+
 #footer {
   margin-top: 120px;
   padding: 24px;
@@ -15,7 +17,7 @@ body {
 }
 
 .navbar-patterned .navbar-brand {
-  padding: 28px 15px;
+  padding: 28px 15px 52px;
   font-size: 22px;
   line-height: 24px;
   -webkit-transition: all 0.4s ease-in-out;

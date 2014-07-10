@@ -33,7 +33,7 @@
           <a class="navbar-brand" href="/" ng-click="changeStep(1)"><b><%= title %></b></a>
         </div>
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right" ng-cloak>
             <li>
               <div class="steps">
                 <button class="step btn btn-default" ng-click="changeStep(1)"><%= __('Step') %> 1</button> <i class="icon-caret-right icon-light"></i>
@@ -340,7 +340,7 @@
 
     </div>
 
-    <div id="footer">
+    <div id="footer" ng-cloak>
       <div class="container">
         <button class="btn btn-lg btn-success pull-right" ng-show="step === 3"  ng-click="goToPrint()" ng-disabled="!isValid(step1Form, step3Form)">
           <%= __('Print delegation form') %> <i class="icon-caret-right"></i>
