@@ -35,6 +35,7 @@ h1.title {
   position: absolute;
   top: 32px;
   right: 32px;
+  left: 32px;
 }
 .alert-container .alert { vertical-align: top; }
 .alert-container .glyphicon { font-size: 18px; margin-right: 8px; }

@@ -8,8 +8,9 @@
   </head>
   <body ng-controller="printCtrl">
 
-    <div class="alert-container pull-right">
-      <div class="alert alert-info not-printable">
+    <div class="alert-container not-printable">
+    <a href="/" class="btn btn-sm btn-default pull-left" data-title="<%= __('I\'ve made a boo boo! Go back and fix it.') %>" bs-tooltip data-placement="right" data-type="warning"><span class="glyphicon glyphicon-hand-left"></span></a>
+      <div class="alert alert-info pull-right">
         <span class="glyphicon glyphicon-print"></span>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="margin-left: 16px;">&times;</button>
         <%= __('If form is correct, please just print this web page') %>
@@ -184,6 +185,8 @@
     <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="/bower_components/angular-i18n/angular-locale_pl.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-strap/dist/angular-strap.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
     <script type="text/javascript" src="/js/printCtrl.js"></script>
   </body>
 </html>

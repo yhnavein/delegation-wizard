@@ -1,5 +1,5 @@
 /*global console:false, angular:false */
-var app = angular.module('delegations', []);
+var app = angular.module('delegations', ['mgcrea.ngStrap']);
 
 app.controller('printCtrl', function($scope) {
   var self = this;

@@ -54,5 +54,6 @@
 	"This tool is dedicated for calculating abroad delegations. You can't use it for domestic delegations! It may change hovewer in future": "To narzędzie służy do wyliczania jedynie delegacji zagranicznej! Podróż krajowa jest rozliczana na zupełnie innych zasadach - proszę tu używać innych narzędzi",
 	"Remove expense": "Usuń wydatek",
 	"Daily diem": "Dzienna dieta",
-	"If form is correct, please just print this web page" : "Jeśli dane są poprawne, to proszę jedynie wydrukować tę stronę (Ctrl+P)"
+	"If form is correct, please just print this web page": "Wygląda w porządku? \nTo drukuj stronę! (Ctrl+P)",
+	"I've made a boo boo! Go back and fix it.": "Kliknij aby powrócić do poprzedniego formularza"
 }
