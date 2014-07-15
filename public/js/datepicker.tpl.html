@@ -1,0 +1,25 @@
+<div class="datepicker datepicker-dropdown dropdown-menu" ng-class="'datepicker-mode-' + $mode" style="max-width: 320px;">
+<table class="table-condensed" style="height: 100%; width: 100%;">
+  <thead>
+    <tr class="controls">
+      <th class="prev" ng-click="$selectPane(-1)">
+        <i class="{{$iconLeft}}"></i>
+      </th>
+      <th colspan="{{ rows[0].length - 2 }}" ng-click="$toggleMode()">
+        <strong ng-bind="title"></strong>
+      </th>
+      <th class="next" ng-click="$selectPane(+1)">
+        <i class="{{$iconRight}}"></i>
+      </th>
+    </tr>
+    <tr class="week-days" ng-show="showLabels" ng-bind-html="labels"></tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="(i, row) in rows">
+      <td class="day" ng-class="{'old': el.muted, 'active': el.selected}" ng-click="$select(el.date)" ng-disabled="el.disabled" ng-repeat="(j, el) in row">
+        {{el.label}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>

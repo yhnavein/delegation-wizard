@@ -1,9 +1,29 @@
 /*global console:false, angular:false */
-var app = angular.module('delegations', ['ui.bootstrap']);
+var app = angular.module('delegations', ['mgcrea.ngStrap']);
 
-app.controller('mainCtrl', function($scope, $http, $filter) {
+app.config(function($datepickerProvider) {
+  angular.extend($datepickerProvider.defaults, {
+    dateFormat: 'yyyy-MM-dd',
+    autoclose: true,
+    template: "js/datepicker.tpl.html",
+    startWeek: 1
+  });
+
+});
+
+app.controller('mainCtrl', function($scope, $http, $filter, $locale) {
   var self = this;
   $scope.root = { departure: {}, arrival: {} };
+
+  $locale.DATETIME_FORMATS.SHORTDAY = [
+    "N",
+    "pn",
+    "wt",
+    "\u015br",
+    "cz",
+    "pt",
+    "so"
+  ];
 
   $scope.transportWays = [
     { nameEN: 'Train', namePL: 'Pociąg' },
