@@ -107,7 +107,7 @@ label.block {
   width: 100%;
 }
 
-.popover-inner .popover-content {
+.popover .popover-content {
   font-size: 13px;
   font-weight: normal;
 }

@@ -6,14 +6,11 @@
     "angular-resource": "latest",
     "angular-cookies": "latest",
     "angular-mocks": "latest",
-    "angular-route": "latest",
     "angular-i18n": "latest",
     "jquery": "1.*",
     "font-awesome": "3.*",
     "bootstrap": "3.*",
-    "angular-bootstrap": "0.10.0",
     "sugar": "*",
-    "angular-ui-utils": "0.1.0",
     "angular-strap": "~2.0.3"
   }
 }
