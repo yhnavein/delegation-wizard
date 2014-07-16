@@ -34,15 +34,32 @@ app.controller('printCtrl', function($scope) {
     });
   };
 
+  self.daysDiff = function(date1, date2) {
+    if(date1 >= date2)
+      return { fullDays: 0, hours: 0, minutes: 0};
+
+    var fullHours = Math.abs( date1 - date2 ) / (1000 * 60 * 60);
+    var days = Math.floor( fullHours / 24 );
+
+    return {
+      fullDays: days,
+      hours: Math.floor(fullHours - days * 24),
+      minutes: (fullHours - Math.floor( fullHours )) * 60
+    };
+  };
+
   self.prepareData = function() {
 
     var departureEnd = self.fixDate($scope.root.departure.date, $scope.root.departure.time);
     var arrivalStart = self.fixDate($scope.root.arrival.date, $scope.root.arrival.time);
 
+    $scope.root.days = self.daysDiff(departureEnd.clone(), arrivalStart.clone());
+
     departureEnd.setTime(departureEnd.getTime() + $scope.root.departure.duration * 60 * 60 * 1000);
     arrivalStart.setTime(arrivalStart.getTime() - $scope.root.arrival.duration * 60 * 60 * 1000);
     $scope.root.departureEnd = departureEnd;
     $scope.root.arrivalStart = arrivalStart;
+
 
     $scope.breakfastDays = self.extractDates(function(el) {
       return el.provBreakfast === true;
@@ -53,8 +70,6 @@ app.controller('printCtrl', function($scope) {
     $scope.supperDays = self.extractDates(function(el) {
       return el.provSupper === true;
     });
-
-    $scope.root.days.hours = Math.floor($scope.root.days.hours);
   };
 
   self.init = function() {

@@ -307,11 +307,6 @@ app.controller('mainCtrl', function($scope, $http, $filter, $locale) {
     $scope.root.delegationDays = self.prepareDelegationDays(dateFrom, dateTo);
   };
 
-  $scope.dateOptions = {
-    startingDay: 1,
-    showWeeks: false
-  };
-
   $scope.goToPrint = function() {
     $scope.root.delegationCost = $scope.delegationCost().round(2);
     self.prepareExpenses($scope.root);
