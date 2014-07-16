@@ -4,7 +4,7 @@
 describe('counting days properly', function(){
     var scope, ctrl, httpBackend;
 
-    beforeEach(module('ui.bootstrap'));
+    beforeEach(module('mgcrea.ngStrap'));
     beforeEach(module('delegations'));
 
     beforeEach(inject(function($rootScope, $controller, $httpBackend, $http) {
@@ -187,7 +187,7 @@ describe('calculating food costs (for substracing)', function(){
         day.provDinner = true;
         day.provSupper = true;
         var foodCost = ctrl.foodCostToSubstract(days, scope.country.diem);
-        expect(foodCost).toEqual(35 * 0.5 * 0.75);
+        expect(foodCost).toEqual(35 * 0.75);
     });
 
     it('exactly 24 hours abroad, one breakfast, one dinner', function() {
@@ -199,6 +199,41 @@ describe('calculating food costs (for substracing)', function(){
         day.provSupper = false;
         var foodCost = ctrl.foodCostToSubstract(days, scope.country.diem);
         expect(foodCost).toEqual(15.75);
+    });
+
+    it('1 and 1/3 days abroad, one breakfast, one dinner, one supper (first accountancy case)', function() {
+        var days = ctrl.prepareDelegationDays(new Date(2013,0,2,19,0), new Date(2013,0,3,23,0));
+
+        var day = days.first();
+        day.provBreakfast = false;
+        day.provDinner = true;
+        day.provSupper = true;
+        day = days.last();
+        day.provBreakfast = true;
+        day.provDinner = false;
+        day.provSupper = false;
+        var foodCost = ctrl.foodCostToSubstract(days, scope.country.diem);
+        expect(foodCost).toEqual(26.25);
+    });
+
+    it('2 and 1/3 days abroad, two breakfasts (second accountancy case)', function() {
+        var days = ctrl.prepareDelegationDays(new Date(2013,12,16,18,25), new Date(2013,12,19,0,30));
+
+        var day = days.first();
+        day.provBreakfast = true;
+        day.provDinner = false;
+        day.provSupper = false;
+        day = days[1];
+        day.provBreakfast = false;
+        day.provDinner = false;
+        day.provSupper = false;
+        day = days.last();
+        day.provBreakfast = true;
+        day.provDinner = false;
+        day.provSupper = false;
+
+        var foodCost = ctrl.foodCostToSubstract(days, scope.country.diem);
+        expect(foodCost).toEqual(10.50);
     });
 
     it('2+ days, two breakfasts, one dinner', function() {
@@ -217,7 +252,7 @@ describe('calculating food costs (for substracing)', function(){
         day.provDinner = false;
         day.provSupper = false;
         var foodCost = ctrl.foodCostToSubstract(days, scope.country.diem);
-        expect(foodCost).toEqual(18.375);
+        expect(foodCost).toEqual(21);
     });
 
 });
@@ -254,7 +289,7 @@ describe('calculating diem costs', function(){
         day.provDinner = true;
         day.provSupper = true;
 
-        expect(scope.delegationCost()).toEqual(35 * 0.5 * 0.25);
+        expect(scope.delegationCost()).toEqual(35 * 0.5 - 35 * 0.75);
     });
 
 });

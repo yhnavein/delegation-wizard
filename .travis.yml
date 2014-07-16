@@ -4,4 +4,4 @@ node_js:
 before_script:
     - "npm i -g karma-cli"
     - "npm i -g bower"
-    - "cd public && bower install -d && cd ../"
+    - "bower install -d"

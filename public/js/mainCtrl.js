@@ -1,9 +1,29 @@
 /*global console:false, angular:false */
-var app = angular.module('delegations', ['ui.bootstrap']);
+var app = angular.module('delegations', ['mgcrea.ngStrap']);
 
-app.controller('mainCtrl', function($scope, $http, $filter) {
+app.config(function($datepickerProvider) {
+  angular.extend($datepickerProvider.defaults, {
+    dateFormat: 'yyyy-MM-dd',
+    autoclose: true,
+    template: "js/datepicker.tpl.html",
+    startWeek: 1
+  });
+
+});
+
+app.controller('mainCtrl', function($scope, $http, $filter, $locale) {
   var self = this;
   $scope.root = { departure: {}, arrival: {} };
+
+  $locale.DATETIME_FORMATS.SHORTDAY = [
+    "N",
+    "pn",
+    "wt",
+    "\u015br",
+    "cz",
+    "pt",
+    "so"
+  ];
 
   $scope.transportWays = [
     { nameEN: 'Train', namePL: 'Pociąg' },
@@ -137,11 +157,11 @@ app.controller('mainCtrl', function($scope, $http, $filter) {
     var valueToSubstract = 0;
     for (var i = 0; i < delegationDays.length; i++) {
       if(delegationDays[i].provBreakfast)
-        valueToSubstract += 0.15 * dayDiem / delegationDays[i].dayType; //day type: 3 when 1/3 day, 2 when 1/2 day for diem, etc
+        valueToSubstract += 0.15 * dayDiem;
       if(delegationDays[i].provDinner)
-        valueToSubstract += 0.30 * dayDiem / delegationDays[i].dayType;
+        valueToSubstract += 0.30 * dayDiem;
       if(delegationDays[i].provSupper)
-        valueToSubstract += 0.30 * dayDiem / delegationDays[i].dayType;
+        valueToSubstract += 0.30 * dayDiem;
     }
     return valueToSubstract;
   };

@@ -104,7 +104,7 @@
               <div class="col-sm-9">
                 <div class="row">
                   <div class="col-sm-6">
-                    <input type="text" class="form-control" id="submit-date" placeholder="<%= __('yyyy-mm-dd') %>" datepicker-popup="yyyy-MM-dd" ng-model="root.submitDate" datepicker-options="dateOptions" ng-required="true"  ng-change="refreshCurrencyRate()" />
+                    <input type="text" class="form-control" id="submit-date" placeholder="<%= __('yyyy-mm-dd') %>" ng-model="root.submitDate" ng-required="true" ng-change="refreshCurrencyRate()" bs-datepicker/>
                   </div>
                   <div class="col-sm-6" ng-show="showSpinner">
                     <div class="spinner"><i class="icon-refresh icon-spin icon-2x"></i></div>
@@ -139,7 +139,7 @@
               <div class="col-sm-6 col-md-12">
                 <h4>
                   <%= __('Departure') %>
-                  <a href="#" class="pull-right btn btn-info btn-xs" popover-placement="left" popover="<%= __('Date and time of departure from last Polish city') %>">
+                  <a href="#" class="pull-right btn btn-info btn-xs" data-placement="left" data-content="<%= __('Date and time of departure from last Polish city') %>" bs-popover>
                     <i class="icon-question-sign icon-large"></i>
                   </a>
                 </h4>
@@ -148,7 +148,7 @@
                 </label>
                 <div class="row form-group">
                   <div class="col-sm-7 col-xs-7">
-                    <input type="text" class="form-control" placeholder="<%= __('yyyy-mm-dd') %>" datepicker-popup="yyyy-MM-dd" ng-model="root.departure.date" datepicker-options="dateOptions" ng-required="true"  ng-change="datesChange(this)" />
+                    <input type="text" class="form-control" placeholder="<%= __('yyyy-mm-dd') %>" ng-model="root.departure.date" ng-required="true" ng-change="datesChange(this)" bs-datepicker/>
                   </div>
                   <div class="col-sm-5 col-xs-5">
                     <input type="text" class="form-control" required ng-model="root.departure.time" placeholder="<%= __('HH:mm') %>" ng-change="datesChange(this)" ng-pattern="timePattern">
@@ -177,7 +177,7 @@
               <div class="col-sm-6 col-md-12">
                 <h4>
                   <%= __('Arrival') %>
-                  <a href="#" class="pull-right btn btn-info btn-xs" popover-placement="left" popover="<%= __('Date and time of arrival to first Polish city') %>">
+                  <a href="#" class="pull-right btn btn-info btn-xs" data-placement="left" data-content="<%= __('Date and time of arrival to first Polish city') %>" bs-popover>
                     <i class="icon-question-sign icon-large"></i>
                   </a>
                 </h4>
@@ -186,7 +186,7 @@
                 </label>
                 <div class="row form-group">
                   <div class="col-sm-7 col-xs-7">
-                    <input type="text" class="form-control" placeholder="<%= __('yyyy-mm-dd') %>" datepicker-popup="yyyy-MM-dd" ng-model="root.arrival.date" datepicker-options="dateOptions" ng-required="true"  ng-change="datesChange(this)" />
+                    <input type="text" class="form-control" placeholder="<%= __('yyyy-mm-dd') %>" ng-model="root.arrival.date" ng-required="true" ng-change="datesChange(this)" bs-datepicker />
                   </div>
                   <div class="col-sm-5 col-xs-5">
                     <input type="text" class="form-control" required ng-model="root.arrival.time" placeholder="<%= __('HH:mm') %>" ng-change="datesChange(this)" ng-pattern="timePattern">
@@ -359,8 +359,8 @@
     <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="/bower_components/angular-i18n/angular-locale_pl.js"></script>
-    <script type="text/javascript" src="/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-    <script type="text/javascript" src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-strap/dist/angular-strap.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
     <script type="text/javascript" src="/js/mainCtrl.js"></script>
   </body>
 </html>
