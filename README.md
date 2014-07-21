@@ -32,7 +32,7 @@ What you need to run this app succesfully
 I am assuming Linux as a standard environment, but with proper modifications, application is working also on Windows without bigger problems
 
 ```
-git clone https://bitbucket.org/puredev/delegation-wizard.git
+git clone https://github.com/yhnavein/delegation-wizard.git delegations
 cd delegations
 npm install -d # -msvs_version=2013 if you have only VS2013 installed
 bower install -d
