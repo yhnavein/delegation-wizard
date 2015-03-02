@@ -1,8 +1,11 @@
+/**
+ * Keymetrics HTTP analyzer
+ */
+require('pmx').init();
 
 /**
  * Module dependencies.
  */
-
 var express = require('express');
 var routes = require('./routes');
 var nbp = require('./routes/nbp');

@@ -7,13 +7,14 @@
     "test": "karma start karma.conf.js --single-run --browsers PhantomJS"
   },
   "dependencies": {
-    "express": "3.4.8",
-    "ejs": "*",
-    "moment": "2.5",
-    "sugar": "*",
-    "xml2json": "*",
-    "i18n": "*",
-    "mongojs": "*"
+    "express"  : "3.4.8",
+    "ejs"      : "*",
+    "moment"   : "2.5",
+    "sugar"    : "*",
+    "xml2json" : "*",
+    "i18n"     : "*",
+    "pmx"      : "^0.3.4",
+    "mongojs"  : "*"
   },
   "devDependencies": {
     "karma": "0.12.9",
