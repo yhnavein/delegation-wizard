@@ -256,15 +256,15 @@ app.controller('mainCtrl', function($scope, $http, $filter, $locale) {
   };
 
   $scope.isFirstStepValid = function(validationStep1) {
-    return validationStep1.$valid && $scope.root.delegationDays.length > 0;
+    return validationStep1.$valid && $scope.root.delegationDays && $scope.root.delegationDays.length > 0;
   };
 
   $scope.isStepValid = function(validationStep1, validationStep3) {
-    return ($scope.step > 0 && $scope.step < 3 && validationStep1.$valid && $scope.root.delegationDays.length > 0) || ($scope.step === 3 && validationStep3.$valid);
+    return ($scope.step > 0 && $scope.step < 3 && validationStep1.$valid && $scope.root.delegationDays && $scope.root.delegationDays.length > 0) || ($scope.step === 3 && validationStep3.$valid);
   };
 
   $scope.isValid = function(validationStep1, validationStep3) {
-    return (validationStep1.$valid && $scope.root.delegationDays.length > 0 && validationStep3.$valid);
+    return (validationStep1.$valid && $scope.root.delegationDays && $scope.root.delegationDays.length > 0 && validationStep3.$valid);
   };
 
   $scope.delegationCost = function() {

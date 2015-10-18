@@ -7,11 +7,14 @@
     "test": "karma start karma.conf.js --single-run --browsers PhantomJS"
   },
   "dependencies": {
+    "body-parser": "^1.14.1",
     "ejs": "*",
-    "express": "3.4.8",
+    "errorhandler": "^1.4.2",
+    "express": "^4.13.3",
     "i18n": "*",
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
+    "morgan": "^1.6.1",
     "pg": "^4.4.3",
     "pg-hstore": "^2.3.2",
     "pmx": "^0.5.5",

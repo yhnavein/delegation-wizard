@@ -9,6 +9,10 @@ require('pmx').init();
  * Module dependencies.
  */
 var express = require('express');
+var logger = require('morgan');
+var bodyParser = require('body-parser');
+var errorHandler = require('errorhandler');
+
 var routes = require('./routes');
 var nbp = require('./routes/nbp');
 var path = require('path');
@@ -24,21 +28,18 @@ var app = express();
 app.set('port', 3001);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.use(express.favicon());
-app.use(express.cookieParser());
-app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(express.methodOverride());
 app.use(i18n);
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), { maxAge: 3600000 * 24 * 7 }));
 
 var db = require('./models/sequelize');
 
 // development only
 if ('development' === app.get('env')) {
-  app.use(express.errorHandler());
+  app.use(errorHandler());
 }
 
 app.get('/', routes.index);
