@@ -1,3 +1,5 @@
+'use strict';
+
 var http = require("http"),
     zlib = require("zlib"),
     nbpIndexCache = require("../app/nbpIndexCache")(),
@@ -41,11 +43,11 @@ var makeTableRequest = function(path, success) {
     response.on('end', function () {
       var buffer = Buffer.concat(chunks);
       var encoding = response.headers['content-encoding'];
-      if (encoding == 'gzip') {
+      if (encoding === 'gzip') {
         zlib.gunzip(buffer, function(err, decoded) {
           success(decoded && decoded.toString());
         });
-      } else if (encoding == 'deflate') {
+      } else if (encoding === 'deflate') {
         zlib.inflate(buffer, function(err, decoded) {
           success(decoded && decoded.toString());
         });

@@ -25,7 +25,7 @@ What you need to run this app succesfully
 * **[python-2.*](www.python.org/download/)** - is needed by one of dependent libraries
 * **[bower](http://bower.io/)** - for managing front-end packages
 * **[pm2](https://github.com/Unitech/pm2)** - not necessary for development, but essential if you want to use this site on Live server
-* **[mongodb](http://www.mongodb.org/)** - it's used for storing exchange rates.
+* **[PostgreSQL](http://www.postgresql.org/)** or **[MySQL](https://www.mysql.com/)** - relational database used for storing Exchange Rates
 
 ## Starting and initial configuration
 
@@ -36,6 +36,7 @@ git clone https://github.com/yhnavein/delegation-wizard.git delegations
 cd delegations
 npm install -d # -msvs_version=2013 if you have only VS2013 installed
 bower install -d
+cp config/config-sample.js config/config.js
 node app
 ```
 

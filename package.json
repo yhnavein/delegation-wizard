@@ -1,6 +1,6 @@
 {
   "name": "delegation-wizard",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "node app.js",
@@ -13,8 +13,7 @@
     "sugar"    : "*",
     "xml2json" : "*",
     "i18n"     : "*",
-    "pmx"      : "^0.3.4",
-    "mongojs"  : "*"
+    "pmx"      : "^0.3.4"
   },
   "devDependencies": {
     "karma": "0.12.9",
