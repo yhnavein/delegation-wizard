@@ -7,13 +7,17 @@
     "test": "karma start karma.conf.js --single-run --browsers PhantomJS"
   },
   "dependencies": {
-    "express"  : "3.4.8",
-    "ejs"      : "*",
-    "moment"   : "2.5",
-    "sugar"    : "*",
-    "xml2json" : "*",
-    "i18n"     : "*",
-    "pmx"      : "^0.3.4"
+    "ejs": "*",
+    "express": "3.4.8",
+    "i18n": "*",
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6",
+    "pg": "^4.4.3",
+    "pg-hstore": "^2.3.2",
+    "pmx": "^0.5.5",
+    "sequelize": "^3.12.1",
+    "sugar": "*",
+    "xml2json": "*"
   },
   "devDependencies": {
     "karma": "0.12.9",

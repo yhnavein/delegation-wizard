@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Keymetrics HTTP analyzer
  */
@@ -9,7 +11,6 @@ require('pmx').init();
 var express = require('express');
 var routes = require('./routes');
 var nbp = require('./routes/nbp');
-var http = require('http');
 var path = require('path');
 var i18n = require('./i18n');
 
@@ -33,9 +34,10 @@ app.use(i18n);
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
+var db = require('./models/sequelize');
 
 // development only
-if ('development' == app.get('env')) {
+if ('development' === app.get('env')) {
   app.use(express.errorHandler());
 }
 
@@ -47,6 +49,11 @@ app.get('/changeLocale/:locale', function (req, res) {
   res.redirect("/");
 });
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
+db
+  .sequelize
+  .sync({ force: false })
+  .then(function() {
+      app.listen(app.get('port'), function() {
+        console.log('Express server listening on port %d in %s mode', app.get('port'), app.get('env'));
+      });
+  });
